@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.SocialWelfare.Templating.Presentation</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.SocialWelfare.Templating.Presentation</RootNamespace>
+    <Version>0.1.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Font\weathericons-regular-webfont.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Font\weathericons-regular-webfont.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1260" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common.Templating.Presentation\Extend.Common.Templating.Presentation.csproj" />
+    <ProjectReference Include="..\Extend.SocialWelfare.Templating\Extend.SocialWelfare.Templating.csproj" />
+    <ProjectReference Include="..\Weather.Api.Connect\Weather.Api.Connect.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\InmersiveCityWeatherOverviewView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

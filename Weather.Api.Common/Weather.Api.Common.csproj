@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Weather.Api.Common</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Weather.Api.Common</RootNamespace>
+  </PropertyGroup>
+
+</Project>

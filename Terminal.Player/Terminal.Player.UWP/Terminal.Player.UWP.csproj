@@ -234,6 +234,14 @@
       <Project>{1887c021-dbec-42f7-8563-0e56598b6f9a}</Project>
       <Name>Extend.Essential</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating.Presentation\Extend.SocialWelfare.Templating.Presentation.csproj">
+      <Project>{56d164f7-2538-4735-9fca-5fe23e1a3eef}</Project>
+      <Name>Extend.SocialWelfare.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SocialWelfare\Extend.SocialWelfare.csproj">
+      <Project>{1d32ffd3-3663-4ba4-926a-3b08087f1baa}</Project>
+      <Name>Extend.SocialWelfare</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Extend.SpringMotion.Transitioning.Presentation\Extend.SpringMotion.Transitioning.Presentation.csproj">
       <Project>{04c90b44-554e-49ba-8887-2ba944bbe99b}</Project>
       <Name>Extend.SpringMotion.Transitioning.Presentation</Name>

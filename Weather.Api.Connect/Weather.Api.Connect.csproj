@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Weather.Api.Connect</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Weather.Api.Connect</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SAPRESSC.Core.Api.Connect" Version="2.1.0-apha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Weather.Api.Common\Weather.Api.Common.csproj" />
+  </ItemGroup>
+
+</Project>

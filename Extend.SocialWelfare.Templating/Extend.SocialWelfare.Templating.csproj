@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.SocialWelfare.Templating</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.SocialWelfare.Templating</RootNamespace>
+    <Version>0.1.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="2E4818BE-1E31-4CA7-B1F1-408A66B72D5D-landscape.png" />
+    <None Remove="2E4818BE-1E31-4CA7-B1F1-408A66B72D5D-portrait.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="2E4818BE-1E31-4CA7-B1F1-408A66B72D5D-landscape.png" />
+    <EmbeddedResource Include="2E4818BE-1E31-4CA7-B1F1-408A66B72D5D-portrait.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common.Templating\Extend.Common.Templating.csproj" />
+  </ItemGroup>
+
+</Project>

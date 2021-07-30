@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.SocialWelfare</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.SocialWelfare</RootNamespace>
+    <Version>0.1.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common\Extend.Common.csproj" />
+    <ProjectReference Include="..\Extend.SocialWelfare.Templating\Extend.SocialWelfare.Templating.csproj" />
+  </ItemGroup>
+
+</Project>

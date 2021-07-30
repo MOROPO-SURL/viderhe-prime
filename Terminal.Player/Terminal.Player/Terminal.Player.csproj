@@ -27,6 +27,9 @@
     <ProjectReference Include="..\..\Extend.Common.Overlaying.Presentation\Extend.Common.Overlaying.Presentation.csproj" />
     <ProjectReference Include="..\..\Extend.Essential.Overlaying.Presentation\Extend.Essential.Overlaying.Presentation.csproj" />
     <ProjectReference Include="..\..\Extend.Essential\Extend.Essential.csproj" />
+    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating.Presentation\Extend.SocialWelfare.Templating.Presentation.csproj" />
+    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating\Extend.SocialWelfare.Templating.csproj" />
+    <ProjectReference Include="..\..\Extend.SocialWelfare\Extend.SocialWelfare.csproj" />
     <ProjectReference Include="..\..\Extend.SpringMotion\Extend.SpringMotion.csproj" />
     <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Presentation\Extend.UICCamaguey.Overlaying.Presentation.csproj" />
     <ProjectReference Include="..\..\Support.Presentation.Player\Support.Presentation.Player.csproj" />
