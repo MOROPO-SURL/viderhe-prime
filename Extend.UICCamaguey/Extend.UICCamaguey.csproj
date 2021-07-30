@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.UICCamaguey</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.UICCamaguey</RootNamespace>
+    <Version>0.2.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common\Extend.Common.csproj" />
+    <ProjectReference Include="..\Extend.UICCamaguey.Overlaying\Extend.UICCamaguey.Overlaying.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\Extend.Essential.Overlaying.Presentation\Extend.Essential.Overlaying.Presentation.csproj" />
     <ProjectReference Include="..\..\Extend.Essential\Extend.Essential.csproj" />
     <ProjectReference Include="..\..\Extend.SpringMotion\Extend.SpringMotion.csproj" />
+    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Presentation\Extend.UICCamaguey.Overlaying.Presentation.csproj" />
     <ProjectReference Include="..\..\Support.Presentation.Player\Support.Presentation.Player.csproj" />
     <ProjectReference Include="..\..\Support.Presentation\Support.Presentation.csproj" />
   </ItemGroup>

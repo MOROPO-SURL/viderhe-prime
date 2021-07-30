@@ -246,6 +246,10 @@
       <Project>{44A1EA24-59C5-4E9D-AF01-C65297998114}</Project>
       <Name>Support.Presentation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Presentation\Extend.UICCamaguey.Overlaying.Presentation.csproj">
+      <Project>{bb80d163-471f-4fa0-a0a8-70b3d4fff0a0}</Project>
+      <Name>Extend.UICCamaguey.Overlaying.Presentation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Terminal.Player\Terminal.Player.csproj">
       <Project>{7A9D6479-B48F-4003-86AB-291C95D9AC63}</Project>
       <Name>Terminal.Player</Name>

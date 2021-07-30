@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<extendcommonoverlayingpresentationviews:BaseOverlayView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extendcommonoverlayingpresentationviews="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Overlaying.Presentation.Views;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Overlaying.Presentation"
+    xmlns:extendcommonoverlayingpresentationbehaviors="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Overlaying.Presentation.Behaviors;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Overlaying.Presentation"
+    xmlns:extendcommonoverlayingpresentationconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Overlaying.Presentation.Converters;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Overlaying.Presentation"
+    xmlns:sscxftoolkitpresentationtransformbehaviors="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Transform.Behaviors;assembly=SmartSolucionesCuba.XFToolKit.Presentation.Transform"
+    xmlns:sscxftoolkitpresentationtransformanimations="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Transform.Animations;assembly=SmartSolucionesCuba.XFToolKit.Presentation.Transform"
+    xmlns:local="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.UICCamaguey.Overlaying.Presentation.Views"
+    mc:Ignorable="d"
+    x:Class="SmartSolucionesCuba.Viderhe.Extend.UICCamaguey.Overlaying.Presentation.Views.TextOverlayView"
+    x:Name="View"
+    TranslationY="{x:Static local:TextOverlayView.MotionTranslation}"
+    Margin="18,0,0,18">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <extendcommonoverlayingpresentationconverters:TextToAbsoluteLayoutBoundsConverter x:Key="TextToAbsoluteLayoutBoundsConverter" />
+
+            <Style x:Key="ContrastBoxViewStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Opacity" Value="0.2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Behaviors>
+        <sscxftoolkitpresentationtransformbehaviors:BeginAnimationBehavior>
+            <sscxftoolkitpresentationtransformbehaviors:BeginAnimationBehavior.Animation>
+                <sscxftoolkitpresentationtransformanimations:TranslateToAnimation 
+                    Target="{x:Reference View}" 
+                    Delay="5000"
+                    EasingType="CubicOut" 
+                    TranslateY="0" />
+            </sscxftoolkitpresentationtransformbehaviors:BeginAnimationBehavior.Animation>
+        </sscxftoolkitpresentationtransformbehaviors:BeginAnimationBehavior>
+    </ContentView.Behaviors>
+    <ContentView.Content>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="18" />
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="18" />
+                <RowDefinition Height="2" />
+            </Grid.RowDefinitions>
+            <ContentView
+                Grid.Column="2" Grid.ColumnSpan="5" Grid.Row="3" Grid.RowSpan="2"
+                BackgroundColor="GhostWhite"
+                Padding="0,4"
+                IsClippedToBounds="True">
+                <AbsoluteLayout BackgroundColor="White">
+                    <Label
+                        AbsoluteLayout.LayoutFlags="None"
+                        AbsoluteLayout.LayoutBounds="{Binding Path=Text, Converter={StaticResource TextToAbsoluteLayoutBoundsConverter}}"
+                        Padding="0,6"
+                        Text="{Binding Path=Text}"
+                        TextColor="Black"
+                        LineBreakMode="NoWrap">
+                        <Label.Behaviors>
+                            <extendcommonoverlayingpresentationbehaviors:MarqueeLabelBehavior />
+                        </Label.Behaviors>
+                    </Label>
+                </AbsoluteLayout>
+            </ContentView>
+            <BoxView 
+                Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1"
+                Style="{x:StaticResource ContrastBoxViewStyle}" />
+            <BoxView 
+                Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2"
+                BackgroundColor="{Binding Path=PrimaryColor}" />
+            <BoxView 
+                Grid.Column="5" Grid.Row="2"
+                Style="{x:StaticResource ContrastBoxViewStyle}" />
+            <BoxView 
+                Grid.Column="1" Grid.Row="3"
+                BackgroundColor="{Binding Path=PrimaryColor}" />
+            <BoxView 
+                Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3"
+                BackgroundColor="White" />
+            <BoxView 
+                Grid.Column="4" Grid.Row="3"
+                BackgroundColor="{Binding Path=PrimaryColor}" />
+            <BoxView 
+                Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4"
+                BackgroundColor="{Binding Path=PrimaryColor}" />
+            <BoxView 
+                Grid.Column="4" Grid.Row="5" Grid.RowSpan="2"
+                BackgroundColor="{Binding Path=PrimaryColor}" />
+            <BoxView 
+                Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5"
+                Style="{x:StaticResource ContrastBoxViewStyle}" />
+            <BoxView 
+                Grid.Column="3" Grid.Row="6"
+                Style="{x:StaticResource ContrastBoxViewStyle}" />
+            <BoxView 
+                Grid.Column="5" Grid.Row="5" Grid.RowSpan="2"
+                Style="{x:StaticResource ContrastBoxViewStyle}" />
+            <BoxView 
+                Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="7"
+                Style="{x:StaticResource ContrastBoxViewStyle}" />
+            <BoxView 
+                Grid.Column="0" Grid.Row="2" Grid.RowSpan="3"
+                Style="{x:StaticResource ContrastBoxViewStyle}" />
+        </Grid>
+    </ContentView.Content>
+</extendcommonoverlayingpresentationviews:BaseOverlayView>

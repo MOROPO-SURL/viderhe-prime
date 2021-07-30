@@ -284,6 +284,18 @@
       <Project>{1887c021-dbec-42f7-8563-0e56598b6f9a}</Project>
       <Name>Extend.Essential</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Dashboard.Presentation\Extend.UICCamaguey.Overlaying.Dashboard.Presentation.csproj">
+      <Project>{d9155fb1-cc71-4209-a980-e15c83096169}</Project>
+      <Name>Extend.UICCamaguey.Overlaying.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying\Extend.UICCamaguey.Overlaying.csproj">
+      <Project>{eb85ea36-54b4-4233-8404-6888ce891fa1}</Project>
+      <Name>Extend.UICCamaguey.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey\Extend.UICCamaguey.csproj">
+      <Project>{e23a8dd5-dbfd-4b1b-ab98-7205bedad4be}</Project>
+      <Name>Extend.UICCamaguey</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Terminal.Dashboard\Terminal.Dashboard.csproj">
       <Project>{A509FE0D-F850-4E5B-9936-116E4378C85F}</Project>
       <Name>Terminal.Dashboard</Name>
