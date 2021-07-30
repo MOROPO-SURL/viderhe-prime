@@ -32,6 +32,10 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.iOS
             _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Templating.Dashboard.Presentation.Providers.PlacardConfigurationPageProvider));
             _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Overlaying.Dashboard.Presentation.Providers.OverlayConfigurationPageProvider));
             _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Transitioning.Presentation.Providers.TransitionProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.SpringMotion.Transitioning.Presentation.Providers.TransitionProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.SocialWelfare.Templating.Dashboard.Presentation.Providers.PlacardConfigurationPageProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.UICCamaguey.Overlaying.Dashboard.Presentation.Providers.OverlayConfigurationPageProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation.Providers.PlacardConfigurationPageProvider));
 
             return base.FinishedLaunching(app, options);
         }
