@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.OHCC.RailwayMuseum.Templating</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.OHCC.RailwayMuseum.Templating</RootNamespace>
+    <Version>0.0.3.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="CD1BAC6A-5C97-4BE6-B146-B7393D39FD01-landscape.png" />
+    <None Remove="CD1BAC6A-5C97-4BE6-B146-B7393D39FD01-portrait.png" />
+    <None Remove="D49EAB3A-F407-4E0E-835B-F15BFD917269-landscape.png" />
+    <None Remove="D49EAB3A-F407-4E0E-835B-F15BFD917269-portrait.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CD1BAC6A-5C97-4BE6-B146-B7393D39FD01-landscape.png" />
+    <EmbeddedResource Include="CD1BAC6A-5C97-4BE6-B146-B7393D39FD01-portrait.png" />
+    <EmbeddedResource Include="D49EAB3A-F407-4E0E-835B-F15BFD917269-landscape.png" />
+    <EmbeddedResource Include="D49EAB3A-F407-4E0E-835B-F15BFD917269-portrait.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common.Templating\Extend.Common.Templating.csproj" />
+  </ItemGroup>
+
+</Project>

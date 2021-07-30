@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xftoolkitmvvmviews:ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xftoolkitmvvmviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Views;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:ffimageloadingforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Class="SmartSolucionesCuba.Viderhe.Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation.Views.CornerTileVideoPresentingVideoPlacardThumbnailView">
+    <ContentView.Content>
+        <Grid>
+            <ffimageloadingforms:CachedImage
+                x:Name="Image"
+                Aspect="AspectFill"
+                CacheType="Disk"
+                CacheDuration="8760:00:00" />
+        </Grid>
+    </ContentView.Content>
+</xftoolkitmvvmviews:ContentView>

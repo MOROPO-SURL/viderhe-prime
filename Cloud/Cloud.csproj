@@ -40,6 +40,7 @@
     <ProjectReference Include="..\Cloud.SignalR.Connect.Dashboard\Cloud.SignalR.Connect.Dashboard.csproj" />
     <ProjectReference Include="..\Cloud.SignalR.Connect.Player\Cloud.SignalR.Connect.Player.csproj" />
     <ProjectReference Include="..\Extend.Essential\Extend.Essential.csproj" />
+    <ProjectReference Include="..\Extend.OHCC.RailwayMuseum\Extend.OHCC.RailwayMuseum.csproj" />
     <ProjectReference Include="..\Extend.SpringMotion\Extend.SpringMotion.csproj" />
     <ProjectReference Include="..\Support.Extend.Transitioning\Support.Extend.Transitioning.csproj" />
     <ProjectReference Include="..\Extend.UICCamaguey\Extend.UICCamaguey.csproj" />

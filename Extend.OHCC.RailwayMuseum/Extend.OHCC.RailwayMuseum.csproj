@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.OHCC.RailwayMuseum</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.OHCC.RailwayMuseum</RootNamespace>
+    <Version>0.0.3.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common\Extend.Common.csproj" />
+    <ProjectReference Include="..\Extend.OHCC.RailwayMuseum.Templating\Extend.OHCC.RailwayMuseum.Templating.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<extendcommontemplatingpresentationviews:BaseTemplatedPlacardPresentationView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.OHCC.RailwayMuseum.Templating.Presentation.Converters"
+    xmlns:extendcommontemplatingpresentationviews="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Views;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation"
+    xmlns:extendcommontemplatingpresentationrenderedviews="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Views.Rendered;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.Viderhe.Extend.OHCC.RailwayMuseum.Templating.Presentation.Views.CornerTileVideoPresentingVideoPlacardView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <sscxftoolkitpresentationconverters:FactorConverter x:Key="FactorConverter" />
+            <converters:ScreenCornerToHorizontalLayoutOptionConverter x:Key="ScreenCornerToHorizontalLayoutOptionConverter" />
+            <converters:ScreenCornerToVerticalLayoutOptionConverter x:Key="ScreenCornerToVerticalLayoutOptionConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid x:Name="Wrapper">
+            <Grid x:Name="PlacardLayout">
+                <extendcommontemplatingpresentationrenderedviews:UnattendedVideoPlayerView
+                    x:Name="PresentedVideoPlayerView"
+                    BackgroundColor="Black"
+                    Source="{Binding Path=PresentedVideoSource}"
+                    ShowControls="False"
+                    AutoPlay="True"
+                    StatusUpdated="PresentedVideoPlayerView_StatusUpdated" />
+                <Grid
+                    x:Name="PresenterTileVideoPlayerViewWrapper"
+                    Margin="30"
+                    HorizontalOptions="{Binding Path=PresenterTileVideoScreenCorner, Converter={StaticResource ScreenCornerToHorizontalLayoutOptionConverter}}}"
+                    VerticalOptions="{Binding Path=PresenterTileVideoScreenCorner, Converter={StaticResource ScreenCornerToVerticalLayoutOptionConverter}}">
+                    <BoxView Color="White" Opacity="0.2" />
+                    <extendcommontemplatingpresentationrenderedviews:UnattendedVideoPlayerView
+                        x:Name="PresenterTileVideoPlayerView"
+                        BackgroundColor="Black"
+                        Margin="6"
+                        WidthRequest="{Binding Source={Reference PlacardLayout}, Path=Width, Converter={StaticResource FactorConverter}, ConverterParameter=0.15}"
+                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                        Source="{Binding Path=PresenterTileVideoSource}"
+                        ShowControls="False"
+                        AutoPlay="False"
+                        StrechAspect="AspectFill"
+                        StatusUpdated="PresenterTileVideoPlayerView_StatusUpdated" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</extendcommontemplatingpresentationviews:BaseTemplatedPlacardPresentationView>
