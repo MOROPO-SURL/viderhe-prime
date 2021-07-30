@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.SpringMotion.Transitioning</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.SpringMotion.Transitioning</RootNamespace>
+    <Version>0.1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common.Transitioning\Extend.Common.Transitioning.csproj" />
+  </ItemGroup>
+
+</Project>

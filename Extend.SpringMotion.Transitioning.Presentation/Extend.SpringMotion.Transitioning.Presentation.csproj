@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Extend.SpringMotion.Transitioning.Presentation</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Extend.SpringMotion.Transitioning.Presentation</RootNamespace>
+    <Version>0.1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extend.Common.Transitioning.Presentation\Extend.Common.Transitioning.Presentation.csproj" />
+    <ProjectReference Include="..\Extend.SpringMotion.Transitioning\Extend.SpringMotion.Transitioning.csproj" />
+  </ItemGroup>
+
+</Project>

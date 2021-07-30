@@ -234,6 +234,14 @@
       <Project>{1887c021-dbec-42f7-8563-0e56598b6f9a}</Project>
       <Name>Extend.Essential</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SpringMotion.Transitioning.Presentation\Extend.SpringMotion.Transitioning.Presentation.csproj">
+      <Project>{04c90b44-554e-49ba-8887-2ba944bbe99b}</Project>
+      <Name>Extend.SpringMotion.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SpringMotion\Extend.SpringMotion.csproj">
+      <Project>{70ad2c13-eb8b-481d-b759-ac91d22fb1c3}</Project>
+      <Name>Extend.SpringMotion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Support.Presentation\Support.Presentation.csproj">
       <Project>{44A1EA24-59C5-4E9D-AF01-C65297998114}</Project>
       <Name>Support.Presentation</Name>
