@@ -1,4 +1,4 @@
-﻿using SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Extensions;
+using SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Extensions;
 using SmartSolucionesCuba.Viderhe.Support.Presentation.Extensions;
 using System.Linq;
 using Xamarin.Forms;
@@ -187,18 +187,18 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
                 SyncronizeRequiredAccountInformation(model.Name, Color.FromHex(model.PrimaryColor), Color.FromHex(model.SecoundaryColor), model.LogoImageId, model.HorizontalSplashImageId, model.VerticalSplashImageId, overalyDescriptor, model.SerializedOverlayContext);
 
+                AccountExtensions = model.Extensions.ToArray();
+
                 // MotoTouch does not support dynamic assembly loading
                 if (Device.RuntimePlatform != Device.iOS)
                 {
-                    AccountExtensions = model.Extensions.ToArray();
-
-                var dynamicLoadExtensions = AccountExtensions.Where(item => 
-                    item.Id != Extend.Essential.Descriptors.EssentialExtensionDescriptor.ID &&
-                    item.Id != Extend.SpringMotion.Descriptors.SpringMotionExtensionDescriptor.ID &&
-                    item.Id != Extend.SocialWelfare.Descriptors.SocialWelfareExtensionDescriptor.ID &&
-                    item.Id != Extend.UICCamaguey.Descriptors.UICCamagueyExtensionDescriptor.ID &&
-                    item.Id != Extend.OHCC.RailwayMuseum.Descriptors.RailwayMuseumOHCCExtensionDescriptor.ID)
-                    .ToArray();
+                    var dynamicLoadExtensions = AccountExtensions.Where(item => 
+                        item.Id != Extend.Essential.Descriptors.EssentialExtensionDescriptor.ID &&
+                        item.Id != Extend.SpringMotion.Descriptors.SpringMotionExtensionDescriptor.ID &&
+                        item.Id != Extend.SocialWelfare.Descriptors.SocialWelfareExtensionDescriptor.ID &&
+                        item.Id != Extend.UICCamaguey.Descriptors.UICCamagueyExtensionDescriptor.ID &&
+                        item.Id != Extend.OHCC.RailwayMuseum.Descriptors.RailwayMuseumOHCCExtensionDescriptor.ID)
+                        .ToArray();
 
                     foreach (var accountExtension in dynamicLoadExtensions)
                     {

@@ -33,5 +33,9 @@
 	<string>Viderhe Control</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Viderhe Control necesita acceso a la cámara del dispositivo para importar imágenes directamente del proceso de captura con este accesorio.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Viderhe Control necesita acceso a la librería de imágenes del dispositivo para importar elementos almacenados.</string>
 </dict>
 </plist>
