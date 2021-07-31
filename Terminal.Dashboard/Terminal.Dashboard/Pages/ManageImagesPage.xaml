@@ -50,81 +50,93 @@
         <Grid>
             <supportpresentationdashboardviews:BackgroundView />
             <ScrollView Orientation="Vertical">
-                <FlexLayout
-                    Margin="5"
-                    Wrap="Wrap"
-                    AlignItems="Start" AlignContent="Start"
-                    BindableLayout.ItemsSource="{Binding Path=Items}">
-                    <BindableLayout.EmptyView>
-                        <Label
-                            IsVisible="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
-                            Margin="20"
-                            Text="Sin elementos que mostrar"
-                            TextColor="Black" />
-                    </BindableLayout.EmptyView>
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Frame
-                                Margin="5" Padding="0"
-                                BackgroundColor="White"
-                                CornerRadius="0"
-                                HasShadow="False"
-                                WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type FlexLayout}}, Path=Width, Converter={StaticResource BindingLayoutWidthToResponsiveChildWidthConverter}}">
-                                <Grid RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <ffimageloadingforms:CachedImage 
-                                        Grid.Row="0" Grid.Column="0"
-                                        BackgroundColor="Black"
-                                        HeightRequest="{Binding Source={x:RelativeSource Mode=Self}, Path=Width, Converter={StaticResource FractionConverter}, ConverterParameter=1.777777777777778}"
-                                        Source="{Binding Converter={StaticResource ImageViewModelToThumbnailImageSourceConverter}}"
-                                        CacheType="Disk"
-                                        CacheDuration="8760:00:00" />
-                                    <StackLayout 
-                                        Grid.Row="0" Grid.Column="0"
-                                        IsVisible="{Binding Path=About, Converter={StaticResource NotNullOrEmptyStringToBooleanConverter}}"
-                                        VerticalOptions="End" 
-                                        Padding="8"
-                                        BackgroundColor="#99000000">
-                                        <Label 
-                                            Text="{Binding Path=About}"
-                                            TextColor="White"
-                                            LineBreakMode="TailTruncation" />
-                                    </StackLayout>
-                                    <StackLayout
-                                        Grid.Row="1"
-                                        Orientation="Horizontal"
-                                        Padding="6" Spacing="3">
-                                        <ContentView 
-                                            VerticalOptions="Center"
+                <StackLayout Spacing="0">
+                    <FlexLayout
+                        Margin="5"
+                        Wrap="Wrap"
+                        AlignItems="Start" AlignContent="Start"
+                        BindableLayout.ItemsSource="{Binding Path=Items}">
+                        <BindableLayout.EmptyView>
+                            <Label
+                                IsVisible="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
+                                Margin="20"
+                                Text="Sin elementos que mostrar"
+                                TextColor="Black" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="5" Padding="0"
+                                    BackgroundColor="White"
+                                    CornerRadius="0"
+                                    HasShadow="False"
+                                    WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type FlexLayout}}, Path=Width, Converter={StaticResource BindingLayoutWidthToResponsiveChildWidthConverter}}">
+                                    <Grid RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ffimageloadingforms:CachedImage 
+                                            Grid.Row="0" Grid.Column="0"
                                             BackgroundColor="Black"
-                                            Padding="4,2" Margin="4,0">
+                                            HeightRequest="{Binding Source={x:RelativeSource Mode=Self}, Path=Width, Converter={StaticResource FractionConverter}, ConverterParameter=1.777777777777778}"
+                                            Source="{Binding Converter={StaticResource ImageViewModelToThumbnailImageSourceConverter}}"
+                                            CacheType="Disk"
+                                            CacheDuration="8760:00:00" />
+                                        <StackLayout 
+                                            Grid.Row="0" Grid.Column="0"
+                                            IsVisible="{Binding Path=About, Converter={StaticResource NotNullOrEmptyStringToBooleanConverter}}"
+                                            VerticalOptions="End" 
+                                            Padding="8"
+                                            BackgroundColor="#99000000">
                                             <Label 
-                                                Text="{Binding Path=Format}" 
+                                                Text="{Binding Path=About}"
                                                 TextColor="White"
-                                                FontAttributes="Bold" />
-                                        </ContentView>
-                                        <Label 
-                                            HorizontalOptions="StartAndExpand" VerticalOptions="Center"
-                                            Text="{Binding Path=Resolution}" />
-                                        <Button 
-                                            Text="Detalles"
-                                            Clicked="ImageOverviewDetailButton_Clicked" />
-                                        <Button 
-                                            BackgroundColor="IndianRed"
-                                            Text="Eliminar"
-                                            TextColor="White"
-                                            Clicked="ImageOverviewDeleteButton_Clicked" />
-                                    </StackLayout>
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
+                                                LineBreakMode="TailTruncation" />
+                                        </StackLayout>
+                                        <StackLayout
+                                            Grid.Row="1"
+                                            Orientation="Horizontal"
+                                            Padding="6" Spacing="3">
+                                            <ContentView 
+                                                VerticalOptions="Center"
+                                                BackgroundColor="Black"
+                                                Padding="4,2" Margin="4,0">
+                                                <Label 
+                                                    Text="{Binding Path=Format}" 
+                                                    TextColor="White"
+                                                    FontAttributes="Bold" />
+                                            </ContentView>
+                                            <Label 
+                                                HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                                Text="{Binding Path=Resolution}" />
+                                            <Button 
+                                                Text="Detalles"
+                                                Clicked="ImageOverviewDetailButton_Clicked" />
+                                            <Button 
+                                                BackgroundColor="IndianRed"
+                                                Text="Eliminar"
+                                                TextColor="White"
+                                                Clicked="ImageOverviewDeleteButton_Clicked" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                    <Button
+                        IsVisible="{Binding Path=HasMoreItems}"
+                        IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
+                        Margin="5,0,5,5"
+                        HorizontalOptions="Center"
+                        Text="Mostrar más"
+                        Clicked="LoadNextPageButtton_Clicked" />
+                    <ActivityIndicator
+                        IsVisible="{Binding Path=IsBusy}"
+                        Margin="5,0,5,5"
+                        IsRunning="{Binding Path=IsBusy}" />
+                </StackLayout>
             </ScrollView>
-            <supportpresentationdashboardviews:BusyView />
         </Grid>
     </ContentPage.Content>
 </sscxftoolkitmvvmpages:BindingContextedContentPage>

@@ -4,6 +4,12 @@
     {
         private readonly System.Action<View.ScreenplayViewModel> selectedScreenplayCallbackAction;
 
+        private View.ScreenplayViewModel[] screenplays;
+        private Support.Presentation.Models.View.FrameViewModel[] frames;
+        private bool hasMorePlacards;
+        private View.ScreenplayViewModel selectedScreenPlay;
+        private bool useExpandedLayout;
+
         public ManageProgrammingPageModel(System.Action<View.ScreenplayViewModel> selectedScreenplayCallbackAction)
         {
             this.selectedScreenplayCallbackAction = selectedScreenplayCallbackAction;
@@ -13,15 +19,11 @@
             Placards = new System.Collections.ObjectModel.ObservableCollection<Support.Presentation.Models.View.PlacardViewModel>();
         }
 
-        private View.ScreenplayViewModel[] screenplays;
-
         public View.ScreenplayViewModel[] Screenplays
         {
             get => screenplays;
             set => SetProperty(ref screenplays, value);
         }
-
-        private Support.Presentation.Models.View.FrameViewModel[] frames;
 
         public Support.Presentation.Models.View.FrameViewModel[] Frames
         {
@@ -31,7 +33,7 @@
 
         public System.Collections.ObjectModel.ObservableCollection<Support.Presentation.Models.View.PlacardViewModel> Placards { get; set; }
 
-        private View.ScreenplayViewModel selectedScreenPlay;
+        public bool HasMorePlacards { get => hasMorePlacards; set => SetProperty(ref hasMorePlacards, value); }
 
         public View.ScreenplayViewModel SelectedScreenplay
         {
@@ -41,6 +43,8 @@
                 selectedScreenplayCallbackAction?.Invoke(value);
             });
         }
+
+        public bool UseExpandedLayout { get => useExpandedLayout; set => SetProperty(ref useExpandedLayout, value); }
 
         protected override void DisposeUnmanagementResources()
         {

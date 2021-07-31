@@ -36,17 +36,26 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
         {
             var accountId = System.Guid.Parse(User.Claims.First(claim => claim.Type == Security.Authorization.Claims.ACCOUNT_CLAIM).Value);
 
-            var limit = 50;
+            var limit = 15;
 
             var account = dbContext.Accounts.Include(e => e.ImageBridges).ThenInclude(b => b.Image).ThenInclude(e => e.Thumbnail).First(e => e.Id == accountId);
 
             var maxCount = account.ImageBridges.Count;
 
-            var offset = (page - 1) * limit;
+            var rest = maxCount % limit;
+
+            var maxPageCount = maxCount / limit;
+
+            if (rest > 0) maxPageCount += 1;
+
+            if (page < 0 || page > maxPageCount)
+            {
+                page = 1;
+            }
 
             return Ok(new SAPRESSC.Core.Common.Models.PaginationModel<ImageDisplayModel>
             {
-                List = account.ImageBridges.Skip(offset).Take(limit).OrderByDescending(b => b.Image.CreateAt).Select((Persistence.Entities.AccountImageBridge bridge) =>
+                List = account.ImageBridges.Skip((page - 1) * limit).Take(limit).OrderByDescending(b => b.Image.CreateAt).Select((Persistence.Entities.AccountImageBridge bridge) =>
                 {
                     var model = new ImageDisplayModel();
 
@@ -56,8 +65,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                 }).ToList(),
                 Limit = limit,
                 Page = page,
-                HasNext = offset + 1 >= maxCount,
-                HasPrevious = page > 1
+                HasPrevious = page > 1,
+                HasNext = page < maxPageCount,
+                MaxPageCount = maxPageCount
             });
         }
 

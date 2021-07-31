@@ -11,6 +11,8 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
         private SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider;
         private Support.Presentation.Helpers.Facade.IExceptionHandleHelperFacade exceptionHandleHelper;
 
+        private int currentVideosPageNumber;
+
         public PrePickVideoPage(Support.Presentation.Helpers.Facade.IExceptionHandleHelperFacade exceptionHandleHelper, Common.Templating.Descriptors.ITemplateDescriptor templateDescriptor, System.Action successfulCompleteCallbackAction, System.Action<Support.Presentation.Models.View.VideoViewModel, Common.Templating.Descriptors.ITemplateDescriptor, System.Action> videoPickedCallbackAction, SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider)
             : base(new Support.Presentation.Dashboard.Models.Page.VideoPickPageModel { IsBusy = true })
         {
@@ -31,7 +33,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
 
             if (IsEnabled) return;
 
-            LoadVideos();
+            LoadNextVideosPage(true);
 
             IsEnabled = true;
         }
@@ -55,14 +57,20 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
             successfulCompleteCallbackAction.Invoke();
         }
 
-        private void LoadVideos(int page = 0)
+        private void LoadNextPageButtton_Clicked(object sender, System.EventArgs eventArgs)
         {
-            System.Threading.Tasks.Task.Run(async () =>
-            {
-                var client = new Cloud.Api.Connect.Clients.VideosApiConnectClient(httpClientHelperProvider.HttpClientHelper);
+            LoadNextVideosPage();
+        }
 
-                return await client.GetPageAsync(page);
-            }).ContinueWith((System.Threading.Tasks.Task<SAPRESSC.Core.Common.Models.PaginationModel<Cloud.Api.Common.Models.VideoDisplayModel>> task) =>
+        private void LoadNextVideosPage(bool restart = false)
+        {
+            BindingContextPageModel.IsBusy = true;
+
+            if (restart) currentVideosPageNumber = 0;
+
+            var videosApiConnectClient = new Cloud.Api.Connect.Clients.VideosApiConnectClient(httpClientHelperProvider.HttpClientHelper);
+
+            videosApiConnectClient.GetPageAsync(++currentVideosPageNumber).ContinueWith(task =>
             {
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
@@ -74,9 +82,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
                     }
                     else
                     {
-                        BindingContextPageModel.Total = task.Result.Limit * task.Result.MaxPageCount;
-
-                        if (page == 0 && BindingContextPageModel.Videos.Count > 0)
+                        if (currentVideosPageNumber == 1)
                         {
                             BindingContextPageModel.Videos.Clear();
                         }
@@ -85,6 +91,8 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
                         {
                             BindingContextPageModel.Videos.Add(item.ToViewModel());
                         }
+
+                        BindingContextPageModel.HasMoreVideos = task.Result.HasNext && task.Result.List.Count > 0;
                     }
                 });
             });

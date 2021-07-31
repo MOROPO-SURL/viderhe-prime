@@ -5,7 +5,6 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:supportpresentationdashboardviews="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Views;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
-    xmlns:supportpresentationhelpers="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Helpers;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation"
     xmlns:pagemodels="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.Page"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
@@ -17,7 +16,12 @@
     Title="Configuración de Cuenta">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <sscxftoolkitpresentationconverters:FractionConverter x:Key="FractionConverter" />
             <sscxftoolkitpresentationconverters:NotNullToBooleanConverter x:Key="NotNullToBooleanConverter" />
+
+            <Style TargetType="Frame">
+                <Setter Property="HasShadow" Value="False" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -128,7 +132,10 @@
                             <BoxView BackgroundColor="#666666" HeightRequest="1" />
                             <Grid>
                                 <ffimageloadingforms:CachedImage 
+                                    BackgroundColor="White"
+                                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
                                     Source="{Binding Path=LogoImageSource}"
+                                    Aspect="AspectFill"
                                     CacheType="Disk"
                                     CacheDuration="8760:00:00" />
                                 <StackLayout 
@@ -169,7 +176,10 @@
                                     <TapGestureRecognizer Tapped="PickVerticalSplashImageButton_Clicked" />
                                 </Grid.GestureRecognizers>
                                 <ffimageloadingforms:CachedImage 
+                                    BackgroundColor="White"
+                                    HeightRequest="{Binding Source={x:RelativeSource Mode=Self}, Path=Width, Converter={StaticResource FractionConverter}, ConverterParameter=0.5625}"
                                     Source="{Binding Path=VerticalSplashImageSource}"
+                                    Aspect="AspectFill"
                                     CacheType="Disk"
                                     CacheDuration="8760:00:00" />
                                 <StackLayout 
@@ -210,7 +220,10 @@
                                     <TapGestureRecognizer Tapped="PickHorizontalSplashImageButton_Clicked" />
                                 </Grid.GestureRecognizers>
                                 <ffimageloadingforms:CachedImage 
+                                    BackgroundColor="White"
+                                    HeightRequest="{Binding Source={x:RelativeSource Mode=Self}, Path=Width, Converter={StaticResource FractionConverter}, ConverterParameter=1.777777777777778}"
                                     Source="{Binding Path=HorizontalSplashImageSource}"
+                                    Aspect="AspectFill"
                                     CacheType="Disk"
                                     CacheDuration="8760:00:00" />
                                 <StackLayout 

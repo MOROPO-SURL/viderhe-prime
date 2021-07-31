@@ -11,6 +11,8 @@ namespace SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Pages
         private SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider;
         private Helpers.Facade.IExceptionHandleHelperFacade exceptionHandleHelper;
 
+        private int currentImagesPageNumber;
+
         public ImagesPickPage(Presentation.Models.View.ImageViewModel[] exclusionImages, Helpers.Facade.IExceptionHandleHelperFacade exceptionHandleHelper, SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider, System.Action<Presentation.Models.View.ImageViewModel[]> imagesSelectedCallbackAction)
             : base(new Models.Page.ImagesPickPageModel { IsBusy = true })
         {
@@ -30,7 +32,7 @@ namespace SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Pages
 
             if (IsEnabled) return;
 
-            LoadImages();
+            LoadNextImagesPage(true);
 
             IsEnabled = true;
         }
@@ -57,14 +59,20 @@ namespace SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Pages
             this.NavigationPushPageAsync(new ImageDetailPage(((sender as Xamarin.Forms.BindableObject).BindingContext as Models.View.SelectableModelViewModel<Presentation.Models.View.ImageViewModel>).Model));
         }
 
-        private void LoadImages(int page = 0)
+        private void LoadNextPageButtton_Clicked(object sender, System.EventArgs eventArgs)
         {
-            System.Threading.Tasks.Task.Run(async () =>
-            {
-                var client = new Cloud.Api.Connect.Clients.ImagesApiConnectClient(httpClientHelperProvider.HttpClientHelper);
+            LoadNextImagesPage();
+        }
 
-                return await client.GetPageAsync(page);
-            }).ContinueWith((System.Threading.Tasks.Task<SAPRESSC.Core.Common.Models.PaginationModel<Cloud.Api.Common.Models.ImageDisplayModel>> task) =>
+        private void LoadNextImagesPage(bool restart = false)
+        {
+            BindingContextPageModel.IsBusy = true;
+
+            if (restart) currentImagesPageNumber = 0;
+
+            var imagesApiConnectClient = new Cloud.Api.Connect.Clients.ImagesApiConnectClient(httpClientHelperProvider.HttpClientHelper);
+
+            imagesApiConnectClient.GetPageAsync(++currentImagesPageNumber).ContinueWith(task =>
             {
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
@@ -76,22 +84,22 @@ namespace SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Pages
                     }
                     else
                     {
-                        BindingContextPageModel.Total = task.Result.Limit * task.Result.MaxPageCount;
-
-                        var items = task.Result.List.Select(m => m.ToViewModel()).ToArray().Except(exclusionImages).Select(m => new Models.View.SelectableModelViewModel<Presentation.Models.View.ImageViewModel>
+                        var relevantImages = task.Result.List.Select(m => m.ToViewModel()).ToArray().Except(exclusionImages).Select(item => new Models.View.SelectableModelViewModel<Presentation.Models.View.ImageViewModel>
                         {
-                            Model = m
+                            Model = item
                         });
 
-                        if (page == 0 && BindingContextPageModel.SelectableImages.Count > 0)
+                        if (currentImagesPageNumber == 1)
                         {
                             BindingContextPageModel.SelectableImages.Clear();
                         }
 
-                        foreach (var item in items)
+                        foreach (var item in relevantImages)
                         {
                             BindingContextPageModel.SelectableImages.Add(item);
                         }
+
+                        BindingContextPageModel.HasMoreImages = task.Result.HasNext && task.Result.List.Count > 0;
                     }
                 });
             });

@@ -18,6 +18,7 @@
             <converters:PlacardViewModelToPlacardThumbnailWrapViewConverter x:Key="PlacardViewModelToPlacardThumbnailWrapViewConverter" />
             <converters:TemplateViewModelToTemplateThumbnailWrapViewConverter x:Key="TemplateViewModelToTemplateThumbnailWrapViewConverter" />
             <converters:PlacardToIsAnyPlayerOrientationSupportedConverter x:Key="PlacardToIsAnyPlayerOrientationSupportedConverter" />
+            <converters:BoolToManageProgrammingPageLayoutToolbarItemIconConverter x:Key="BoolToManageProgrammingPageLayoutToolbarItemIconConverter" />
 
             <sscxftoolkitpresentationconverters:IfNullOrEmptyToStringConverter x:Key="IfNullOrEmptyToStringConverter" StringReplacement="Descripción no especificada" />
             <sscxftoolkitpresentationconverters:NullToBooleanConverter x:Key="NullToBooleanConverter" />
@@ -27,6 +28,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Visualización"
+            IconImageSource="{Binding Path=UseExpandedLayout, Converter={StaticResource BoolToManageProgrammingPageLayoutToolbarItemIconConverter}}"
+            Clicked="ToogleUseLayoutVariantToolbarItem_Clicked" />
         <ToolbarItem
             Text="Actualizar"
             Clicked="ReloadToolbarItem_Clicked">
@@ -44,7 +49,7 @@
     <ContentPage.Content>
         <Grid ColumnSpacing="0" RowSpacing="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="300" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -53,10 +58,12 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackLayout
+                IsVisible="{Binding Path=UseExpandedLayout, Converter={StaticResource BoolToBoolNegationConverter}}"
                 Grid.Column="0" Grid.Row="0"
                 Padding="10"
-                Orientation="Horizontal"
                 BackgroundColor="LightGray"
+                WidthRequest="240"
+                Orientation="Horizontal"
                 Spacing="4">
                 <Label
                     VerticalOptions="Center" 
@@ -75,8 +82,10 @@
                     Clicked="AddScreenplayButton_Clicked" />
             </StackLayout>
             <CollectionView
+                IsVisible="{Binding Path=UseExpandedLayout, Converter={StaticResource BoolToBoolNegationConverter}}"
                 Grid.Column="0" Grid.Row="1"
                 BackgroundColor="White"
+                WidthRequest="240"
                 ItemsSource="{Binding Path=Screenplays}"
                 ItemSizingStrategy="MeasureAllItems"
                 SelectionMode="Single"
@@ -256,87 +265,100 @@
             <ScrollView
                 Grid.Column="2" Grid.Row="1"
                 Orientation="Vertical">
-                <FlexLayout
-                    Margin="5"
-                    Wrap="Wrap"
-                    AlignItems="Start" AlignContent="Start"
-                    BindableLayout.ItemsSource="{Binding Path=Placards}">
-                    <BindableLayout.EmptyViewTemplate>
-                        <DataTemplate>
-                            <Label
-                                IsVisible="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
-                                Margin="5"
-                                Text="Sin elementos que mostrar"
-                                TextColor="Black" />
-                        </DataTemplate>
-                    </BindableLayout.EmptyViewTemplate>
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Frame 
-                                Padding="0" Margin="5"
-                                HasShadow="False"
-                                CornerRadius="0"
-                                WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type FlexLayout}}, Path=Width, Converter={StaticResource BindingLayoutWidthToResponsiveChildWidthConverter}}">
-                                <Grid RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid 
-                                        Grid.Row="0"
-                                        HeightRequest="{Binding Source={x:RelativeSource Mode=Self}, Path=Width}">
-                                        <BoxView Color="White" Opacity="0.2" />
-                                        <Label
-                                            IsVisible="{Binding Converter={StaticResource PlacardToIsAnyPlayerOrientationSupportedConverter}}"
-                                            HorizontalOptions="End" VerticalOptions="Start"
-                                            Margin="8"
-                                            Text="&#xf884;"
-                                            TextColor="Black"
-                                            FontFamily="Material Design Icons"
-                                            FontSize="28" />
-                                        <ContentView Content="{Binding Converter={StaticResource PlacardViewModelToPlacardThumbnailWrapViewConverter}}" />
-                                    </Grid>
-                                    <Grid 
-                                        Grid.Row="1"
-                                        BackgroundColor="White"
-                                        ColumnSpacing="0" RowSpacing="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
+                <StackLayout Spacing="0">
+                    <FlexLayout
+                        Margin="5"
+                        Wrap="Wrap"
+                        AlignItems="Start" AlignContent="Start"
+                        BindableLayout.ItemsSource="{Binding Path=Placards}">
+                        <BindableLayout.EmptyViewTemplate>
+                            <DataTemplate>
+                                <Label
+                                    IsVisible="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
+                                    Margin="5"
+                                    Text="Sin elementos que mostrar"
+                                    TextColor="Black" />
+                            </DataTemplate>
+                        </BindableLayout.EmptyViewTemplate>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame 
+                                    Padding="0" Margin="5"
+                                    HasShadow="False"
+                                    CornerRadius="0"
+                                    WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type FlexLayout}}, Path=Width, Converter={StaticResource BindingLayoutWidthToResponsiveChildWidthConverter}}">
+                                    <Grid RowSpacing="0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
-                                            <RowDefinition />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Label
-                                            Grid.Column="0" Grid.Row="0"
-                                            Margin="8,8,8,4"
-                                            Text="{Binding Path=Label}"
-                                            LineBreakMode="TailTruncation" />
-                                        <Label 
-                                            Grid.Column="0" Grid.Row="1"
-                                            VerticalOptions="Center"
-                                            Margin="8,0,0,8"
-                                            Text="{Binding Path=Template.Name}"
-                                            LineBreakMode="TailTruncation"
-                                            TextColor="DimGray"
-                                            FontSize="Caption" />
-                                        <Button 
-                                            Grid.Column="1" Grid.RowSpan="2"
-                                            VerticalOptions="Center"
-                                            BackgroundColor="Transparent"
-                                            BorderWidth="0"
-                                            Padding="0,6"
-                                            Text="&#xF1D9;"
-                                            FontFamily="{StaticResource IconFontFamily}"
-                                            FontSize="Medium"
-                                            Clicked="PlacardOverviewOptionsButton_Clicked" />
+                                        <Grid 
+                                            Grid.Row="0"
+                                            HeightRequest="{Binding Source={x:RelativeSource Mode=Self}, Path=Width}">
+                                            <BoxView Color="White" Opacity="0.2" />
+                                            <Label
+                                                IsVisible="{Binding Converter={StaticResource PlacardToIsAnyPlayerOrientationSupportedConverter}}"
+                                                HorizontalOptions="End" VerticalOptions="Start"
+                                                Margin="8"
+                                                Text="&#xf884;"
+                                                TextColor="Black"
+                                                FontFamily="Material Design Icons"
+                                                FontSize="28" />
+                                            <ContentView Content="{Binding Converter={StaticResource PlacardViewModelToPlacardThumbnailWrapViewConverter}}" />
+                                        </Grid>
+                                        <Grid 
+                                            Grid.Row="1"
+                                            BackgroundColor="White"
+                                            ColumnSpacing="0" RowSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Column="0" Grid.Row="0"
+                                                Margin="8,8,8,4"
+                                                Text="{Binding Path=Label}"
+                                                LineBreakMode="TailTruncation" />
+                                            <Label 
+                                                Grid.Column="0" Grid.Row="1"
+                                                VerticalOptions="Center"
+                                                Margin="8,0,0,8"
+                                                Text="{Binding Path=Template.Name}"
+                                                LineBreakMode="TailTruncation"
+                                                TextColor="DimGray"
+                                                FontSize="Caption" />
+                                            <Button 
+                                                Grid.Column="1" Grid.RowSpan="2"
+                                                VerticalOptions="Center"
+                                                BackgroundColor="Transparent"
+                                                BorderWidth="0"
+                                                Padding="0,6"
+                                                Text="&#xF1D9;"
+                                                FontFamily="{StaticResource IconFontFamily}"
+                                                FontSize="Medium"
+                                                Clicked="PlacardOverviewOptionsButton_Clicked" />
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                    <Button
+                        IsVisible="{Binding Path=HasMorePlacards}"
+                        IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
+                        Margin="5,0,5,5"
+                        HorizontalOptions="Center"
+                        Text="Mostrar más"
+                        Clicked="LoadNextPlacardsPageButtton_Clicked" />
+                    <ActivityIndicator
+                        IsVisible="{Binding Path=IsBusy}"
+                        Margin="5,0,5,5"
+                        IsRunning="{Binding Path=IsBusy}" />
+                </StackLayout>
             </ScrollView>
             <supportpresentationdashboardviews:BusyView Grid.ColumnSpan="3" Grid.RowSpan="2" />
         </Grid>

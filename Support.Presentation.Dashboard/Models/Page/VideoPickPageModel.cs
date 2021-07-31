@@ -2,21 +2,16 @@
 {
     public class VideoPickPageModel : XFToolKit.Mvvm.Models.Page.BasePageModel
     {
-        private int total;
-        private bool isLoadingInfinity;
+        private bool hasMoreVideos;
 
         public VideoPickPageModel()
         {
-            isLoadingInfinity = false;
-
             Videos = new System.Collections.ObjectModel.ObservableCollection<Presentation.Models.View.VideoViewModel>();
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Presentation.Models.View.VideoViewModel> Videos { get; set; }
 
-        public int Total { get => total; set => SetProperty(ref total, value); }
-
-        public bool IsLoadingInfinite { get => isLoadingInfinity; set => SetProperty(ref isLoadingInfinity, value); }
+        public bool HasMoreVideos { get => hasMoreVideos; set => SetProperty(ref hasMoreVideos, value); }
 
         protected override void DisposeUnmanagementResources()
         {
