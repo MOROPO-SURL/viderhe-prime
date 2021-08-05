@@ -81,49 +81,66 @@
     <Compile Include="Managers\ApplicationManager.cs" />
     <Compile Include="Views\Renderer\VideoPlayerViewRenderer.cs" />
     <Compile Include="Views\Renderer\CustomApparenceEditorRenderer.cs" />
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1201.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\401.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\402.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\581.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\801.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
@@ -152,6 +169,9 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Plugin.FilePicker">
       <Version>2.1.41</Version>
     </PackageReference>
@@ -167,66 +187,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation\Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation.csproj">
-      <Project>{b4a9b021-0e5c-487d-8c45-2275ec9ef10e}</Project>
-      <Name>Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum.Templating.Presentation\Extend.OHCC.RailwayMuseum.Templating.Presentation.csproj">
-      <Project>{a7926688-af72-41df-85eb-141f2ec72e6a}</Project>
-      <Name>Extend.OHCC.RailwayMuseum.Templating.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum.Templating\Extend.OHCC.RailwayMuseum.Templating.csproj">
-      <Project>{72397bc7-c36f-4dfe-bc31-ceebba04aa64}</Project>
-      <Name>Extend.OHCC.RailwayMuseum.Templating</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum\Extend.OHCC.RailwayMuseum.csproj">
-      <Project>{5d4a0c15-33f9-46cc-8d4b-d4ec9bdbb488}</Project>
-      <Name>Extend.OHCC.RailwayMuseum</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating.Dashboard.Presentation\Extend.SocialWelfare.Templating.Dashboard.Presentation.csproj">
-      <Project>{961885d1-e76a-49bb-a7e3-b7dd994a03ff}</Project>
-      <Name>Extend.SocialWelfare.Templating.Dashboard.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating.Presentation\Extend.SocialWelfare.Templating.Presentation.csproj">
-      <Project>{56d164f7-2538-4735-9fca-5fe23e1a3eef}</Project>
-      <Name>Extend.SocialWelfare.Templating.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating\Extend.SocialWelfare.Templating.csproj">
-      <Project>{2061e2ad-2139-48a1-9a9c-e6ddc03f7ae7}</Project>
-      <Name>Extend.SocialWelfare.Templating</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.SocialWelfare\Extend.SocialWelfare.csproj">
-      <Project>{1d32ffd3-3663-4ba4-926a-3b08087f1baa}</Project>
-      <Name>Extend.SocialWelfare</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.SpringMotion.Transitioning.Presentation\Extend.SpringMotion.Transitioning.Presentation.csproj">
-      <Project>{04c90b44-554e-49ba-8887-2ba944bbe99b}</Project>
-      <Name>Extend.SpringMotion.Transitioning.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.SpringMotion.Transitioning\Extend.SpringMotion.Transitioning.csproj">
-      <Project>{e1dd5a12-ce0c-4cbd-ac65-23c6a39d00fb}</Project>
-      <Name>Extend.SpringMotion.Transitioning</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.SpringMotion\Extend.SpringMotion.csproj">
-      <Project>{70ad2c13-eb8b-481d-b759-ac91d22fb1c3}</Project>
-      <Name>Extend.SpringMotion</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Dashboard.Presentation\Extend.UICCamaguey.Overlaying.Dashboard.Presentation.csproj">
-      <Project>{d9155fb1-cc71-4209-a980-e15c83096169}</Project>
-      <Name>Extend.UICCamaguey.Overlaying.Dashboard.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Presentation\Extend.UICCamaguey.Overlaying.Presentation.csproj">
-      <Project>{bb80d163-471f-4fa0-a0a8-70b3d4fff0a0}</Project>
-      <Name>Extend.UICCamaguey.Overlaying.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying\Extend.UICCamaguey.Overlaying.csproj">
-      <Project>{eb85ea36-54b4-4233-8404-6888ce891fa1}</Project>
-      <Name>Extend.UICCamaguey.Overlaying</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Extend.UICCamaguey\Extend.UICCamaguey.csproj">
-      <Project>{e23a8dd5-dbfd-4b1b-ab98-7205bedad4be}</Project>
-      <Name>Extend.UICCamaguey</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Terminal.Dashboard\Terminal.Dashboard.csproj">
       <Project>{CBA05853-1C8C-4704-811A-1C1C679B7B55}</Project>
       <Name>Terminal.Dashboard</Name>
@@ -308,5 +268,4 @@
       <Name>Extend.Essential.Templating.Dashboard.Presentation</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
 </Project>

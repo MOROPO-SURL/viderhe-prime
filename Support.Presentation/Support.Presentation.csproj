@@ -10,12 +10,14 @@
     <None Remove="Resources\Fonts\icomoon.ttf" />
     <None Remove="Resources\Fonts\JuliusSansOne-Regular.ttf" />
     <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
+    <None Remove="Resources\Images\viderhe-identity-main.svg" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\icomoon.ttf" />
     <EmbeddedResource Include="Resources\Fonts\JuliusSansOne-Regular.ttf" />
     <EmbeddedResource Include="Resources\Fonts\materialdesignicons-webfont.ttf" />
+    <EmbeddedResource Include="Resources\Images\viderhe-identity-main.svg" />
   </ItemGroup>
 
   <ItemGroup>

@@ -56,37 +56,37 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\Terminal.Player.UWP\Terminal.Player.UWP.csproj</EntryPointProjectUniqueName>
-    <PackageCertificateThumbprint>4BE9C1E16BB4139C372F61C10F90562307FEA5D4</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A0991B70F6E70694BA0F8CAC95AA3C9FDAC8499D</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <DefaultLanguage>es-US</DefaultLanguage>
+    <DefaultLanguage>es</DefaultLanguage>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

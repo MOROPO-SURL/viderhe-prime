@@ -21,5 +21,10 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Repositories
         {
             return entity => entity.Name;
         }
+
+        public override bool IsPagingOrderDescending()
+        {
+            return true;
+        }
     }
 }

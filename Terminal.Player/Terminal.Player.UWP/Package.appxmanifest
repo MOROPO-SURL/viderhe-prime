@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap mp uap3">
 
   <Identity
-    Name="c6ae3430-dd1e-4b55-8d30-a5d263249b73"
-    Publisher="CN=SMART SOLUCIONES CUBA"
-    Version="0.1.0.0" />
+    Name="SmartSolucionesCuba.Viderhe.Player"
+    Publisher="CN=SMART SOLUCIONES CUBA (SSC)"
+    Version="0.2.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Viderhe Player</DisplayName>
-    <PublisherDisplayName>0f4c15ed-f4b2-4472-8d92-8eedcbe839ec</PublisherDisplayName>
+    <PublisherDisplayName>SMART SOLUCIONES CUBA (SSC)</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -37,7 +37,7 @@
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="Presentador de guiones de señalización digital para dispositivos asociados a cuentas de la plataforma Viderhe"
-        BackgroundColor="#cf0423">
+        BackgroundColor="#00162c">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
@@ -45,7 +45,7 @@
             <uap:ShowOn Tile="square310x310Logo" />
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#cf0423"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#00162c"/>
       </uap:VisualElements>
     </Application>
   </Applications>

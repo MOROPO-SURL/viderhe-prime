@@ -8,8 +8,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Droid
 {
     [Activity(
         Label = "Viderhe Player", 
-        Icon = "@mipmap/ic_launcher", 
-        RoundIcon = "@mipmap/ic_launcher_round",
+        Icon = "@mipmap/ic_launcher",
         Theme = "@style/AppTheme.NoActionBar", 
         MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]

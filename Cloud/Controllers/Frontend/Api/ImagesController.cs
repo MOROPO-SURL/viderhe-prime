@@ -55,11 +55,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 
             return Ok(new SAPRESSC.Core.Common.Models.PaginationModel<ImageDisplayModel>
             {
-                List = account.ImageBridges.Skip((page - 1) * limit).Take(limit).OrderByDescending(b => b.Image.CreateAt).Select((Persistence.Entities.AccountImageBridge bridge) =>
+                List = account.ImageBridges.Select(bridge => bridge.Image).OrderByDescending(e => e.CreateAt).Skip((page - 1) * limit).Take(limit).Select(entity =>
                 {
                     var model = new ImageDisplayModel();
 
-                    model.Import(bridge.Image);
+                    model.Import(entity);
 
                     return model;
                 }).ToList(),

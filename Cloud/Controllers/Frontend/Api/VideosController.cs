@@ -58,11 +58,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 
             return Ok(new SAPRESSC.Core.Common.Models.PaginationModel<VideoDisplayModel>
             {
-                List = account.VideoBridges.Skip((page - 1) * limit).Take(limit).OrderByDescending(b => b.Video.CreateAt).Select((Persistence.Entities.AccountVideoBridge bridge) =>
+                List = account.VideoBridges.Select(bridge => bridge.Video).OrderByDescending(b => b.CreateAt).Skip((page - 1) * limit).Take(limit).Select(entity =>
                 {
                     var model = new VideoDisplayModel();
 
-                    model.Import(bridge.Video);
+                    model.Import(entity);
 
                     return model;
                 }).ToList(),

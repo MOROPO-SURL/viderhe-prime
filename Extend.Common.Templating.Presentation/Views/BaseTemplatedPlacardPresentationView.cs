@@ -9,11 +9,9 @@
 
         public sealed override void OnShowInTransitionComplete()
         {
-            if ((BindingContext is Models.View.AbstractScreenTimedPlacardViewModel) && (BindingContext as Models.View.AbstractScreenTimedPlacardViewModel).ScreenPresentationTime <= System.TimeSpan.Zero) return;
-
             PerformPlacardStarup();
 
-            if (!(BindingContext is Models.View.AbstractScreenTimedPlacardViewModel)) return;
+            if (!(BindingContext is Models.View.AbstractScreenTimedPlacardViewModel) || (BindingContext as Models.View.AbstractScreenTimedPlacardViewModel).ScreenPresentationTime <= System.TimeSpan.Zero) return;
 
             Xamarin.Forms.Device.StartTimer((BindingContext as Models.View.AbstractScreenTimedPlacardViewModel).ScreenPresentationTime, () =>
             {

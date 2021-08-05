@@ -7,6 +7,8 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
         public UserAuthenticationPage() : base(new Models.Page.UserAuthenticationPageModel { TargetCloudHostName = Managers.SessionManager.Instance.Server })
         {
             InitializeComponent();
+
+            PlatformIdentityImageView.Source = FFImageLoading.Svg.Forms.SvgImageSource.FromResource("SmartSolucionesCuba.Viderhe.Support.Presentation.Resources.Images.viderhe-identity-main.svg", typeof(Support.Presentation.Providers.TemplateViewModelProvider).Assembly);
         }
 
         protected override bool OnBackButtonPressed()
