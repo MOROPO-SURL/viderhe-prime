@@ -267,5 +267,65 @@
       <Project>{9792E424-4FF0-489F-B1CE-6A1CA6CD47B1}</Project>
       <Name>Extend.Essential.Templating.Dashboard.Presentation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum\Extend.OHCC.RailwayMuseum.csproj">
+      <Project>{5D4A0C15-33F9-46CC-8D4B-D4EC9BDBB488}</Project>
+      <Name>Extend.OHCC.RailwayMuseum</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum.Templating\Extend.OHCC.RailwayMuseum.Templating.csproj">
+      <Project>{72397BC7-C36F-4DFE-BC31-CEEBBA04AA64}</Project>
+      <Name>Extend.OHCC.RailwayMuseum.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum.Templating.Presentation\Extend.OHCC.RailwayMuseum.Templating.Presentation.csproj">
+      <Project>{A7926688-AF72-41DF-85EB-141F2EC72E6A}</Project>
+      <Name>Extend.OHCC.RailwayMuseum.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SocialWelfare\Extend.SocialWelfare.csproj">
+      <Project>{1D32FFD3-3663-4BA4-926A-3B08087F1BAA}</Project>
+      <Name>Extend.SocialWelfare</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating\Extend.SocialWelfare.Templating.csproj">
+      <Project>{2061E2AD-2139-48A1-9A9C-E6DDC03F7AE7}</Project>
+      <Name>Extend.SocialWelfare.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating.Presentation\Extend.SocialWelfare.Templating.Presentation.csproj">
+      <Project>{56D164F7-2538-4735-9FCA-5FE23E1A3EEF}</Project>
+      <Name>Extend.SocialWelfare.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SpringMotion\Extend.SpringMotion.csproj">
+      <Project>{70AD2C13-EB8B-481D-B759-AC91D22FB1C3}</Project>
+      <Name>Extend.SpringMotion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SpringMotion.Transitioning\Extend.SpringMotion.Transitioning.csproj">
+      <Project>{E1DD5A12-CE0C-4CBD-AC65-23C6A39D00FB}</Project>
+      <Name>Extend.SpringMotion.Transitioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SpringMotion.Transitioning.Presentation\Extend.SpringMotion.Transitioning.Presentation.csproj">
+      <Project>{04C90B44-554E-49BA-8887-2BA944BBE99B}</Project>
+      <Name>Extend.SpringMotion.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey\Extend.UICCamaguey.csproj">
+      <Project>{E23A8DD5-DBFD-4B1B-AB98-7205BEDAD4BE}</Project>
+      <Name>Extend.UICCamaguey</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying\Extend.UICCamaguey.Overlaying.csproj">
+      <Project>{EB85EA36-54B4-4233-8404-6888CE891FA1}</Project>
+      <Name>Extend.UICCamaguey.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Presentation\Extend.UICCamaguey.Overlaying.Presentation.csproj">
+      <Project>{BB80D163-471F-4FA0-A0A8-70B3D4FFF0A0}</Project>
+      <Name>Extend.UICCamaguey.Overlaying.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.UICCamaguey.Overlaying.Dashboard.Presentation\Extend.UICCamaguey.Overlaying.Dashboard.Presentation.csproj">
+      <Project>{D9155FB1-CC71-4209-A980-E15C83096169}</Project>
+      <Name>Extend.UICCamaguey.Overlaying.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.SocialWelfare.Templating.Dashboard.Presentation\Extend.SocialWelfare.Templating.Dashboard.Presentation.csproj">
+      <Project>{961885D1-E76A-49BB-A7E3-B7DD994A03FF}</Project>
+      <Name>Extend.SocialWelfare.Templating.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation\Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation.csproj">
+      <Project>{B4A9B021-0E5C-487D-8C45-2275EC9EF10E}</Project>
+      <Name>Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
