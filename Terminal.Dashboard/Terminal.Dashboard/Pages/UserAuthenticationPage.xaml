@@ -21,9 +21,9 @@
                 Orientation="Vertical"
                 Spacing="0">
                 <ffimageloadingsvg:SvgCachedImage
-                        x:Name="PlatformIdentityImageView"
                         HorizontalOptions="Center"
                         WidthRequest="320" HeightRequest="320"
+                        Source="resource://SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Assets.Images.viderhe-identity-main.svg"
                         Aspect="AspectFill" />
                 <ScrollView HorizontalOptions="Center">
                     <StackLayout 

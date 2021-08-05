@@ -6,6 +6,7 @@
     xmlns:supportpresentationhelpers="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Helpers;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation"
     xmlns:supportpresentationviews="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Views;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Player.Pages.MainPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -46,26 +47,15 @@
                     Grid.ColumnSpan="2" Grid.Row="2" />
                 <StackLayout 
                     x:Name="ProductIdentityContainer"
-                    Grid.ColumnSpan="2" Grid.Row="3"
-                    Orientation="Horizontal"
-                    Spacing="0"
-                    Opacity="0">
-                    <Label 
-                        VerticalOptions="Center"
-                        Margin="0,0,16,0"
-                        Text="&#xe9ff;"
-                        TextColor="White"
-                        FontFamily="Viderhe Identity Icons"
-                        FontSize="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.NormalHeroTextFontSize}" />
-                    <Label 
-                        Margin="0,6,0,0"
-                        Text="Viderhe"
-                        TextColor="White"
-                        HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"
-                        FontFamily="Julius Sans One Regular"
-                        FontSize="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.NormalTitleTextFontSize}" />
-                    <Image 
-                        VerticalOptions="End">
+                    Grid.Column="1" Grid.RowSpan="4"
+                    HorizontalOptions="End" VerticalOptions="End"
+                    Opacity="0"
+                    Spacing="0">
+                    <ffimageloadingsvg:SvgCachedImage
+                        WidthRequest="320" HeightRequest="320"
+                        Source="resource://SmartSolucionesCuba.Viderhe.Terminal.Player.Assets.Images.viderhe-identity-high-contrast-light.svg"
+                        Aspect="AspectFill" />
+                    <Image HorizontalOptions="Center">
                         <Image.Source>
                             <OnPlatform x:TypeArguments="ImageSource">
                                 <On Platform="Android" Value="powerby_signature.png" />
@@ -74,6 +64,26 @@
                         </Image.Source>
                     </Image>
                 </StackLayout>
+                <!--<StackLayout 
+                    x:Name="ProductIdentityContainer"
+                    Grid.ColumnSpan="2" Grid.Row="3"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    Opacity="0">
+                    <ffimageloadingsvg:SvgCachedImage
+                        HorizontalOptions="Start" VerticalOptions="End"
+                        WidthRequest="320" HeightRequest="120"
+                        Source="resource://SmartSolucionesCuba.Viderhe.Terminal.Player.Assets.Images.viderhe-identity-high-contrast-light.svg"
+                        Aspect="AspectFill" />
+                    <Image HorizontalOptions="End" VerticalOptions="End">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android" Value="powerby_signature.png" />
+                                <On Platform="UWP" Value="Assets/PowerbySignature.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                </StackLayout>-->
             </Grid>
         </Grid>
     </ContentPage.Content>
