@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SmartSolucionesCuba.Videre.Terminal.Player.iOS</RootNamespace>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Terminal.Player.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>SmartSolucionesCuba.Videre.Terminal.Player.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
@@ -26,6 +26,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -72,6 +73,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
+    <Compile Include="Providers\StaticResourceProvider.cs" />
+    <Compile Include="Providers\HostEnvironmentInfoProvider.cs" />
+    <Compile Include="Helpers\PlatformControlHelper.cs" />
+    <Compile Include="Helpers\TextWidthCalculationHelper.cs" />
+    <Compile Include="Views\Renderer\FontOverflowLabelRenderer.cs" />
+    <Compile Include="Views\Renderer\IndeterminableProgressBarViewRenderer.cs" />
+    <Compile Include="Views\LinearProgressBarView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20@2x.png">
@@ -134,6 +142,10 @@
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x-1.png" />
+    <ImageAsset Include="Assets.xcassets\PowerbySignature.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\PowerbySignature.imageset\SplashSignature_HC-White_1x.png" />
+    <ImageAsset Include="Assets.xcassets\PowerbySignature.imageset\SplashSignature_HC-White_2x.png" />
+    <ImageAsset Include="Assets.xcassets\PowerbySignature.imageset\SplashSignature_HC-White_3x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -170,5 +182,68 @@
       <Project>{97704A13-8184-40B3-92BE-FB0E1AAC6271}</Project>
       <Name>Terminal.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential\Extend.Essential.csproj">
+      <Project>{1887C021-DBEC-42F7-8563-0E56598B6F9A}</Project>
+      <Name>Extend.Essential</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Overlaying\Extend.Essential.Overlaying.csproj">
+      <Project>{87C8E862-21A4-4679-9FC0-26A99F7A24AE}</Project>
+      <Name>Extend.Essential.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Overlaying.Presentation\Extend.Essential.Overlaying.Presentation.csproj">
+      <Project>{2AC14CD7-AD15-48F4-AFE5-B67DA5107BC1}</Project>
+      <Name>Extend.Essential.Overlaying.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Templating\Extend.Essential.Templating.csproj">
+      <Project>{BB3B9DC7-E652-499A-B609-325A01414109}</Project>
+      <Name>Extend.Essential.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Templating.Presentation\Extend.Essential.Templating.Presentation.csproj">
+      <Project>{F52E5E05-B3D9-44F2-BFDC-2C8483F1F770}</Project>
+      <Name>Extend.Essential.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Transitioning\Extend.Essential.Transitioning.csproj">
+      <Project>{5E18FBA2-62E1-4BAE-8917-1E809FC5FCFD}</Project>
+      <Name>Extend.Essential.Transitioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Transitioning.Presentation\Extend.Essential.Transitioning.Presentation.csproj">
+      <Project>{B88A5D61-11D9-4827-875E-7BD9BC5F6720}</Project>
+      <Name>Extend.Essential.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.Api.Connect\Cloud.Api.Connect.csproj">
+      <Project>{0BEE0E5C-B306-4E5F-AC02-2B340A7BFF6E}</Project>
+      <Name>Cloud.Api.Connect</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.Api.Common\Cloud.Api.Common.csproj">
+      <Project>{4D9E2D5F-55C3-497A-9EA0-89CED1ACD180}</Project>
+      <Name>Cloud.Api.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.SignalR.Connect.Common\Cloud.SignalR.Connect.Common.csproj">
+      <Project>{335BAEFF-DBA7-4B8E-8946-A3EA1EA687CE}</Project>
+      <Name>Cloud.SignalR.Connect.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.SignalR.Connect.Player\Cloud.SignalR.Connect.Player.csproj">
+      <Project>{258B002C-4000-4FA0-8313-7DC1EB74B5CC}</Project>
+      <Name>Cloud.SignalR.Connect.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Presentation\Support.Presentation.csproj">
+      <Project>{44A1EA24-59C5-4E9D-AF01-C65297998114}</Project>
+      <Name>Support.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Overlaying.Presentation\Extend.Common.Overlaying.Presentation.csproj">
+      <Project>{54A31415-5ACA-41CF-A9DA-2B97E0812EC6}</Project>
+      <Name>Extend.Common.Overlaying.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Templating.Presentation\Extend.Common.Templating.Presentation.csproj">
+      <Project>{E620A859-7769-472D-981A-B93DBF496926}</Project>
+      <Name>Extend.Common.Templating.Presentation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Providers\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Renderer\" />
+    <Folder Include="Assets.xcassets\PowerbySignature.imageset\" />
   </ItemGroup>
 </Project>

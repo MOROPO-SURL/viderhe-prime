@@ -60,6 +60,7 @@
                             <OnPlatform x:TypeArguments="ImageSource">
                                 <On Platform="Android" Value="powerby_signature.png" />
                                 <On Platform="UWP" Value="Assets/PowerbySignature.png" />
+                                <On Platform="iOS" Value="PowerbySignature" />
                             </OnPlatform>
                         </Image.Source>
                     </Image>

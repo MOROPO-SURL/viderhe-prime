@@ -27,6 +27,10 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.iOS
             
             LoadApplication(new App());
 
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Templating.Presentation.Providers.PlacardPresentationViewProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Overlaying.Presentation.Providers.OverlayPresentationViewProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Transitioning.Presentation.Providers.TransitionProvider));
+
             return base.FinishedLaunching(app, options);
         }
     }
