@@ -154,7 +154,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extend.OHCC.RailwayMuseum.Templating.Presentation", "Extend.OHCC.RailwayMuseum.Templating.Presentation\Extend.OHCC.RailwayMuseum.Templating.Presentation.csproj", "{A7926688-AF72-41DF-85EB-141F2EC72E6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation", "Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation\Extend.OHCC.RailwayMuseum.Templating.Dashboard.Presentation.csproj", "{B4A9B021-0E5C-487D-8C45-2275EC9EF10E}"
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Terminal.Player.UWP.Package", "Terminal.Player\Terminal.Player.UWP.Package\Terminal.Player.UWP.Package.wapproj", "{C62FBC04-60F7-4892-A78F-E75545C0A85E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2140,7 +2139,6 @@ Global
 		{4B814041-316C-4DCD-9B93-5FAFFA963947} = {C7CDA89F-DFD7-4559-8C68-5A1350426490}
 		{F3BAE034-8FC1-4B40-83A7-5B5EAA5005E2} = {C7CDA89F-DFD7-4559-8C68-5A1350426490}
 		{961885D1-E76A-49BB-A7E3-B7DD994A03FF} = {5CC54634-A7A0-4A30-9A54-11859AD89410}
-		{075F5BD6-D1E1-40A4-BAEB-6D7E908F3405} = {45D5011F-E5DA-418D-BFCB-70EC08AF546E}
 		{C62FBC04-60F7-4892-A78F-E75545C0A85E} = {68B79360-7D3F-4AB7-8749-AFBCA67E1CF9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

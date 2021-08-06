@@ -264,60 +264,59 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
                     item.Id != Extend.OHCC.RailwayMuseum.Descriptors.RailwayMuseumOHCCExtensionDescriptor.ID)
                     .ToArray();
 
-                    foreach (var accountExtension in dynamicLoadExtensions)
+                foreach (var accountExtension in dynamicLoadExtensions)
+                {
+                    var extensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", accountExtension.Id.ToString(), accountExtension.Version));
+
+                    // TODO Clear obsolete extension folder!!
+
+                    if (!extensionDirectoryInfo.Exists)
                     {
-                        var extensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", accountExtension.Id.ToString(), accountExtension.Version));
+                        extensionDirectoryInfo.Create();
 
-                        // TODO Clear obsolete extension folder!!
+                        await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
+                    }
 
-                        if (!extensionDirectoryInfo.Exists)
+                    var extensionLibraryFileInfos = extensionDirectoryInfo.GetFiles();
+
+                    if (extensionLibraryFileInfos.Length <= 0)
+                    {
+                        await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
+                    }
+
+                    foreach (var extensionLibraryFileInfo in extensionLibraryFileInfos)
+                    {
+                        var assembly = System.Reflection.Assembly.LoadFrom(extensionLibraryFileInfo.FullName);
+
+                        System.AppDomain.CurrentDomain.Load(assembly.GetName());
+
+                        var attributes = assembly.GetCustomAttributesSafe(typeof(Xamarin.Forms.ExportFontAttribute));
+
+                        if (attributes == null || attributes.Length == 0) continue;
+
+                        var length = attributes.Length;
+
+                        for (var i = 0; i < length; i++)
                         {
-                            extensionDirectoryInfo.Create();
+                            var a = attributes[i];
 
-                            await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
-                        }
+                            var attribute = a as Xamarin.Forms.HandlerAttribute;
 
-                        var extensionLibraryFileInfos = extensionDirectoryInfo.GetFiles();
-
-                        if (extensionLibraryFileInfos.Length <= 0)
-                        {
-                            await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
-                        }
-
-                        foreach (var extensionLibraryFileInfo in extensionLibraryFileInfos)
-                        {
-                            var assembly = System.Reflection.Assembly.LoadFrom(extensionLibraryFileInfo.FullName);
-
-                            System.AppDomain.CurrentDomain.Load(assembly.GetName());
-
-                            var attributes = assembly.GetCustomAttributesSafe(typeof(Xamarin.Forms.ExportFontAttribute));
-
-                            if (attributes == null || attributes.Length == 0) continue;
-
-                            var length = attributes.Length;
-
-                            for (var i = 0; i < length; i++)
+                            if (attribute == null && (a is Xamarin.Forms.ExportFontAttribute fa))
                             {
-                                var a = attributes[i];
-
-                                var attribute = a as Xamarin.Forms.HandlerAttribute;
-
-                                if (attribute == null && (a is Xamarin.Forms.ExportFontAttribute fa))
-                                {
-                                    Xamarin.Forms.Internals.FontRegistrar.Register(fa, assembly);
-                                }
+                                Xamarin.Forms.Internals.FontRegistrar.Register(fa, assembly);
                             }
                         }
                     }
                 }
-
-                if (configurationStepQueue.Count > 1)
-                {
-                    configurationStepQueue.Dequeue();
-                }
-
-                AnimateOutCurrentStep(CurentStepAnimateOut_Completed);
             }
+
+            if (configurationStepQueue.Count > 1)
+            {
+                configurationStepQueue.Dequeue();
+            }
+
+            AnimateOutCurrentStep(CurentStepAnimateOut_Completed);
         }
 
         private async System.Threading.Tasks.Task<Cloud.Api.Common.Models.PlacardDisplayModel[]> RequestScreenplayPlacardsAsync()

@@ -30,6 +30,10 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.iOS
             _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Templating.Presentation.Providers.PlacardPresentationViewProvider));
             _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Overlaying.Presentation.Providers.OverlayPresentationViewProvider));
             _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.Essential.Transitioning.Presentation.Providers.TransitionProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.SpringMotion.Transitioning.Presentation.Providers.TransitionProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.SocialWelfare.Templating.Presentation.Providers.PlacardPresentationViewProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.UICCamaguey.Overlaying.Presentation.Providers.OverlayPresentationViewProvider));
+            _ = System.Reflection.Assembly.GetAssembly(typeof(Extend.OHCC.RailwayMuseum.Templating.Presentation.Providers.PlacardPresentationViewProvider));
 
             return base.FinishedLaunching(app, options);
         }
