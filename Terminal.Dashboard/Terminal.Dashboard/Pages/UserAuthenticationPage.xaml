@@ -16,14 +16,13 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
-            <StackLayout 
-                HorizontalOptions="Center" VerticalOptions="Center"
-                Orientation="Vertical"
-                Spacing="0">
-                <ScrollView HorizontalOptions="Center">
-                    <StackLayout 
-                        WidthRequest="240"
-                        Margin="20,0">
+            <ScrollView
+                HorizontalOptions="Center"
+                Orientation="Vertical">
+                <Grid
+                    WidthRequest="240">
+                    <StackLayout
+                        VerticalOptions="Center">
                         <ffimageloadingsvg:SvgCachedImage
                             HorizontalOptions="Center"
                             WidthRequest="320" HeightRequest="320"
@@ -48,8 +47,8 @@
                             TextColor="White"
                             Clicked="SignButton_Clicked" />
                     </StackLayout>
-                </ScrollView>
-            </StackLayout>
+                </Grid>
+            </ScrollView>
             <supportpresentationdashboardviews:BusyView />
         </Grid>
     </ContentPage.Content>
