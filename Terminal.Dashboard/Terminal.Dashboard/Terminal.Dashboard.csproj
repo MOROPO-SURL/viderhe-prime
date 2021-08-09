@@ -25,6 +25,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.3" />
     <PackageReference Include="Toasts.Forms.Plugin" Version="3.3.2" />
     <PackageReference Include="Xam.Plugin.SimpleColorPicker" Version="1.0.5" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />

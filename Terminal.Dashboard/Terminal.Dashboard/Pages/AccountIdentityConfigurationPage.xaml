@@ -131,6 +131,9 @@
                                 Style="{StaticResource FormLabel}" />
                             <BoxView BackgroundColor="#666666" HeightRequest="1" />
                             <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="PickLogoImageButton_Clicked" />
+                                </Grid.GestureRecognizers>
                                 <ffimageloadingforms:CachedImage 
                                     BackgroundColor="White"
                                     HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"

@@ -68,7 +68,7 @@
                                         VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label 
                                             HorizontalTextAlignment="Center"
-                                            Text="&#xF268;"
+                                            Text="&#xF26A;"
                                             TextColor="Black"
                                             FontFamily="{StaticResource IconFontFamily}"
                                             FontSize="Medium" />

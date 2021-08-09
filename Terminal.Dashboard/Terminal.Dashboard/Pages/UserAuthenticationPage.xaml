@@ -20,15 +20,15 @@
                 HorizontalOptions="Center" VerticalOptions="Center"
                 Orientation="Vertical"
                 Spacing="0">
-                <ffimageloadingsvg:SvgCachedImage
-                        HorizontalOptions="Center"
-                        WidthRequest="320" HeightRequest="320"
-                        Source="resource://SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Assets.Images.viderhe-identity-main.svg"
-                        Aspect="AspectFill" />
                 <ScrollView HorizontalOptions="Center">
                     <StackLayout 
                         WidthRequest="240"
                         Margin="20,0">
+                        <ffimageloadingsvg:SvgCachedImage
+                            HorizontalOptions="Center"
+                            WidthRequest="320" HeightRequest="320"
+                            Source="resource://SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Assets.Images.viderhe-identity-main.svg"
+                            Aspect="AspectFill" />
                         <Entry
                             Text="{Binding Path=TargetCloudHostName}"
                             Placeholder="servidor cloud" />

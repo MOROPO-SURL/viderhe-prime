@@ -2,17 +2,15 @@
 <sscxftoolkitmvvmpages:BindingContextedContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pagemodels="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.Page"
     xmlns:viewmodels="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.View"
     xmlns:managers="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers"
     xmlns:supportpresentationdashboardviews="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Views;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
     xmlns:viewtemplateselectors="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Views.Template.Selector"
-    xmlns:ffimageloadingforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
-    mc:Ignorable="d"
+    xmlns:ffimageloadingforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:icplugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages.MainPage"
     x:TypeArguments="pagemodels:MainPageModel"
     Title="Inicio">
@@ -68,7 +66,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <ffimageloadingforms:CachedImage
+                        <!--<ffimageloadingforms:CachedImage
                             Grid.Column="0"
                             VerticalOptions="Center"
                             HeightRequest="96" WidthRequest="96"
@@ -78,7 +76,13 @@
                             <ffimageloadingforms:CachedImage.Clip>
                                 <EllipseGeometry RadiusX="48" RadiusY="48" Center="48,48" />
                             </ffimageloadingforms:CachedImage.Clip>
-                        </ffimageloadingforms:CachedImage>
+                        </ffimageloadingforms:CachedImage>-->
+                        <icplugin:CircleImage
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            HeightRequest="96" WidthRequest="96"
+                            Source="{Binding Source={x:Static managers:SessionManager.Instance}, Path=ModeratorPictureImageSource}"
+                            BorderThickness="0" />
                         <StackLayout 
                             Grid.Column="1" 
                             VerticalOptions="Center">
