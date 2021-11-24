@@ -283,11 +283,11 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Extend.Essential.Transitioning.Presentation\Extend.Essential.Transitioning.Presentation.csproj">
       <Project>{b88a5d61-11d9-4827-875e-7bd9bc5f6720}</Project>
-      <Name>Extend.Essential.Motion.Presentation</Name>
+      <Name>Extend.Essential.Transitioning.Presentation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Extend.Essential.Transitioning\Extend.Essential.Transitioning.csproj">
       <Project>{5e18fba2-62e1-4bae-8917-1e809fc5fcfd}</Project>
-      <Name>Extend.Essential.Motion</Name>
+      <Name>Extend.Essential.Transitioning</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Extend.Essential.Overlaying.Dashboard.Presentation\Extend.Essential.Overlaying.Dashboard.Presentation.csproj">
       <Project>{c79fac59-2855-438c-b372-23ee0e4ebb7c}</Project>

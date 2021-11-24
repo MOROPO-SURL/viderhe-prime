@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>tizen40</TargetFramework>
-      <AssemblyName>SmartSolucionesCuba.Viderhe.Terminal.Player.Tizen.TV</AssemblyName>
+    <AssemblyName>SmartSolucionesCuba.Viderhe.Terminal.Player.Tizen.TV</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -33,12 +33,15 @@
       <PackageReference Include="SSCXFToolKit.Presentation" Version="0.6.1-alpha" />
       <PackageReference Include="SSCXFToolKit.Presentation.Transform" Version="0.2.0-alpha" />
       <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-      <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
       <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
       <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\IDI\FFImageLoading\source\FFImageLoading.Common\FFImageLoading.csproj" />
+      <ProjectReference Include="..\..\..\..\IDI\FFImageLoading\source\FFImageLoading.Forms.Tizen\FFImageLoading.Forms.Tizen.csproj" />
+      <ProjectReference Include="..\..\..\..\IDI\FFImageLoading\source\FFImageLoading.Forms\FFImageLoading.Forms.csproj" />
+      <ProjectReference Include="..\..\..\..\IDI\FFImageLoading\source\FFImageLoading.Tizen\FFImageLoading.Tizen.csproj" />
       <ProjectReference Include="..\..\Cloud.Api.Common\Cloud.Api.Common.csproj" />
       <ProjectReference Include="..\..\Cloud.Api.Connect\Cloud.Api.Connect.csproj" />
       <ProjectReference Include="..\..\Cloud.Persistence\Cloud.Persistence.csproj" />
