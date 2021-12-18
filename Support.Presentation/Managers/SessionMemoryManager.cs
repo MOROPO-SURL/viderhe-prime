@@ -27,7 +27,7 @@
             }
             else
             {
-                Server = "cloud.viderhe.net";
+                Server = "cloud.viderhe.local";
             }
         }
 

@@ -109,7 +109,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminal.Common.Android.Rtm
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Terminal.Player.UWP.Package", "Terminal.Player\Terminal.Player.UWP.Package\Terminal.Player.UWP.Package.wapproj", "{64105B22-CDD2-402C-A880-EBE89E7C09D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terminal.Player.Tizen.TV", "Terminal.Player.Tizen\Terminal.Player.Tizen.TV\Terminal.Player.Tizen.TV.csproj", "{1EF72239-3CE5-4231-8047-3AC5295A82D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terminal.Player.Tizen.TV", "Terminal.Player\Terminal.Player.Tizen\Terminal.Player.Tizen.TV\Terminal.Player.Tizen.TV.csproj", "{A638237E-E3F9-4DEE-A2BF-7F972D51449B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFImageLoading.Tizen", "..\..\IDI\FFImageLoading\source\FFImageLoading.Tizen\FFImageLoading.Tizen.csproj", "{CC9C0BA7-CF46-4BFF-9A82-2AFE45E42D81}"
 EndProject
@@ -1693,6 +1693,34 @@ Global
 		{9067D3C7-04E9-462B-A9C2-183389C2DB86}.Release|x64.Build.0 = Release|Any CPU
 		{9067D3C7-04E9-462B-A9C2-183389C2DB86}.Release|x86.ActiveCfg = Release|Any CPU
 		{9067D3C7-04E9-462B-A9C2-183389C2DB86}.Release|x86.Build.0 = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|x64.Build.0 = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Debug|x86.Build.0 = Debug|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|ARM.Build.0 = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|ARM64.Build.0 = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|iPhone.Build.0 = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|x64.ActiveCfg = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|x64.Build.0 = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|x86.ActiveCfg = Release|Any CPU
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1750,6 +1778,7 @@ Global
 		{F51C4BA3-69E7-4C0C-B8CC-7E4BEE21A617} = {68B79360-7D3F-4AB7-8749-AFBCA67E1CF9}
 		{C7D80E4F-D151-4973-B746-8EDCB3792178} = {F51C4BA3-69E7-4C0C-B8CC-7E4BEE21A617}
 		{9067D3C7-04E9-462B-A9C2-183389C2DB86} = {F51C4BA3-69E7-4C0C-B8CC-7E4BEE21A617}
+		{A638237E-E3F9-4DEE-A2BF-7F972D51449B} = {68B79360-7D3F-4AB7-8749-AFBCA67E1CF9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F235201-8823-4E89-9BA7-111B50D99078}

@@ -1,0 +1,74 @@
+﻿<Project Sdk="Tizen.NET.Sdk/1.1.6">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>tizen40</TargetFramework>
+      <AssemblyName>SmartSolucionesCuba.Viderhe.Terminal.Player.Tizen.TV</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+    <PropertyGroup>
+        <ProjectTypeGuids>{B484D2DE-331C-4CA2-B931-2B4BDAD9945F}</ProjectTypeGuids>
+        <RootNamespace>SmartSolucionesCuba.Viderhe.Terminal.Player.Tizen.TV</RootNamespace>
+        <Version>0.1.0</Version>
+        <SignAssembly>false</SignAssembly>
+    </PropertyGroup>
+
+    <ItemGroup>
+    <Folder Include="lib\" />
+  </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MagicGradients" Version="1.3.1" />
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.3" />
+      <PackageReference Include="SAPRESSC.Core.Api.Connect" Version="2.8.0" />
+      <PackageReference Include="SSCXFToolKit.IoC" Version="0.2.0-alpha" />
+      <PackageReference Include="SSCXFToolKit.Mvvm" Version="0.4.10-alpha" />
+      <PackageReference Include="SSCXFToolKit.Presentation" Version="0.6.1-alpha" />
+      <PackageReference Include="SSCXFToolKit.Presentation.Transform" Version="0.2.0-alpha" />
+      <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+      <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+      <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+      <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Cloud.Api.Common\Cloud.Api.Common.csproj" />
+      <ProjectReference Include="..\..\..\Cloud.Api.Connect\Cloud.Api.Connect.csproj" />
+      <ProjectReference Include="..\..\..\Cloud.Persistence\Cloud.Persistence.csproj" />
+      <ProjectReference Include="..\..\..\Cloud.SignalR.Connect.Common\Cloud.SignalR.Connect.Common.csproj" />
+      <ProjectReference Include="..\..\..\Cloud.SignalR.Connect.Player\Cloud.SignalR.Connect.Player.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Common.Overlaying.Presentation\Extend.Common.Overlaying.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Common.Overlaying\Extend.Common.Overlaying.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Common.Presentation\Extend.Common.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Common.Templating.Presentation\Extend.Common.Templating.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Common.Templating\Extend.Common.Templating.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Common.Transitioning.Presentation\Extend.Common.Transitioning.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Common\Extend.Common.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Essential.Overlaying.Presentation\Extend.Essential.Overlaying.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Essential.Overlaying\Extend.Essential.Overlaying.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Essential.Templating.Presentation\Extend.Essential.Templating.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Essential.Templating\Extend.Essential.Templating.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Essential.Transitioning.Presentation\Extend.Essential.Transitioning.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Essential.Transitioning\Extend.Essential.Transitioning.csproj" />
+      <ProjectReference Include="..\..\..\Extend.Essential\Extend.Essential.csproj" />
+      <ProjectReference Include="..\..\..\Support.Extend.Overlaying\Support.Extend.Overlaying.csproj" />
+      <ProjectReference Include="..\..\..\Support.Extend.Templating.Presentation\Support.Extend.Templating.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Support.Extend.Templating\Support.Extend.Templating.csproj" />
+      <ProjectReference Include="..\..\..\Support.Extend.Transitioning.Presentation\Support.Extend.Transitioning.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Support.Extend.Transitioning\Support.Extend.Transitioning.csproj" />
+      <ProjectReference Include="..\..\..\Support.Extend\Support.Extend.csproj" />
+      <ProjectReference Include="..\..\..\Support.Presentation.Player\Support.Presentation.Player.csproj" />
+      <ProjectReference Include="..\..\..\Support.Presentation\Support.Presentation.csproj" />
+      <ProjectReference Include="..\..\..\Terminal.Player\Terminal.Player\Terminal.Player.csproj" />
+    </ItemGroup>
+
+  
+
+</Project>

@@ -337,15 +337,18 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </ContentView>
-                <StackLayout
-                    BackgroundColor="#9fa9b6"
-                    IsVisible="{Binding Path=HasMorePlacards}">
+                <StackLayout BackgroundColor="#9fa9b6">
                     <Button
                         HorizontalOptions="Center"
                         Margin="8"
-                        IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
                         Text="Mostrar más"
                         Clicked="LoadNextPlacardsPageButtton_Clicked">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource AllTrueMultiConverter}">
+                                <Binding Path="HasMorePlacards" />
+                                <Binding Path="IsBusy" Converter="{StaticResource BoolToBoolNegationConverter}" />
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         <Button.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double" Default="-1">
                                 <On Platform="UWP" Value="40" />
