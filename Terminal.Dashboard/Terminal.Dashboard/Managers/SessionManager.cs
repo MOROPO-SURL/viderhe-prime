@@ -141,6 +141,8 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
         public async System.Threading.Tasks.Task SignInAsync(string server, string login, string password)
         {
+            Support.Presentation.Managers.SessionMemoryManager.Instance.Server = server;
+
             var userApiClient = new Cloud.Api.Connect.Clients.UserApiConnectClient(HttpClientHelper);
 
             var result = await userApiClient.AuthenticateAsync(new Cloud.Api.Common.Models.AuthenticationIntentModel
@@ -148,8 +150,6 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
                 User = login,
                 Password = password
             });
-
-            Support.Presentation.Managers.SessionMemoryManager.Instance.Server = server;
 
             Support.Presentation.Managers.SessionMemoryManager.Instance.Persist();
 

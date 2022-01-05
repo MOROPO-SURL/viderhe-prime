@@ -35,12 +35,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
         {
             base.OnAppearing();
 
-            if (!IsEnabled)
-            {
-                IsEnabled = true;
-
-                ReloadScreenplays();
-            }
+            if (!IsEnabled) ReloadScreenplays();
         }
 
         private void AddPlacardButton_Clicked(object sender, System.EventArgs eventArgs)

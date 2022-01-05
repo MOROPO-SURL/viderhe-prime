@@ -22,7 +22,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Presentation.P
 
                 return new SimpleVideoPlacardView(new Models.View.SimpleVideoPlacardViewModel
                 {
-                    RequireUnobstructedPresetation = false,
+                    RequireUnobstructedPresetation = context.RequireUnobstructedPresetation,
                     VideoSource = XFToolKit.Presentation.Sources.Video.VideoSource.FromUri(Support.Presentation.Factories.VideoUriFactory.BuildVideoUri(cloudServerProvider, context.Video.Id, context.Video.Extension).AbsoluteUri)
                 }, accountInformationProvider);
             }
