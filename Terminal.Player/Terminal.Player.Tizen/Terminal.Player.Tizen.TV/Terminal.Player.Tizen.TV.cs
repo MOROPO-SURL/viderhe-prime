@@ -29,7 +29,6 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Tizen.TV
 
             var option = new Xamarin.Forms.InitializationOptions(app) 
             { 
-                UseSkiaSharp = true,
                 UseDeviceIndependentPixel = true
             };
 
