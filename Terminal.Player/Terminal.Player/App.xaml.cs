@@ -6,6 +6,13 @@
         {
             InitializeComponent();
 
+            Xamarin.Forms.DependencyService.Register<Support.Presentation.Helpers.Facade.IImageUriFactoryHelper, Helpers.ImageUriFactoryHelper>();
+
+            FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
+            {
+                HttpClient = new System.Net.Http.HttpClient(new Handlers.SecureImageHttpClientHandler())
+            });
+
             MainPage = new Pages.MainPage();
         }
 

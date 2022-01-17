@@ -2,7 +2,7 @@
 {
     public partial class SimpleVideoPlacardView : Common.Templating.Presentation.Views.BaseTemplatedPlacardPresentationView
     {
-        private Common.Transitioning.Presentation.Transitions.AbstractTransition transition;
+        private Common.Transitioning.Presentation.Transitions.Contract.AbstractTransition transition;
 
         public SimpleVideoPlacardView(Models.View.SimpleVideoPlacardViewModel model, Common.Presentation.Providers.Facade.IAccountInformationProviderFacade accountInformationProvider)
         {
@@ -39,7 +39,7 @@
             }
         }
 
-        public override void StartShowInWhenReady(Common.Transitioning.Presentation.Transitions.AbstractTransition transition)
+        public override void StartShowInWhenReady(Common.Transitioning.Presentation.Transitions.Contract.AbstractTransition transition)
         {
             if (VideoPlayerView.Status == XFToolKit.Presentation.Views.Rendered.VideoStatus.Playing)
             {

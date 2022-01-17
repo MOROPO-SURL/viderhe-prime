@@ -110,22 +110,26 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Presentation.V
 
             var context = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Context.SimplePicturePlacardContextModel>(model.SerializedContext);
 
-            var viewModel = new Models.View.SimplePicturePlacardViewModel
-            {
-                RequireUnobstructedPresetation = context.RequireUnobstructedPresetation,
-                ScreenPresentationTime = context.ScreenPresentationTime,
-                Source = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(cloudServerProvider, context.Image.Id)),
-                Aspect = context.LayoutMode.ToXamarinFormsAspect(),
-                ZoomingEnabled = context.IsZoomingEnabled
-            };
-
             if (context.LayoutMode == Enumerations.PictureLayoutMode.AspectFitWithOpaqueAspectFilledBySelf)
             {
-                return new SelfOpaqueFillSimplePicturePlacardView(viewModel, accountInformationProvider);
+                return new SelfOpaqueFillSimplePicturePlacardView(new Models.View.SelfOpaqueFillSimplePicturePlacardViewModel
+                {
+                    RequireUnobstructedPresetation = context.RequireUnobstructedPresetation,
+                    ScreenPresentationTime = context.ScreenPresentationTime,
+                    Source = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(cloudServerProvider, context.Image.Id)),
+                    ThumnailSource = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ThumbnailUriFactory.BuildThumbnailUri(cloudServerProvider, context.Image.ThumbnailId)),
+                    Aspect = context.LayoutMode.ToXamarinFormsAspect()
+                }, accountInformationProvider);
             }
             else
             {
-                return new SimplePicturePlacardView(viewModel);
+                return new SimplePicturePlacardView(new Models.View.SimplePicturePlacardViewModel
+                {
+                    RequireUnobstructedPresetation = context.RequireUnobstructedPresetation,
+                    ScreenPresentationTime = context.ScreenPresentationTime,
+                    Source = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(cloudServerProvider, context.Image.Id)),
+                    Aspect = context.LayoutMode.ToXamarinFormsAspect()
+                });
             }
         }
 

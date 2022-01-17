@@ -177,7 +177,7 @@
       <Version>0.6.1-alpha</Version>
     </PackageReference>
     <PackageReference Include="SSCXFToolKit.Presentation.Transform">
-      <Version>0.2.0-alpha</Version>
+      <Version>0.3.0-alpha</Version>
     </PackageReference>
     <PackageReference Include="Toasts.Forms.Plugin">
       <Version>3.3.2</Version>

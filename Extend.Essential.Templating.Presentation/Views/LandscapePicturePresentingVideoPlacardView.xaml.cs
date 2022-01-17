@@ -2,7 +2,7 @@
 {
     public partial class LandscapePicturePresentingVideoPlacardView : Common.Templating.Presentation.Views.BaseTemplatedPlacardPresentationView
     {
-        private Common.Transitioning.Presentation.Transitions.AbstractTransition transition;
+        private Common.Transitioning.Presentation.Transitions.Contract.AbstractTransition transition;
 
         public LandscapePicturePresentingVideoPlacardView(Models.View.LandscapePicturePresentingVideoPlacardViewModel model)
         {
@@ -39,7 +39,7 @@
             }
         }
 
-        public override void StartShowInWhenReady(Common.Transitioning.Presentation.Transitions.AbstractTransition transition)
+        public override void StartShowInWhenReady(Common.Transitioning.Presentation.Transitions.Contract.AbstractTransition transition)
         {
             if (PresentedVideo.Status == XFToolKit.Presentation.Views.Rendered.VideoStatus.Playing)
             {

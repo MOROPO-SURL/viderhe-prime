@@ -4,7 +4,7 @@
     {
         public static System.Uri BuildImageUri(Providers.Facade.ICloudServerProviderFacade cloudServerProvider, System.Guid imageId)
         {
-            return new System.Uri(string.Format("http://{0}/media/default/image/{1}", cloudServerProvider.CloudServerHost, imageId));
+            return new System.Uri(Xamarin.Forms.DependencyService.Get<Helpers.Facade.IImageUriFactoryHelper>().BuildImageUrl(cloudServerProvider, imageId));
         }
     }
 }

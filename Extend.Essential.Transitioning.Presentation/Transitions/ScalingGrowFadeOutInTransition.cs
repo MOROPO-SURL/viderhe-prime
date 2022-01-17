@@ -1,8 +1,9 @@
 ﻿using SmartSolucionesCuba.XFToolKit.Presentation.Transform.Animations;
+using SmartSolucionesCuba.XFToolKit.Presentation.Transform.Animations.Contract;
 
 namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Transitioning.Presentation.Transitions
 {
-    public class ScalingGrowFadeOutInTransition : Common.Transitioning.Presentation.Transitions.AbstractTransition
+    public class ScalingGrowFadeOutInTransition : Common.Transitioning.Presentation.Transitions.Contract.AbstractTransition
     {
         private AbstractAnimation factShowInAnimation;
 

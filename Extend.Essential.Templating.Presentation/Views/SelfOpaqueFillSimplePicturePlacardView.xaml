@@ -13,7 +13,7 @@
         <Grid x:Name="Wrapper">
             <Grid x:Name="PlacardLayout">
                 <ffimageloadingforms:CachedImage
-                    Source="{Binding Path=Source}"
+                    Source="{Binding Path=ThumnailSource}"
                     Aspect="AspectFill"
                     CacheType="Disk"
                     CacheDuration="8760:00:00"
@@ -27,8 +27,7 @@
                     Source="{Binding Path=Source}"
                     Aspect="AspectFit"
                     CacheType="Disk"
-                    CacheDuration="8760:00:00"
-                    FadeAnimationEnabled="False" />
+                    CacheDuration="8760:00:00" />
             </Grid>
         </Grid>
     </ContentView.Content>

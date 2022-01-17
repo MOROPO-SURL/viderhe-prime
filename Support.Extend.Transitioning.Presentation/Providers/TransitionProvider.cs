@@ -1,5 +1,5 @@
 ﻿using SmartSolucionesCuba.Viderhe.Extend.Common.Transitioning.Presentation.Providers.Facade;
-using SmartSolucionesCuba.Viderhe.Extend.Common.Transitioning.Presentation.Transitions;
+using SmartSolucionesCuba.Viderhe.Extend.Common.Transitioning.Presentation.Transitions.Contract;
 using SmartSolucionesCuba.Viderhe.Extend.Common.Presentation.Providers.Facade;
 using SmartSolucionesCuba.Viderhe.Extend.Common.Presentation.Views;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using SmartSolucionesCuba.Viderhe.Extend.Common.Presentation.Providers.Facade;
 using SmartSolucionesCuba.Viderhe.Extend.Common.Presentation.Views;
 
-namespace SmartSolucionesCuba.Viderhe.Extend.Common.Transitioning.Presentation.Transitions
+namespace SmartSolucionesCuba.Viderhe.Extend.Common.Transitioning.Presentation.Transitions.Contract
 {
     public abstract class AbstractTransition
     {
@@ -23,7 +23,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Transitioning.Presentation.T
 
         protected abstract XFToolKit.Presentation.Transform.Animations.Storyboard CreateShowInMotionStoryboard();
 
-        protected abstract XFToolKit.Presentation.Transform.Animations.AbstractAnimation FactShowInAnimation { get; }
+        protected abstract XFToolKit.Presentation.Transform.Animations.Contract.AbstractAnimation FactShowInAnimation { get; }
 
         public void PerformMotion()
         {
@@ -36,7 +36,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Transitioning.Presentation.T
 
         private void MotionStoryboard_Completed(object sender, System.EventArgs eventArgs)
         {
-            var factShowInAnimation = sender as XFToolKit.Presentation.Transform.Animations.AbstractAnimation;
+            var factShowInAnimation = sender as XFToolKit.Presentation.Transform.Animations.Contract.AbstractAnimation;
 
             factShowInAnimation.Completed -= MotionStoryboard_Completed;
 

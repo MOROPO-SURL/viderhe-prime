@@ -10,6 +10,8 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard
         {
             InitializeComponent();
 
+            Xamarin.Forms.DependencyService.Register<Support.Presentation.Helpers.Facade.IImageUriFactoryHelper, Helpers.ImageUriFactoryHelper>();
+
             On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
 
             PresentForUserAuthentication();

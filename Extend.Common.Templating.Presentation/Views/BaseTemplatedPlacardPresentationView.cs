@@ -2,7 +2,7 @@
 {
     public class BaseTemplatedPlacardPresentationView : Common.Presentation.Views.BasePlacardPresentationView
     {
-        public virtual void StartShowInWhenReady(Transitioning.Presentation.Transitions.AbstractTransition transition)
+        public virtual void StartShowInWhenReady(Transitioning.Presentation.Transitions.Contract.AbstractTransition transition)
         {
             transition.PerformMotion();
         }

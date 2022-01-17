@@ -1,8 +1,9 @@
 ﻿using SmartSolucionesCuba.XFToolKit.Presentation.Transform.Animations;
+using SmartSolucionesCuba.XFToolKit.Presentation.Transform.Animations.Contract;
 
 namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Transitioning.Presentation.Transitions
 {
-    public class FadeInTransition : Common.Transitioning.Presentation.Transitions.AbstractTransition
+    public class FadeInTransition : Common.Transitioning.Presentation.Transitions.Contract.AbstractTransition
     {
         private const double MotionSize = 80;
 
