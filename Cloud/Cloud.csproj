@@ -1,10 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AssemblyName>SmartSolucionesCuba.Viderhe.Cloud</AssemblyName>
     <RootNamespace>SmartSolucionesCuba.Viderhe.Cloud</RootNamespace>
+    <Version>0.7.0</Version>
+    <Authors>SmartSolucionesCuba.Viderhe.Cloud</Authors>
   </PropertyGroup>
 
   <ItemGroup>

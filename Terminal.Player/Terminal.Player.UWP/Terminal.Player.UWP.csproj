@@ -65,7 +65,10 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <!-- <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain> -->
+    <!-- For Crash on 1909 LWC -->
+    <UseAppLocalCoreFramework>true</UseAppLocalCoreFramework>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
