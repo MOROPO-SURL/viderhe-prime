@@ -49,7 +49,7 @@
             get
             {
 #if DEBUG
-                return false;
+                return true;
 #else
                 return true;
 #endif

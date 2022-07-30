@@ -25,9 +25,16 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+
+            this.configuration = configuration;
+            this.env = env;
+
             #region Ensure Required Assemblies load
 
             var extensionRootDirectoryPath = configuration["Viderhe:ExtensionRootDirectoryPath"];
+
+            Log.Logger.Information(string.Format(">>>>>>>>>>>>>>> extensionRootDirectoryPath: {0}", extensionRootDirectoryPath));
 
             var extensionRootDirectoryInfo = new System.IO.DirectoryInfo(extensionRootDirectoryPath);
 
@@ -39,10 +46,14 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
 
                 foreach (var extensionDirectoryInfo in extensionDirectoryInfos)
                 {
+                    Log.Logger.Information(string.Format(">>>>>>>>>>>>>>> extensionDirectoryInfo: {0}", extensionDirectoryInfo));
+
                     var extensionLibraryFileInfos = Providers.ViderheExtensionLibraryFileInfosProvider.GetRelevantToCloud(extensionDirectoryInfo);
 
                     foreach (var extensionLibraryFileInfo in extensionLibraryFileInfos)
                     {
+                        Log.Logger.Information(string.Format(">>>>>>>>>>>>>>> extensionLibraryFileInfo: {0}", extensionLibraryFileInfo));
+
                         var assembly = System.Reflection.Assembly.LoadFrom(extensionLibraryFileInfo.FullName);
 
                         var assemblyName = assembly.GetName();
@@ -64,14 +75,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
             foreach (var runtimeLibrary in extensionCustomRuntimeLibraries)
             {
                 System.AppDomain.CurrentDomain.Load(runtimeLibrary.Name);
+
+                Log.Logger.Information(string.Format(">>>>>>>>>>>>>>> runtimeLibrary Loaded: {0}", runtimeLibrary.Name));
             }
 
             #endregion
-
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
-
-            this.configuration = configuration;
-            this.env = env;
         }
 
         public void ConfigureServices(IServiceCollection services)

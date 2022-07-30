@@ -10,7 +10,10 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Providers
 
             if (libraryFileInfos.Length <= 0) return Enumerable.Empty<System.IO.FileInfo>();
 
-            var extensionDescriptionLibraryFileInfo = libraryFileInfos.First(item => System.Text.RegularExpressions.Regex.IsMatch(item.Name, ".+\\.Viderhe\\.Extend\\.[a-zA-Z0-9|\\.]+\\.dll"));
+            var extensionDescriptionLibraryFileInfo = libraryFileInfos
+                .Where(item => System.Text.RegularExpressions.Regex.IsMatch(item.Name, ".+\\.Viderhe\\.Extend\\.[a-zA-Z0-9|\\.]+\\.dll"))
+                .OrderBy(item => item.Name.Length)
+                .First();
 
             var extensionBaseLibraryFilePath = System.IO.Path.GetFileNameWithoutExtension(extensionDescriptionLibraryFileInfo.Name);
 

@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <PackageReference Include="FFMediaToolkit" Version="4.4.1" />
-    <PackageReference Include="MediaToolkit.NetCore" Version="0.2.1-preview" />
     <PackageReference Include="Microsoft.AspNetCore.App">
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
@@ -42,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MediaToolkit.NetCore\MediaToolkit\MediaToolkit.csproj" />
     <ProjectReference Include="..\Cloud.Api.Common\Cloud.Api.Common.csproj" />
     <ProjectReference Include="..\Cloud.Persistence.EF\Cloud.Persistence.EF.csproj" />
     <ProjectReference Include="..\Cloud.SignalR.Connect.Dashboard\Cloud.SignalR.Connect.Dashboard.csproj" />
