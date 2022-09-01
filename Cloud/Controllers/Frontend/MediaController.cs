@@ -15,16 +15,14 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
         private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository;
         private readonly IImageFileManagerFacade imageFileManager;
         private readonly IThumbnailFileManagerFacade thumbnailFileManager;
-        private readonly SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider;
 
-        public MediaController(SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
+        public MediaController(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
             : base(localizer, logger)
         {
             this.accountRepository = accountRepository;
             this.playerRepository = playerRepository;
             this.imageFileManager = imageFileManager;
             this.thumbnailFileManager = thumbnailFileManager;
-            this.identityProvider = identityProvider;
         }
 
         [HttpGet("[action]/{key}")]
@@ -184,6 +182,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
             return new NoContentResult();
         }
 
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpGet("[action]/{key}")]
         public IActionResult Moderator(string key)
         {
