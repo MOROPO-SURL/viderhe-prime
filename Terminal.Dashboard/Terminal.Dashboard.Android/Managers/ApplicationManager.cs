@@ -12,5 +12,12 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Droid.Managers
         public void RequestRequiredPermissions()
         {
         }
+        
+        public string GetUnhandleExceptionMessage(System.Exception exception)
+        {
+            if (exception is Java.Net.UnknownHostException) return "No se puede acceder al servidor. Compruebe si la dirección especificada es correcta.";
+
+            return null;
+        }
     }
 }

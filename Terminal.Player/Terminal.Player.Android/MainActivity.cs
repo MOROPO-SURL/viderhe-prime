@@ -7,7 +7,7 @@ using Android.OS;
 namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Droid
 {
     [Activity(
-        Label = "Viderhe Player", 
+        Label = "VIDEHRE Player", 
         Icon = "@mipmap/ic_launcher",
         Theme = "@style/AppTheme.NoActionBar", 
         MainLauncher = true,

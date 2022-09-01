@@ -22,27 +22,9 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
             }
         }
 
-        private System.Collections.Generic.KeyValuePair<string, string> AuthorizeHeader
-        {
-            get
-            {
-                if (!HasAuthenticatedIdentity)
-                {
-                    return new System.Collections.Generic.KeyValuePair<string, string>();
-                }
-                else
-                {
-                    var type = AuthenticationType;
-                    var token = AuthorizationToken;
-
-                    return new System.Collections.Generic.KeyValuePair<string, string>(type, token);
-                }
-            }
-        }
-
         public bool HasAuthenticatedIdentity => Moderator != null;
 
-        public SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper HttpClientHelper => new SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper(string.Format("{0}://{1}/api/", Support.Presentation.Managers.SessionMemoryManager.Instance.UseSSL ? "https" : "http", Support.Presentation.Managers.SessionMemoryManager.Instance.Server), () => AuthorizeHeader, null);
+        public SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper HttpClientHelper => new SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper(string.Format("{0}://{1}/api/", Support.Presentation.Managers.SessionMemoryManager.Instance.UseSSL ? "https" : "http", Support.Presentation.Managers.SessionMemoryManager.Instance.Server), GetAuthorizeHeader, null);
 
         public string AuthenticationType { get; private set; }
         public string AuthorizationToken { get; private set; }
@@ -57,6 +39,21 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
         public System.Guid? AccountDefaultOverlayId { get; private set; }
         public string AccountSerializedOverlayContext { get; private set; }
         public Cloud.Api.Common.Models.ExtensionDisplayModel[] AccountExtensions { get; private set; }
+
+        private System.Collections.Generic.KeyValuePair<string, string> GetAuthorizeHeader()
+        {
+            if (!HasAuthenticatedIdentity)
+            {
+                return new System.Collections.Generic.KeyValuePair<string, string>();
+            }
+            else
+            {
+                var type = AuthenticationType;
+                var token = AuthorizationToken;
+
+                return new System.Collections.Generic.KeyValuePair<string, string>(type, token);
+            }
+        }
 
         public void SyncronizeRequiredAccountInformation(string name, Color primaryColor, Color secoundaryColor, System.Guid logoImageId, System.Guid horizontalSplashImageId, System.Guid verticalSplashImageId, Extend.Common.Overlaying.Descriptors.IOverlayDescriptor defaultOverlay, string serializedOverlayContext)
         {
@@ -139,9 +136,10 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
             SyncronizeRequiredAccountInformation(model.Name, Color.FromHex(model.PrimaryColor), Color.FromHex(model.SecoundaryColor), model.LogoImageId, model.HorizontalSplashImageId, model.VerticalSplashImageId, defaultOverlay, model.SerializedOverlayContext);
         }
 
-        public async System.Threading.Tasks.Task SignInAsync(string server, string login, string password)
+        public async System.Threading.Tasks.Task SignInAsync(string server, bool useSSL, string login, string password, System.Action<string> callbackAction)
         {
             Support.Presentation.Managers.SessionMemoryManager.Instance.Server = server;
+            Support.Presentation.Managers.SessionMemoryManager.Instance.UseSSL = useSSL;
 
             var userApiClient = new Cloud.Api.Connect.Clients.UserApiConnectClient(HttpClientHelper);
 
@@ -176,23 +174,41 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
                 {
                     var dynamicLoadExtensions = AccountExtensions.Where(item => item.Id != Extend.Essential.Descriptors.EssentialExtensionDescriptor.ID).ToArray();
 
+                    var missingAccountExtensions = new System.Collections.Generic.List<Cloud.Api.Common.Models.ExtensionDisplayModel>();
+
+                    foreach (var accountExtension in dynamicLoadExtensions)
+                    {
+                        if (System.IO.Directory.Exists(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", server, accountExtension.Id.ToString(), accountExtension.Version))) continue;
+                        
+                        missingAccountExtensions.Add(accountExtension);
+                    }
+
+                    var counter = 1;
+                    var missingAccountExtensionsCount = dynamicLoadExtensions.Length;
+
+                    foreach (var missingAccountExtension in missingAccountExtensions)
+                    {
+                        callbackAction.Invoke(string.Format("Sincronizando extensiones {0}/{1}", counter++, missingAccountExtensionsCount));
+
+                        var extensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", server, missingAccountExtension.Id.ToString(), missingAccountExtension.Version));
+
+                        var tempExtensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", server, missingAccountExtension.Id.ToString(), string.Format("_{0}", missingAccountExtension.Version)));
+
+                        if (!tempExtensionDirectoryInfo.Exists)
+                        {
+                            tempExtensionDirectoryInfo.Create();
+                        }
+
+                        await DownloadAccountExtensionBundleAsync(missingAccountExtension.Id, tempExtensionDirectoryInfo);
+
+                        tempExtensionDirectoryInfo.MoveTo(extensionDirectoryInfo.FullName);
+                    }
+
                     foreach (var accountExtension in dynamicLoadExtensions)
                     {
                         var extensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", server, accountExtension.Id.ToString(), accountExtension.Version));
 
-                        if (!extensionDirectoryInfo.Exists)
-                        {
-                            extensionDirectoryInfo.Create();
-
-                            await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
-                        }
-
                         var extensionLibraryFileInfos = extensionDirectoryInfo.GetFiles();
-
-                        if (extensionLibraryFileInfos.Length <= 0)
-                        {
-                            await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
-                        }
 
                         foreach (var extensionLibraryFileInfo in extensionLibraryFileInfos)
                         {
@@ -227,6 +243,15 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
                 throw e;
             }
+
+            var ffImageLoadingHttpClient = new System.Net.Http.HttpClient();
+
+            ffImageLoadingHttpClient.DefaultRequestHeaders.Add(AuthenticationType, AuthorizationToken);
+
+            FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
+            {
+                HttpClient = ffImageLoadingHttpClient
+            });
         }
 
         public void SignOut()

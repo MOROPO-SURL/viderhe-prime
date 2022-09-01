@@ -6,7 +6,7 @@
         {
             InitializeComponent();
 
-            Xamarin.Forms.DependencyService.Register<Support.Presentation.Helpers.Facade.IImageUriFactoryHelper, Helpers.ImageUriFactoryHelper>();
+            Xamarin.Forms.DependencyService.Register<Support.Presentation.Helpers.Facade.IImageUriFactoryHelper, Support.Presentation.Helpers.DefaultImageUriFactoryHelper>();
             Xamarin.Forms.DependencyService.Register<Extend.Common.Presentation.Providers.Facade.IAccountInformationProviderFacade, Providers.AccountInformationProvider>();
             Xamarin.Forms.DependencyService.RegisterSingleton<Support.Presentation.Providers.Facade.ICloudServerProviderFacade>(Support.Presentation.Managers.SessionMemoryManager.Instance);
             Xamarin.Forms.DependencyService.RegisterSingleton<SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade>(Managers.SessionManager.Instance);

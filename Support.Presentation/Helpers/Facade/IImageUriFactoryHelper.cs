@@ -2,6 +2,6 @@
 {
     public interface IImageUriFactoryHelper
     {
-        string BuildImageUrl(Providers.Facade.ICloudServerProviderFacade cloudServerProvider, System.Guid imageId);
+        string BuildImageUrl(Providers.Facade.ICloudServerProviderFacade cloudServerProvider, System.Guid imageId, bool original = false);
     }
 }

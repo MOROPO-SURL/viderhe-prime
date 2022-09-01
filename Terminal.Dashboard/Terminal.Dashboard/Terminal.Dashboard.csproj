@@ -5,6 +5,8 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <AssemblyName>SmartSolucionesCuba.Viderhe.Terminal.Dashboard</AssemblyName>
     <RootNamespace>SmartSolucionesCuba.Viderhe.Terminal.Dashboard</RootNamespace>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <FileVersion>0.3.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

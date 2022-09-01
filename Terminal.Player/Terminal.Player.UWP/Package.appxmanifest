@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap mp uap3">
 
   <Identity
-    Name="SmartSolucionesCuba.Viderhe.Player"
-    Publisher="CN=SMART SOLUCIONES CUBA (SSC)"
-    Version="0.3.0.0" />
+    Name="MOROPO.Viderhe.Player"
+    Publisher="CN=MOROPO S.U.R.L."
+    Version="0.5.4.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Viderhe Player</DisplayName>
-    <PublisherDisplayName>SMART SOLUCIONES CUBA (SSC)</PublisherDisplayName>
+    <PublisherDisplayName>MOROPO S.U.R.L.</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

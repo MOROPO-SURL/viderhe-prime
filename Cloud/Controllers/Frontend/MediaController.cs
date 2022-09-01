@@ -15,14 +15,16 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
         private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository;
         private readonly IImageFileManagerFacade imageFileManager;
         private readonly IThumbnailFileManagerFacade thumbnailFileManager;
+        private readonly SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider;
 
-        public MediaController(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
+        public MediaController(SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
             : base(localizer, logger)
         {
             this.accountRepository = accountRepository;
             this.playerRepository = playerRepository;
             this.imageFileManager = imageFileManager;
             this.thumbnailFileManager = thumbnailFileManager;
+            this.identityProvider = identityProvider;
         }
 
         [HttpGet("[action]/{key}")]
@@ -42,10 +44,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
             }
             catch { }
 
-            return new NotFoundResult();
+            return new NoContentResult();
         }
 
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpGet("[action]/{key}/w/{width}/h/{height}")]
         public IActionResult Image(System.Guid key, int width, int height)
         {
@@ -143,7 +144,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
             return new NoContentResult();
         }
 
-        [HttpGet("[action]/{key}")]
+        [HttpGet("thumbnail/image/{key}")]
         public IActionResult ImageThumbnail(System.Guid key)
         {
             try
@@ -160,10 +161,10 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
             }
             catch { }
 
-            return new NotFoundResult();
+            return new NoContentResult();
         }
 
-        [HttpGet("[action]/{key}")]
+        [HttpGet("thumbnail/video/{key}")]
         public IActionResult VideoThumbnail(System.Guid key)
         {
             try
@@ -180,7 +181,27 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
             }
             catch { }
 
-            return new NotFoundResult();
+            return new NoContentResult();
+        }
+
+        [HttpGet("[action]/{key}")]
+        public IActionResult Moderator(string key)
+        {
+            try
+            {
+                var account = accountRepository.Get(System.Guid.Parse(User.Claims.First(claim => claim.Type == Security.Authorization.Claims.ACCOUNT_CLAIM).Value));
+
+                var moderator = account.ModeratorBridges.First(b => b.Moderator.UserId == key).Moderator;
+
+                return new FileContentResult(imageFileManager.GetImageFileContent(moderator.Identity.Image), account.Logo.ContentType);
+            }
+            catch (System.IO.IOException e)
+            {
+                logger.LogError(e.Message, e.InnerException);
+            }
+            catch { }
+
+            return new NoContentResult();
         }
 
         [HttpGet("[action]")]
@@ -198,7 +219,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
             }
             catch { }
 
-            return new NotFoundResult();
+            return new NoContentResult();
         }
 
         [HttpGet("[action]")]
@@ -216,7 +237,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
             }
             catch { }
 
-            return new NotFoundResult();
+            return new NoContentResult();
         }
     }
 }

@@ -6,6 +6,11 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.iOS.Managers
 {
     public class ApplicationManager : Dashboard.Managers.Facade.IApplicationManagerFacade
     {
+        public string GetUnhandleExceptionMessage(System.Exception exception)
+        {
+            return null;
+        }
+
         public void Quit()
         {
             System.Threading.Thread.CurrentThread.Abort();

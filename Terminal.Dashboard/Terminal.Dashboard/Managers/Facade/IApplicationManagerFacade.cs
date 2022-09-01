@@ -4,5 +4,6 @@
     {
         void Quit();
         void RequestRequiredPermissions();
+        string GetUnhandleExceptionMessage(System.Exception exception);
     }
 }

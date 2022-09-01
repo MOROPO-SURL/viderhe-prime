@@ -20,25 +20,45 @@
                 HorizontalOptions="Center"
                 Orientation="Vertical">
                 <Grid>
-                    <StackLayout 
+                    <Grid 
                         HorizontalOptions="Center" VerticalOptions="Center"
-                        WidthRequest="240">
+                        WidthRequest="280">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <ffimageloadingsvg:SvgCachedImage
+                            Grid.ColumnSpan="2" Grid.Row="0"
                             HorizontalOptions="Center"
                             WidthRequest="320" HeightRequest="320"
                             Source="resource://SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Assets.Images.viderhe-identity-main.svg"
                             Aspect="AspectFill" />
+                        <Picker
+                            Grid.Column="0" Grid.Row="1"
+                            ItemsSource="{Binding Path=AvailableProtocols}"
+                            SelectedIndex="{Binding Path=TargetCloudProtocolIndex, FallbackValue=0, TargetNullValue=0}" />
                         <Entry
+                            Grid.Column="1" Grid.Row="1"
                             Text="{Binding Path=TargetCloudHostName}"
                             Placeholder="servidor cloud" />
                         <Entry
+                            Grid.ColumnSpan="2" Grid.Row="2"
                             Text="{Binding Path=UserName}"
                             Placeholder="usuario" />
                         <Entry
+                            Grid.ColumnSpan="2" Grid.Row="3"
                             Text="{Binding Path=Password}"
                             Placeholder="contraseña"
                             IsPassword="true" />
                         <Button
+                            Grid.ColumnSpan="2" Grid.Row="4"
                             IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
                             HorizontalOptions="FillAndExpand"
                             Margin="24"
@@ -46,7 +66,7 @@
                             Text="Iniciar"
                             TextColor="White"
                             Clicked="SignButton_Clicked" />
-                    </StackLayout>
+                    </Grid>
                 </Grid>
             </ScrollView>
             <supportpresentationdashboardviews:BusyView />

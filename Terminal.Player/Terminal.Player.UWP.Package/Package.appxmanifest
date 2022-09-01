@@ -8,13 +8,13 @@
   IgnorableNamespaces="uap rescap desktop">
 
   <Identity
-    Name="SmartSolucionesCuba.Viderhe.Player"
-    Publisher="CN=SMART SOLUCIONES CUBA (SSC)"
-    Version="0.3.0.0" />
+    Name="MOROPO.Viderhe.Player"
+    Publisher="CN=MOROPO S.U.R.L."
+    Version="0.5.4.0" />
 
   <Properties>
     <DisplayName>Viderhe Player</DisplayName>
-    <PublisherDisplayName>SMART SOLUCIONES CUBA (SSC)</PublisherDisplayName>
+    <PublisherDisplayName>MOROPO S.U.R.L.</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
