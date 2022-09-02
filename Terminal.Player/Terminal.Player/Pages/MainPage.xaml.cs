@@ -371,6 +371,15 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
                     if (scheduledRelaunche == null) scheduledRelaunche = orderScheduledRelaunches[0];
                 }
 
+                var ffImageLoadingHttpClient = new System.Net.Http.HttpClient();
+
+                ffImageLoadingHttpClient.DefaultRequestHeaders.Add(task.Result.AuthenticationType, task.Result.AuthenticationToken);
+
+                FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
+                {
+                    HttpClient = ffImageLoadingHttpClient
+                });
+
                 AnimateOutCurrentStep(CurrentStepAnimateOut_Completed);
             }
         }

@@ -50,20 +50,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
         {
             try
             {
-                var accountId = System.Guid.Parse(Request.Headers[Cloud.Api.Common.Providers.Constant.SecurityConstantProvider.ACCOUNT_ID_HEADER_KEY]);
-
-                var protectedPlayerId = Request.Headers[Cloud.Api.Common.Providers.Constant.SecurityConstantProvider.PROTECTED_PLAYER_ID_HEADER_KEY];
-
-                var playerId = Helpers.Security.PlayerSecurityHelper.UnprotectPlayerId(protectedPlayerId);
-
-                var player = playerRepository.Get(playerId);
-
-                if (player.Account.Id != accountId)
-                {
-                    return Forbid(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
-                }
-                
-                var account = accountRepository.GetAll().Include(e => e.ImageBridges).ThenInclude(b => b.Image).First(e => e.Id == accountId);
+                var account = accountRepository.Get(System.Guid.Parse(User.Claims.First(claim => claim.Type == Security.Authorization.Claims.ACCOUNT_CLAIM).Value));
 
                 var image = account.ImageBridges.FirstOrDefault(b => b.ImageId == key)?.Image;
 
@@ -184,13 +171,13 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpGet("[action]/{key}")]
-        public IActionResult Moderator(string key)
+        public IActionResult Moderator(System.Guid key)
         {
             try
             {
                 var account = accountRepository.Get(System.Guid.Parse(User.Claims.First(claim => claim.Type == Security.Authorization.Claims.ACCOUNT_CLAIM).Value));
 
-                var moderator = account.ModeratorBridges.First(b => b.Moderator.UserId == key).Moderator;
+                var moderator = account.ModeratorBridges.First(b => b.Moderator.Id == key).Moderator;
 
                 return new FileContentResult(imageFileManager.GetImageFileContent(moderator.Identity.Image), account.Logo.ContentType);
             }

@@ -13,11 +13,13 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     {
         private readonly IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
         private readonly IEntityRepository<Persistence.Entities.Extension, System.Guid> extensionRepository;
+        private readonly Microsoft.Extensions.Options.IOptions<Options.JwtOptions> jwtOptions;
 
-        public PlayersController(IEntityRepository<Persistence.Entities.Extension, System.Guid> extensionRepository, IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IEntityRepository<Persistence.Entities.Player, string> repository, Microsoft.Extensions.Localization.IStringLocalizer<PlayersController> localizer, ILogger<PlayersController> logger) : base(repository, localizer, logger)
+        public PlayersController(Microsoft.Extensions.Options.IOptions<Options.JwtOptions> jwtOptions, IEntityRepository<Persistence.Entities.Extension, System.Guid> extensionRepository, IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IEntityRepository<Persistence.Entities.Player, string> repository, Microsoft.Extensions.Localization.IStringLocalizer<PlayersController> localizer, ILogger<PlayersController> logger) : base(repository, localizer, logger)
         {
             this.accountRepository = accountRepository;
             this.extensionRepository = extensionRepository;
+            this.jwtOptions = jwtOptions;
         }
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
@@ -84,6 +86,15 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 
                 Response.Headers.Add(Request.Headers.First(header => header.Key == Cloud.Api.Common.Providers.Constant.SecurityConstantProvider.PROTECTED_PLAYER_ID_HEADER_KEY));
 
+                var claims = new System.Collections.Generic.List<System.Security.Claims.Claim>
+                {
+                    new System.Security.Claims.Claim(System.Security.Claims.ClaimsIdentity.DefaultNameClaimType, playerId),
+                    new System.Security.Claims.Claim(Security.Authorization.Claims.ACCOUNT_CLAIM, accountId),
+                    new System.Security.Claims.Claim(Security.Authorization.Policies.ACCOUNT_ASSOCIATED, accountId)
+                };
+
+                var authenticationType = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+
                 return Ok(new PlayerPlaybackConfigurationModel
                 {
                     Placards = player.Screenplay?.Frames.OrderBy(e => e.Priority).Where(e => e.Placard.Template.Enabled).Select((Persistence.Entities.Frame entity) =>
@@ -98,7 +109,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                     {
                         Id = entity.Id,
                         Time = entity.Time
-                    }).ToArray()
+                    }).ToArray(),
+                    AuthenticationType = authenticationType,
+                    AuthenticationToken = GenerateJwtToken(new System.Security.Claims.ClaimsIdentity(claims, authenticationType))
                 });
             }
             catch
@@ -189,5 +202,25 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 
             return model;
         }
+
+        #region Token Utility Methods
+
+        private string GenerateJwtToken(System.Security.Claims.ClaimsIdentity userIdentity)
+        {
+            var key = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtOptions.Value.Key));
+            var creds = new Microsoft.IdentityModel.Tokens.SigningCredentials(key, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
+
+            var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
+                jwtOptions.Value.Issuer,
+                jwtOptions.Value.Issuer,
+                userIdentity.Claims,
+                expires: null,
+                signingCredentials: creds
+            );
+
+            return new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        #endregion
     }
 }
