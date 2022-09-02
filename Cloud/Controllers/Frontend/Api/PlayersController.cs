@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_ASSOCIATED)]
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_MODERATION)]
     [Route("api/[area]/[controller]")]
     [Area("account")]
     public class PlayersController : SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementController<Persistence.Entities.Player, string, PlayerInputModel, PlayerDisplayModel>
@@ -88,9 +88,10 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 
                 var claims = new System.Collections.Generic.List<System.Security.Claims.Claim>
                 {
+                    new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.NameIdentifier, playerId),
                     new System.Security.Claims.Claim(System.Security.Claims.ClaimsIdentity.DefaultNameClaimType, playerId),
                     new System.Security.Claims.Claim(Security.Authorization.Claims.ACCOUNT_CLAIM, accountId),
-                    new System.Security.Claims.Claim(Security.Authorization.Policies.ACCOUNT_ASSOCIATED, accountId)
+                    new System.Security.Claims.Claim(Security.Authorization.Policies.ACCOUNT_MODERATION, accountId)
                 };
 
                 var authenticationType = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;

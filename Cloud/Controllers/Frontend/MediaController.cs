@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartSolucionesCuba.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade;
 using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
@@ -7,20 +6,18 @@ using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_ASSOCIATED)]
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class MediaController : SAPRESSC.Core.Web.Common.Controllers.BaseWebController
     {
         private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
-        private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository;
         private readonly IImageFileManagerFacade imageFileManager;
         private readonly IThumbnailFileManagerFacade thumbnailFileManager;
 
-        public MediaController(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Player, string> playerRepository, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
+        public MediaController(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
             : base(localizer, logger)
         {
             this.accountRepository = accountRepository;
-            this.playerRepository = playerRepository;
             this.imageFileManager = imageFileManager;
             this.thumbnailFileManager = thumbnailFileManager;
         }

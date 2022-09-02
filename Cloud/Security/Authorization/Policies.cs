@@ -2,6 +2,7 @@
 {
     public static class Policies
     {
-        public const string ACCOUNT_ASSOCIATED = "user-account-tied";
+        public const string ACCOUNT_MODERATION = "account-moderation-policy";
+        public const string ACCOUNT_SANDBOXED = "account-sandboxed-policy";
     }
 }

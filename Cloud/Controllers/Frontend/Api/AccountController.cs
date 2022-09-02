@@ -8,7 +8,7 @@ using System.Linq;
 namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 {
     // TODO Firbid requiest for unprivileged moderators!!
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_ASSOCIATED)]
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_MODERATION)]
     [Route("api/[controller]")]
     [SAPRESSC.Core.Web.Security.Filters.ChangeUserPasswordRequiredAction]
     [SAPRESSC.Core.Web.Security.Filters.CatchChangeUserPasswordRequiredException]

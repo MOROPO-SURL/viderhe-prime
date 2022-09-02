@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Hubs
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_ASSOCIATED)]
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_MODERATION)]
     public class DashboardHub : Hub<SignalR.Connect.Dashboard.Clients.IDashboardClient>, SignalR.Connect.Dashboard.Hubs.IDashboardHub
     {
         private readonly IHubContext<PlayerHub, SignalR.Connect.Player.Clients.IPlayerClient> playerHubContext;

@@ -373,7 +373,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
 
                 var ffImageLoadingHttpClient = new System.Net.Http.HttpClient();
 
-                ffImageLoadingHttpClient.DefaultRequestHeaders.Add(task.Result.AuthenticationType, task.Result.AuthenticationToken);
+                ffImageLoadingHttpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(task.Result.AuthenticationType, task.Result.AuthenticationToken);
 
                 FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
                 {
