@@ -64,8 +64,8 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
 
                         var screenplayPlayerPage = new Support.Presentation.Player.Pages.ScreenplayPlayerPage(placards, ScreenplayPresentationEnded_Callback, true, PlacardPlaying_Callback, ScreenplayPresentIterationComplete_Callback, overlayView, PlacardViewTransitionComplete_Callback)
                         {
-                            BackgroundColor = Managers.SessionManager.Instance.AccountPrimaryColor,
-                            BindingContext = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait ? Managers.SessionManager.Instance.AccountVerticalSplashImageSource : Managers.SessionManager.Instance.AccountHorizontalSplashImageSource
+                            BackgroundColor = Managers.SessionManager.Instance.Account.PrimaryColor,
+                            BindingContext = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait ? Managers.SessionManager.Instance.Account.VerticalSplashImageSource : Managers.SessionManager.Instance.Account.HorizontalSplashImageSource
                         };
 
                         this.NavigationPushModalPageAsync(screenplayPlayerPage);
@@ -224,7 +224,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
             return await client.GetAccountAsync();
         }
 
-        private async void RequestAccount_Callback(System.Threading.Tasks.Task<Cloud.Api.Common.Models.AccountDisplayModel> task)
+        private void RequestAccount_Callback(System.Threading.Tasks.Task<Cloud.Api.Common.Models.AccountDisplayModel> task)
         {
             if (task.IsCanceled || task.Exception != null)
             {
@@ -251,51 +251,87 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(((BindingContext as Models.View.ConfigurationStepViewModel).DetailContentView as Views.ConfigurationStepStartingDetailView).PresentFallbackOptions);
                 }
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(10)).ContinueWith(delayTask =>
                 {
                     RequestAccountAsync().ContinueWith(RequestAccount_Callback);
                 });
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
             else
             {
                 Support.Presentation.Managers.SessionMemoryManager.Instance.Persist();
 
-                Managers.SessionManager.Instance.AccountId = task.Result.Id;
-                Managers.SessionManager.Instance.AccountName = task.Result.Name;
-                Managers.SessionManager.Instance.AccountLogoImageSource = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(task.Result.LogoImageId));
-                Managers.SessionManager.Instance.AccountHorizontalSplashImageSource = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(task.Result.HorizontalSplashImageId));
-                Managers.SessionManager.Instance.AccountVerticalSplashImageSource = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(task.Result.VerticalSplashImageId));
-                Managers.SessionManager.Instance.AccountPrimaryColor = Xamarin.Forms.Color.FromHex(task.Result.PrimaryColor);
-                Managers.SessionManager.Instance.AccountSecoundaryColor = Xamarin.Forms.Color.FromHex(task.Result.SecoundaryColor);
-                Managers.SessionManager.Instance.AccountDefaultOverlayId = task.Result.DefaultOverlayId;
-                Managers.SessionManager.Instance.AccountSerializedOverlayContext = task.Result.SerializedOverlayContext;
+                Managers.SessionManager.Instance.Account = new Models.View.AccountViewModel
+                {
+                    Id = task.Result.Id,
+                    Name = task.Result.Name,
+                    LogoImageSource = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(task.Result.LogoImageId)),
+                    HorizontalSplashImageSource = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(task.Result.HorizontalSplashImageId)),
+                    VerticalSplashImageSource = Xamarin.Forms.ImageSource.FromUri(Support.Presentation.Factories.ImageUriFactory.BuildImageUri(task.Result.VerticalSplashImageId)),
+                    PrimaryColor = Xamarin.Forms.Color.FromHex(task.Result.PrimaryColor),
+                    SecoundaryColor = Xamarin.Forms.Color.FromHex(task.Result.SecoundaryColor),
+                    DefaultOverlayId = task.Result.DefaultOverlayId,
+                    SerializedOverlayContext = task.Result.SerializedOverlayContext,
+                    Extensions = task.Result.Extensions
+                };                
 
+                if (configurationStepQueue.Count > 1)
+                {
+                    configurationStepQueue.Dequeue();
+                }
+
+                AnimateOutCurrentStep(CurrentStepAnimateOut_Completed);
+            }
+        }
+
+        private async System.Threading.Tasks.Task<Cloud.Api.Common.Models.PlayerPlaybackConfigurationModel> RequestPlaybackConfigurationAsyncAsync()
+        {
+            var client = new Cloud.Api.Connect.Clients.PlayersApiConnectClient(Managers.SessionManager.Instance);
+
+            return await client.GetPlaybackConfigurationAsync();
+        }
+
+        private async void RequestPlaybackConfiguration_Callback(System.Threading.Tasks.Task<Cloud.Api.Common.Models.PlayerPlaybackConfigurationModel> task)
+        {
+            if (task.IsCanceled || task.Exception != null || task.Result == null)
+            {
+                await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(10));
+
+#pragma warning disable CS4014 // Dado que no se esperaba esta llamada, la ejecución del método actual continuará antes de que se complete la llamada
+                RequestPlaybackConfigurationAsyncAsync().ContinueWith(RequestPlaybackConfiguration_Callback);
+#pragma warning restore CS4014 // Dado que no se esperaba esta llamada, la ejecución del método actual continuará antes de que se complete la llamada
+            }
+            else
+            {
                 // MotoTouch does not support dynamic assembly loading
                 if (Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.iOS)
                 {
-                    var dynamicLoadExtensions = task.Result.Extensions.Where(item => item.Id != Extend.Essential.Descriptors.EssentialExtensionDescriptor.ID).ToArray();
+                    var dynamicLoadExtensions = Managers.SessionManager.Instance.Account.Extensions.Where(item => item.Id != Extend.Essential.Descriptors.EssentialExtensionDescriptor.ID).ToArray();
+
+                    var missingAccountExtensions = new System.Collections.Generic.List<Cloud.Api.Common.Models.ExtensionDisplayModel>();
+
+                    foreach (var accountExtension in dynamicLoadExtensions)
+                    {
+                        if (System.IO.Directory.Exists(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", accountExtension.Id.ToString(), accountExtension.Version))) continue;
+
+                        missingAccountExtensions.Add(accountExtension);
+                    }
+
+                    foreach (var missingAccountExtension in missingAccountExtensions)
+                    {
+                        var extensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", missingAccountExtension.Id.ToString(), missingAccountExtension.Version));
+
+                        var tempExtensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", missingAccountExtension.Id.ToString(), string.Format("--{0}", missingAccountExtension.Version)));
+
+                        await DownloadAccountExtensionBundleAsync(missingAccountExtension.Id, tempExtensionDirectoryInfo);
+
+                        System.IO.Directory.Move(tempExtensionDirectoryInfo.FullName, extensionDirectoryInfo.FullName);
+                    }
 
                     foreach (var accountExtension in dynamicLoadExtensions)
                     {
                         var extensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", accountExtension.Id.ToString(), accountExtension.Version));
 
-                        // TODO Clear obsolete extension folder!!
-
-                        if (!extensionDirectoryInfo.Exists)
-                        {
-                            extensionDirectoryInfo.Create();
-
-                            await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
-                        }
-
                         var extensionLibraryFileInfos = extensionDirectoryInfo.GetFiles();
-
-                        if (extensionLibraryFileInfos.Length <= 0)
-                        {
-                            await DownloadAccountExtensionBundleAsync(accountExtension.Id, extensionDirectoryInfo);
-                        }
 
                         foreach (var extensionLibraryFileInfo in extensionLibraryFileInfos)
                         {
@@ -324,33 +360,6 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
                     }
                 }
 
-                if (configurationStepQueue.Count > 1)
-                {
-                    configurationStepQueue.Dequeue();
-                }
-
-                AnimateOutCurrentStep(CurrentStepAnimateOut_Completed);
-            }
-        }
-
-        private async System.Threading.Tasks.Task<Cloud.Api.Common.Models.PlayerPlaybackConfigurationModel> RequestPlaybackConfigurationAsyncAsync()
-        {
-            var client = new Cloud.Api.Connect.Clients.PlayersApiConnectClient(Managers.SessionManager.Instance);
-
-            return await client.GetPlaybackConfigurationAsync();
-        }
-
-        private void RequestPlaybackConfiguration_Callback(System.Threading.Tasks.Task<Cloud.Api.Common.Models.PlayerPlaybackConfigurationModel> task)
-        {
-            if (task.IsCanceled || task.Exception != null || task.Result == null)
-            {
-                System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(10)).ContinueWith(delayTask =>
-                {
-                    RequestPlaybackConfigurationAsyncAsync().ContinueWith(RequestPlaybackConfiguration_Callback);
-                });
-            }
-            else
-            {
                 placards = task.Result.Placards.Select(m => m.ToViewModel()).ToArray();
                 
                 if (task.Result.ScheduledRelaunches.Length > 0)
@@ -439,6 +448,11 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
 
         private async System.Threading.Tasks.Task DownloadAccountExtensionBundleAsync(System.Guid extensionId, System.IO.DirectoryInfo extensionDirectoryInfo)
         {
+            if (!extensionDirectoryInfo.Exists)
+            {
+                extensionDirectoryInfo.Create();
+            }
+
             var extensionsApiConnectClient = new Cloud.Api.Connect.Clients.ExtensionsApiConnectClient(Managers.SessionManager.Instance.HttpClientHelper);
 
             var extensionBundleModules = await extensionsApiConnectClient.GetPlayerBundleModulesAsync(extensionId);
@@ -448,6 +462,8 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
                 using (var extensionLibraryFileStream = System.IO.File.Create(System.IO.Path.Combine(extensionDirectoryInfo.FullName, extensionBundleModule.FileName)))
                 {
                     extensionLibraryFileStream.Write(extensionBundleModule.FileContent, 0, extensionBundleModule.FileContent.Length);
+
+                    extensionLibraryFileStream.Flush();
                 }
             }
         }

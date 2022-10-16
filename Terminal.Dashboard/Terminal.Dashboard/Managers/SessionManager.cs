@@ -194,14 +194,9 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
                         var tempExtensionDirectoryInfo = new System.IO.DirectoryInfo(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Extensions", server, missingAccountExtension.Id.ToString(), string.Format("_{0}", missingAccountExtension.Version)));
 
-                        if (!tempExtensionDirectoryInfo.Exists)
-                        {
-                            tempExtensionDirectoryInfo.Create();
-                        }
-
                         await DownloadAccountExtensionBundleAsync(missingAccountExtension.Id, tempExtensionDirectoryInfo);
 
-                        tempExtensionDirectoryInfo.MoveTo(extensionDirectoryInfo.FullName);
+                        System.IO.Directory.Move(tempExtensionDirectoryInfo.FullName, extensionDirectoryInfo.FullName);
                     }
 
                     foreach (var accountExtension in dynamicLoadExtensions)
@@ -285,6 +280,11 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
         private async System.Threading.Tasks.Task DownloadAccountExtensionBundleAsync(System.Guid extensionId, System.IO.DirectoryInfo extensionDirectoryInfo)
         {
+            if (!extensionDirectoryInfo.Exists)
+            {
+                extensionDirectoryInfo.Create();
+            }
+
             var extensionsApiConnectClient = new Cloud.Api.Connect.Clients.ExtensionsApiConnectClient(HttpClientHelper);
 
             var extensionBundleModules = await extensionsApiConnectClient.GetDashboardBundleModulesAsync(extensionId);

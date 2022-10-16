@@ -2,22 +2,22 @@
 {
     public class AccountInformationProvider : Extend.Common.Presentation.Providers.Facade.IAccountInformationProviderFacade
     {
-        public System.Guid Id => Managers.SessionManager.Instance.AccountId;
+        public System.Guid Id => Managers.SessionManager.Instance.Account.Id;
 
-        public string Name => Managers.SessionManager.Instance.AccountName;
+        public string Name => Managers.SessionManager.Instance.Account.Name;
 
-        public Xamarin.Forms.ImageSource LogoImageSource => Managers.SessionManager.Instance.AccountLogoImageSource;
+        public Xamarin.Forms.ImageSource LogoImageSource => Managers.SessionManager.Instance.Account.LogoImageSource;
 
-        public Xamarin.Forms.ImageSource HorizontalSplashImageSource => Managers.SessionManager.Instance.AccountHorizontalSplashImageSource;
+        public Xamarin.Forms.ImageSource HorizontalSplashImageSource => Managers.SessionManager.Instance.Account.HorizontalSplashImageSource;
 
-        public Xamarin.Forms.ImageSource VerticalSplashImageSource => Managers.SessionManager.Instance.AccountVerticalSplashImageSource;
+        public Xamarin.Forms.ImageSource VerticalSplashImageSource => Managers.SessionManager.Instance.Account.VerticalSplashImageSource;
 
-        public Xamarin.Forms.Color PrimaryColor => Managers.SessionManager.Instance.AccountPrimaryColor;
+        public Xamarin.Forms.Color PrimaryColor => Managers.SessionManager.Instance.Account.PrimaryColor;
 
-        public Xamarin.Forms.Color SecoundaryColor => Managers.SessionManager.Instance.AccountSecoundaryColor;
+        public Xamarin.Forms.Color SecoundaryColor => Managers.SessionManager.Instance.Account.SecoundaryColor;
 
-        public System.Guid? AccountDefaultOverlayId => Managers.SessionManager.Instance.AccountDefaultOverlayId;
+        public System.Guid? AccountDefaultOverlayId => Managers.SessionManager.Instance.Account.DefaultOverlayId;
 
-        public string AccountSerializedOverlayContext => Managers.SessionManager.Instance.AccountSerializedOverlayContext;
+        public string AccountSerializedOverlayContext => Managers.SessionManager.Instance.Account.SerializedOverlayContext;
     }
 }
