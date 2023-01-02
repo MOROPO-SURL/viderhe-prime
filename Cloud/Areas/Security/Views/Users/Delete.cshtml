@@ -1,6 +1,6 @@
-﻿@using SmartSolucionesCuba.SAPRESSC.Core.Common.Models.View;
+﻿@using MOROPO.SAPRESSC.Core.Common.Models.View;
 
-@model SmartSolucionesCuba.SAPRESSC.Core.Web.SecurityLocal.Models.View.UserDisplayViewModel
+@model MOROPO.SAPRESSC.Middleware.Security.Essential.Web.Backend.Models.View.UserDisplayViewModel
 
 @{
     ViewData["Title"] = "Eliminar Usuario";
@@ -10,7 +10,7 @@
         new BreadcrumbViewModel
         {
             Caption = "<span class=\"mdi mdi-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
-            Url = "/"
+            Url = Url.Action("index", "dashboard", new { Area = string.Empty })
         },
         new BreadcrumbViewModel
         {

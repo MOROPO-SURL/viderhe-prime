@@ -1,41 +1,41 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartSolucionesCuba.SAPRESSC.Core.Security.Persistence.Entities;
-using SmartSolucionesCuba.SAPRESSC.Core.Web.SecurityLocal.Extensions;
+using MOROPO.SAPRESSC.Core.Security.Common.Persistence.EF.Extensions;
+using MOROPO.SAPRESSC.Core.Security.Common.Persistence.Entities;
 using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Helpers
 {
-    public sealed class BusinessDataInitializationHelper : SAPRESSC.Core.Persistence.EF.Helpers.Facade.IDataInitializationHelper
+    public sealed class BusinessDataInitializationHelper : MOROPO.SAPRESSC.Core.Persistence.EF.Helpers.Facade.IDataInitializationHelper
     {
         public void InitialiseData(DbContext dbContext)
         {
-            #region Account Roles definitios
+            #region Account Permission definitions
 
-            var roleDbSet = dbContext.Set<Role>();
+            var roleDbSet = dbContext.Set<Permission>();
 
-            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Roles.AccountViewer)))
+            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Permission.AccountViewer)))
             {
-                roleDbSet.Add(Cloud.Security.Authorization.Roles.AccountViewer.ToRoleEntity());
+                roleDbSet.Add(Cloud.Security.Authorization.Permission.AccountViewer.ToPermissionEntity(Cloud.Security.Authorization.PermissionFamily.AccountManagement));
             }
 
-            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Roles.AccountCreator)))
+            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Permission.AccountCreator)))
             {
-                roleDbSet.Add(Cloud.Security.Authorization.Roles.AccountCreator.ToRoleEntity());
+                roleDbSet.Add(Cloud.Security.Authorization.Permission.AccountCreator.ToPermissionEntity(Cloud.Security.Authorization.PermissionFamily.AccountManagement));
             }
 
-            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Roles.AccountEditor)))
+            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Permission.AccountEditor)))
             {
-                roleDbSet.Add(Cloud.Security.Authorization.Roles.AccountEditor.ToRoleEntity());
+                roleDbSet.Add(Cloud.Security.Authorization.Permission.AccountEditor.ToPermissionEntity(Cloud.Security.Authorization.PermissionFamily.AccountManagement));
             }
 
-            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Roles.AccountRemover)))
+            if (!roleDbSet.Any(role => role.Code.Equals(Cloud.Security.Authorization.Permission.AccountRemover)))
             {
-                roleDbSet.Add(Cloud.Security.Authorization.Roles.AccountRemover.ToRoleEntity());
+                roleDbSet.Add(Cloud.Security.Authorization.Permission.AccountRemover.ToPermissionEntity(Cloud.Security.Authorization.PermissionFamily.AccountManagement));
             }
 
             #endregion
 
-            #region Extension definitios
+            #region Extension definitions
 
             var extensionDbSet = dbContext.Set<Persistence.Entities.Extension>();
 
@@ -167,9 +167,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Helpers
 
             #endregion
 
-            if (dbContext is SAPRESSC.Core.Persistence.EF.Context.ITraceableDbContext)
+            if (dbContext is MOROPO.SAPRESSC.Core.Persistence.EF.Context.ITraceableDbContext)
             {
-                (dbContext as SAPRESSC.Core.Persistence.EF.Context.ITraceableDbContext).SaveChanges("system");
+                (dbContext as MOROPO.SAPRESSC.Core.Persistence.EF.Context.ITraceableDbContext).SaveChanges("system");
             }
             else
             {

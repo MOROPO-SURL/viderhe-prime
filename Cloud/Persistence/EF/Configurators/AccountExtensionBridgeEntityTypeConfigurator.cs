@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Configurators
 {
-    public class AccountExtensionBridgeEntityTypeConfigurator : SAPRESSC.Core.Persistence.EF.Configurators.AbstractEntityTypeConfigurator<Entities.AccountExtensionBridge>
+    public class AccountExtensionBridgeEntityTypeConfigurator : MOROPO.SAPRESSC.Core.Persistence.EF.Configurators.AbstractEntityTypeConfigurator<Entities.AccountExtensionBridge>
     {
         protected override void ApplayRules(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Entities.AccountExtensionBridge> entityTypeBuilder)
         {

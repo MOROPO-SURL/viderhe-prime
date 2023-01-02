@@ -21,11 +21,17 @@
     Layout = "_UserAuthenticatedLayout";
 }
 
-<dl style="margin-bottom: 0;">
-    <dt>Usuario</dt>
+<h3>Perfil de Usuario</h3>
+<hr class="mb-4" />
+
+<dl>
+    <dt>@GlobalViewLocalizationHelper.Localize("Login")</dt>
     <dd>@User.Identity.Name</dd>
 </dl>
 
-<div class="actions" style="margin-top: 10px; margin-bottom: 20px;">
-    <a asp-action="password" class="btn btn-default"><span class="fas fa-key"></span> Modificar Contraseña</a>
+<hr />
+
+<div class="actions">
+    <a asp-action="edit" class="btn btn-light"><span class="mdi mdi-square-edit-outline"></span> Modificar</a>
+    <a asp-action="password" class="btn btn-light"><span class="mdi mdi-key-change"></span> Cambiar Contraseña</a>
 </div>

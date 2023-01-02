@@ -1,18 +1,18 @@
-﻿@model SmartSolucionesCuba.SAPRESSC.Core.Web.SecurityLocal.Models.View.GroupDisplayViewModel
+﻿@model MOROPO.SAPRESSC.Core.Security.Common.Web.Backend.Models.View.RoleDisplayViewModel
 
 @{
-    ViewData["Title"] = "Eliminar Grupo";
+    ViewData["Title"] = "Eliminar Rol";
 
     ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
     {
         new BreadcrumbViewModel
         {
             Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
-            Url = "/"
+            Url = Url.Action("index", "dashboard", new { Area = string.Empty })
         },
         new BreadcrumbViewModel
         {
-            Caption = "Administración de Grupos",
+            Caption = "Administración de Roles",
             Url = Url.Action("index")
         },
         new BreadcrumbViewModel
@@ -24,7 +24,7 @@
     Layout = "_BackendLayout";
 }
 
-<h3>Esta seguro que desea eliminar el grupo detallado a continuación?</h3>
+<h3>Esta seguro que desea eliminar el rol detallado a continuación?</h3>
 
 <dl>
     <dt>@Html.DisplayNameFor(model => model.Name)</dt>
@@ -32,7 +32,7 @@
     <dt>@Html.DisplayNameFor(model => model.Description)</dt>
     <dd>@Html.DisplayFor(model => model.Description)</dd>
 </dl>
-@using (Html.BeginForm("delete", "groups", new { Area = "security", key = string.Empty }, FormMethod.Post, true, null))
+@using (Html.BeginForm("delete", "roles", new { Area = "security", key = string.Empty }, FormMethod.Post, true, null))
 {
     @Html.HiddenFor(model => model.Id)
     <div>

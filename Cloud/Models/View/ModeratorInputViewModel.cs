@@ -1,15 +1,14 @@
-﻿using SmartSolucionesCuba.SAPRESSC.Core.Web.Common.ComponentModel.DataAnnotations;
-using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
+﻿using MOROPO.SAPRESSC.Core.Web.Common.ComponentModel.DataAnnotations;
+using MOROPO.SAPRESSC.Middleware.Media.Web.Common.Extensions;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Models.View
 {
-    public class ModeratorInputViewModel : SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Moderator, System.Guid>
+    public class ModeratorInputViewModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Moderator, System.Guid>
     {
         public ModeratorInputViewModel()
         {
             Account = new AccountDisplayViewModel();
-            BornDate = System.DateTime.Now.AddYears(-30);
             SelectableUsers = new System.Collections.Generic.List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
         }
 
@@ -36,13 +35,13 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Models.View
 
         [Required(ErrorMessage = "RequiredValidationErrorMessage")]
         [Display(Name = "BornDate")]
-        public System.DateTime BornDate { get; set; }
+        public System.DateTime? BornDate { get; set; }
 
         [Display(Name = "CivilStatus")]
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
 
         [Display(Name = "Sex")]
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
 
         [Display(Name = "About")]
         public string About { get; set; }

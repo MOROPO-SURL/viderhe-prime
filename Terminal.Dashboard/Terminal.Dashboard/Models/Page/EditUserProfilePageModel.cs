@@ -7,7 +7,7 @@
         private string targetIdentityName;
         private string targetIdentityLastName;
         private Xamarin.Forms.ImageSource targetIdentityImageSource;
-        private SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex targetIdentitySex;
+        private MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex targetIdentitySex;
         private string targetIdentityAbout;
 
         public string TargetUserId { get; set; }
@@ -24,7 +24,7 @@
 
         public string TargetIdentityImageContentType { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex TargetIdentitySex { get => targetIdentitySex; set => SetProperty(ref targetIdentitySex, value); }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex TargetIdentitySex { get => targetIdentitySex; set => SetProperty(ref targetIdentitySex, value); }
 
         public string TargetIdentityAbout { get => targetIdentityAbout; set => SetProperty(ref targetIdentityAbout, value); }
 

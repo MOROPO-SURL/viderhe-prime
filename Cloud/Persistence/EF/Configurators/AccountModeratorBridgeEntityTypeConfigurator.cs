@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Configurators
 {
-    public class AccountModeratorBridgeEntityTypeConfigurator : SAPRESSC.Core.Persistence.EF.Configurators.AbstractEntityTypeConfigurator<Entities.AccountModeratorBridge>
+    public class AccountModeratorBridgeEntityTypeConfigurator : MOROPO.SAPRESSC.Core.Persistence.EF.Configurators.AbstractEntityTypeConfigurator<Entities.AccountModeratorBridge>
     {
         protected override void ApplayRules(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Entities.AccountModeratorBridge> entityTypeBuilder)
         {

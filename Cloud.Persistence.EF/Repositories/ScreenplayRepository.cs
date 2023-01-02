@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Repositories
 {
-    public class ScreenplayRepository : SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Screenplay, System.Guid>
+    public class ScreenplayRepository : MOROPO.SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Screenplay, System.Guid>
     {
         public ScreenplayRepository(DbContext dbContext) : base(dbContext)
         {

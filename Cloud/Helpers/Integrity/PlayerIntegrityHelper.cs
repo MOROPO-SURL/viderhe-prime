@@ -4,7 +4,7 @@
     {
         public static string GetSignature(Persistence.Entities.Player entity)
         {
-            return SAPRESSC.Core.Persistence.Helpers.DataIntegrityHelper.GetEntitySignature(entity);
+            return MOROPO.SAPRESSC.Core.Persistence.Helpers.DataIntegrityHelper.GetEntitySignature(entity);
         }
 
         public static bool IsCorrectlySigned(Persistence.Entities.Player entity)

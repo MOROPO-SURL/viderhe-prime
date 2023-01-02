@@ -13,7 +13,7 @@
         private Xamarin.Forms.ImageSource targetIdentityImageSource;
         //private System.DateTime targetIdentityBornDate;
         //private SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus targetIdentityCivilStatus;
-        private SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex targetIdentitySex;
+        private MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex targetIdentitySex;
         //private string targetIdentityAlias;
         private string targetIdentityAbout;
 
@@ -45,7 +45,7 @@
 
         //public SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus TargetIdentityCivilStatus { get => targetIdentityCivilStatus; set => SetProperty(ref targetIdentityCivilStatus, value); }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex TargetIdentitySex { get => targetIdentitySex; set => SetProperty(ref targetIdentitySex, value); }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex TargetIdentitySex { get => targetIdentitySex; set => SetProperty(ref targetIdentitySex, value); }
 
         //public string TargetIdentityAlias { get => targetIdentityAlias; set => SetProperty(ref targetIdentityAlias, value); }
 

@@ -1,8 +1,8 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Connect.Clients
 {
-    public class ScreenplaysApiConnectClient : SAPRESSC.Core.Api.Connect.Clients.AbstractEntityApiManagementClient<Persistence.Entities.Screenplay, System.Guid, Common.Models.ScreenplayInputModel, Common.Models.ScreenplayDisplayModel>
+    public class ScreenplaysApiConnectClient : MOROPO.SAPRESSC.Core.Api.Connect.Clients.AbstractEntityApiManagementClient<Persistence.Entities.Screenplay, System.Guid, Common.Models.ScreenplayInputModel, Common.Models.ScreenplayDisplayModel>
     {
-        public ScreenplaysApiConnectClient(SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider) : base(httpClientHelperProvider)
+        public ScreenplaysApiConnectClient(MOROPO.SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider) : base(httpClientHelperProvider)
         {
         }
 

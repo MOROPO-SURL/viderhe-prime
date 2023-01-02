@@ -1,8 +1,8 @@
-﻿using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
+﻿using MOROPO.SAPRESSC.Middleware.Media.Web.Common.Extensions;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Models.View
 {
-    public class ModeratorDisplayViewModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Moderator, System.Guid>
+    public class ModeratorDisplayViewModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Moderator, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -16,11 +16,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Models.View
 
         public string Alias { get; set; }
 
-        public System.DateTime BornDate { get; set; }
+        public System.DateTime? BornDate { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
 
         public string About { get; set; }
 

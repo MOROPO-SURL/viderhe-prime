@@ -8,11 +8,11 @@
 
             Xamarin.Forms.DependencyService.Register<Extend.Common.Presentation.Providers.Facade.IAccountInformationProviderFacade, Providers.AccountInformationProvider>();
             Xamarin.Forms.DependencyService.RegisterSingleton<Support.Presentation.Providers.Facade.ICloudServerProviderFacade>(Support.Presentation.Managers.SessionMemoryManager.Instance);
-            Xamarin.Forms.DependencyService.RegisterSingleton<SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade>(Managers.SessionManager.Instance);
+            Xamarin.Forms.DependencyService.RegisterSingleton<MOROPO.SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade>(Managers.SessionManager.Instance);
 
             Support.Presentation.Helpers.ImageUriFactoryHelper.Instance.Initialize();
 
-            MainPage = new Pages.MainPage();
+            MainPage = new Pages.StartingPage();
         }
 
         protected override void OnStart()

@@ -49,7 +49,7 @@
                     @foreach (var item in subList)
                     {
                         <div class="col-sm-4" style="text-align: center; padding-bottom: 15px; padding-top: 15px;">
-                            @if (User.HasClaim(claim => claim.Type.Equals(SmartSolucionesCuba.SAPRESSC.Core.Web.Security.ClaimTypes.AccountWithFullAccess) && claim.Value.Equals(true.ToString())) || User.IsInRole(item.Role))
+                            @if (User.HasClaim(claim => claim.Type.Equals(MOROPO.SAPRESSC.Core.Web.Security.Constants.ClaimTypes.AccountWithFullAccess) && claim.Value.Equals(true.ToString())) || User.IsInRole(item.Role))
                             {
                                 <a href="@Url.Action(item.Action, item.Controller, new { item.Area })">
                                     @item.ToIconographyHtmlString()
@@ -96,7 +96,7 @@
                             @foreach (var item in subList)
                             {
                                 <div class="col-sm-4" style="text-align: center; padding-bottom: 15px; padding-top: 15px;">
-                                    @if (User.HasClaim(claim => claim.Type.Equals(SmartSolucionesCuba.SAPRESSC.Core.Web.Security.ClaimTypes.AccountWithFullAccess) && claim.Value.Equals(true.ToString())) || User.IsInRole(item.Role))
+                                    @if (User.HasClaim(claim => claim.Type.Equals(MOROPO.SAPRESSC.Core.Web.Security.Constants.ClaimTypes.AccountWithFullAccess) && claim.Value.Equals(true.ToString())) || User.IsInRole(item.Role))
                                     {
                                     <a href="@Url.Action(item.Action, item.Controller, new { item.Area })">
                                         @item.ToIconographyHtmlString()

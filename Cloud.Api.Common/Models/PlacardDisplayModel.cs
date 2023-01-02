@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class PlacardDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Placard, System.Guid>
+    public class PlacardDisplayModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Placard, System.Guid>
     {
         public System.Guid Id { get; set; }
 

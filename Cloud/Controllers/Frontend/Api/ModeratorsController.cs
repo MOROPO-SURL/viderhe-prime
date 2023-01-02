@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SmartSolucionesCuba.SAPRESSC.Core.Persistence.Repositories;
-using SmartSolucionesCuba.SAPRESSC.Core.Web.SecurityLocal.Extensions;
+using MOROPO.SAPRESSC.Core.Persistence.Repositories;
+using MOROPO.SAPRESSC.Core.Security.Common.Persistence.Extensions;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models;
 using System.Linq;
 
@@ -12,11 +12,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     [Route("api/[area]/[controller]")]
     [Area("account")]
     [ApiController]
-    public class ModeratorsController : SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementController<Persistence.Entities.Moderator, System.Guid, ModeratorInputModel, ModeratorDisplayModel>
+    public class ModeratorsController : MOROPO.SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementController<Persistence.Entities.Moderator, System.Guid, ModeratorInputModel, ModeratorDisplayModel>
     {
-        private readonly SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade imageFileManager;
+        private readonly MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade imageFileManager;
 
-        public ModeratorsController(SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade imageFileManager, IEntityRepository<Persistence.Entities.Moderator, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ModeratorsController> localizer, ILogger<ModeratorsController> logger) : base(repository, localizer, logger)
+        public ModeratorsController(MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade imageFileManager, IEntityRepository<Persistence.Entities.Moderator, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ModeratorsController> localizer, ILogger<ModeratorsController> logger) : base(repository, localizer, logger)
         {
             this.imageFileManager = imageFileManager;
         }
@@ -61,7 +61,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                     {
                         using (var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData))
                         {
-                            entity.Identity.Image = new SAPRESSC.Middleware.Media.Persistence.Entities.Image
+                            entity.Identity.Image = new MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image
                             {
                                 ContentType = inputModel.Identity.Image.ContentType,
                                 Length = inputModel.Identity.Image.ContentData.LongLength,
@@ -76,7 +76,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                 }
             }
 
-            entity.User.Signature = SAPRESSC.Core.Web.SecurityLocal.Helpers.Integrity.UserIntegrityHelper.GetSignature(entity.User);
+            entity.User.Signature = MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.EF.Helpers.Integrity.UserIntegrityHelper.GetSignature(entity.User);
         }
     }
 }

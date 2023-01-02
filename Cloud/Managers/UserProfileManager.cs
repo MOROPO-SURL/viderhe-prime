@@ -1,13 +1,19 @@
-﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
+﻿using MOROPO.SAPRESSC.Core.Web.Security.Models.View.Contrat;
+
+namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
 {
-    public class UserProfileManager : SAPRESSC.Core.Web.Security.Managers.Facade.IUserProfileManagerFacade
+    public class UserProfileManager : MOROPO.SAPRESSC.Core.Web.Security.Managers.Facade.IUserProfileManagerFacade
     {
-        public SAPRESSC.Core.Web.Security.Models.View.IUserProfileViewModel GetUserProfile(string username)
+        public IUserProfileViewModel GetUserProfile(string username)
         {
             return new Models.View.UserProfileViewModel();
         }
 
-        public void UpdateUserProfile(string username, SAPRESSC.Core.Web.Security.Models.View.IUserProfileViewModel profileModel)
+        public void PreValidateUserProfile(string username, IUserProfileViewModel profileModel, Microsoft.AspNetCore.Mvc.Controller controller)
+        {
+        }
+
+        public void UpdateUserProfile(string username, IUserProfileViewModel profileModel)
         {
         }
     }

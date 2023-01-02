@@ -6,13 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.SAPRESSC.Core.Persistence.EF.Extensions;
+using MOROPO.SAPRESSC.Core.Persistence.Repositories;
+using MOROPO.SAPRESSC.Core.Security.Common.Web.Frontend.Extensions;
+using MOROPO.SAPRESSC.Middleware.Identity.Web.Common.Extensions;
+using MOROPO.SAPRESSC.Middleware.Media.Web.Common.Extensions;
+using MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.EF.Extensions;
+using MOROPO.SAPRESSC.Middleware.Security.Essential.Web.Backend.Extensions;
+using MOROPO.SAPRESSC.Middleware.Security.Essential.Web.Common.Extensions;
 using Serilog;
-using SmartSolucionesCuba.SAPRESSC.Core.Persistence.EF.Extensions;
-using SmartSolucionesCuba.SAPRESSC.Core.Persistence.Repositories;
-using SmartSolucionesCuba.SAPRESSC.Core.Web.Security.Extensions;
-using SmartSolucionesCuba.SAPRESSC.Core.Web.SecurityLocal.Extensions;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Identity.Web.Common.Extensions;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Media.Web.Common.Extensions;
 using SmartSolucionesCuba.Viderhe.Cloud.Options;
 using System.Linq;
 
@@ -97,8 +99,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
 
             services.AddScoped<DbContext, Persistence.EF.ApplicationDbContext>();
 
-            services.PerformCoreWebSecurityServiceRegistration();
-            services.PerformCoreWebSecurityLocalServiceRegistration();
+            services.PerformCoreWebSecurityCommonFrontendServiceRegistration();
+            services.PerformMiddlewareSecurityEssentialWebCommonServiceRegistration();
+            services.PerformMiddlewareSecurityEssentialWebBackendServiceRegistration();
             services.PerformMiddlewareMediaWebCommonServiceRegistration();
             services.PerformMiddlewareIdentityWebCommonServiceRegistration();
 
@@ -112,15 +115,15 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
             services.AddScoped<IEntityRepository<Persistence.Entities.Template, System.Guid>, Persistence.EF.Repositories.TemplateRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.ScheduledRelaunch, System.Guid>, Persistence.EF.Repositories.ScheduledRelaunchRepository>();
 
-            services.AddSingleton<SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade, Managers.ImageFileManager>();
-            services.AddSingleton<SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IThumbnailFileManagerFacade, Managers.ThumbnailFileManager>();
-            services.AddSingleton<SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IVideoFileManagerFacade, Managers.VideoFileManager>();
+            services.AddSingleton<MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade, Managers.ImageFileManager>();
+            services.AddSingleton<MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IThumbnailFileManagerFacade, Managers.ThumbnailFileManager>();
+            services.AddSingleton<MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IVideoFileManagerFacade, Managers.VideoFileManager>();
 
             services.AddMediaToolkit(configuration["FFmpeg:MainBinaryPath"]);
 
-            services.AddSingleton<SAPRESSC.Core.Persistence.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.EF.Providers.BusinessDbSchemaConfigurationProvider>();
+            services.AddSingleton<MOROPO.SAPRESSC.Core.Persistence.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.EF.Providers.BusinessDbSchemaConfigurationProvider>();
 
-            services.AddSingleton<SAPRESSC.Core.Persistence.EF.Helpers.Facade.IDataInitializationHelper, Helpers.BusinessDataInitializationHelper>();
+            services.AddSingleton<MOROPO.SAPRESSC.Core.Persistence.EF.Helpers.Facade.IDataInitializationHelper, Helpers.BusinessDataInitializationHelper>();
 
             services.AddScoped<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, Security.Authorization.Requirement.Handler.AccountModerationRequirementHandler>();
 
@@ -185,14 +188,14 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
             });
 
             #region SAPRESSC.Core.Security concreter dependencies configuration
-            services.AddSingleton<SAPRESSC.Core.Web.Security.Licensing.ILicenseValidator, Security.Licensing.WilcardLicenseValidator>();
+            services.AddSingleton<MOROPO.SAPRESSC.Core.Web.Security.Helpers.Facade.ILicenseValidationHelperFacade, Security.Licensing.WilcardLicenseValidator>();
 
-            services.AddTransient<SAPRESSC.Core.Web.Security.Models.View.IUserProfileViewModel, Models.View.UserProfileViewModel>();
+            services.AddTransient<MOROPO.SAPRESSC.Core.Web.Security.Models.View.Contrat.IUserProfileViewModel, Models.View.UserProfileViewModel>();
 
-            services.AddSingleton<SAPRESSC.Core.Web.Common.ModelBinding.IConcretModelBindHelper, Helpers.Binding.ConcretModelBindHelper>();
+            services.AddSingleton<MOROPO.SAPRESSC.Core.Web.Common.ModelBinding.IConcretModelBindHelper, Helpers.Binding.ConcretModelBindHelper>();
 
-            services.AddScoped<SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade, Managers.IdentityManager>();
-            services.AddScoped<SAPRESSC.Core.Web.Security.Managers.Facade.IUserProfileManagerFacade, Managers.UserProfileManager>();
+            services.AddScoped<MOROPO.SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade, Managers.IdentityManager>();
+            services.AddScoped<MOROPO.SAPRESSC.Core.Web.Security.Managers.Facade.IUserProfileManagerFacade, Managers.UserProfileManager>();
             #endregion
 
             #region Globalization configuration
@@ -206,7 +209,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
                 options.SupportedCultures = new[] { defaultCulture };
                 options.SupportedUICultures = new[] { defaultCulture };
 
-                options.RequestCultureProviders = new[] { new SAPRESSC.Core.Web.Common.Localization.UrlRequestCultureProvider() };
+                options.RequestCultureProviders = new[] { new MOROPO.SAPRESSC.Core.Web.Common.Localization.UrlRequestCultureProvider() };
             });
 
             services.AddSingleton<Helpers.Localization.GlobalViewLocalizationHelper>();
@@ -221,7 +224,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
             services.AddSignalR();
 
             services.AddMvc(mvc =>
-                mvc.ModelBinderProviders.Insert(0, new SAPRESSC.Core.Web.Common.ModelBinding.AbstractsModelBinderProvider())
+                mvc.ModelBinderProviders.Insert(0, new MOROPO.SAPRESSC.Core.Web.Common.ModelBinding.AbstractsModelBinderProvider())
             )
             .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization(options =>

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using SmartSolucionesCuba.SAPRESSC.Core.Persistence.Repositories;
+using MOROPO.SAPRESSC.Core.Persistence.Repositories;
 using SmartSolucionesCuba.Viderhe.Cloud.SignalR.Connect.Common.Enumerations;
 using System.Linq;
 

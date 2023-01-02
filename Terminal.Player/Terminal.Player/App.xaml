@@ -2,66 +2,32 @@
 <Application 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:supportpresentationhelpers="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Helpers;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation"
+    xmlns:supportpresentationconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Converters;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Player.App">
     <Application.Resources>
+        <supportpresentationconverters:ImageViewModelToImageSourceConverter x:Key="ImageViewModelToImageSourceConverter" />
+
         <OnPlatform x:Key="IconFontFamily" x:TypeArguments="x:String" Default="Material Design Icons">
             <On Platform="Tizen" Value="MaterialDesignIcons" />
         </OnPlatform>
 
         <Style x:Key="ConfigurationStepSubtitleLabelStyle" TargetType="Label">
             <Setter Property="TextColor" Value="White" />
-            <Setter Property="FontSize" Value="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.NormalHeaderTextFontSize}" />
         </Style>
 
         <Style x:Key="ConfigurationStepDataIconLabelStyle" TargetType="Label">
-            <Setter Property="Margin" Value="10,24,10,0" />
             <Setter Property="TextColor" Value="WhiteSmoke" />
             <Setter Property="VerticalTextAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
-            <Setter Property="FontSize">
-                <Setter.Value>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android" Value="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.NormalHeroTextFontSize}" />
-                        <On Platform="UWP" Value="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.NormalHeroTextFontSize}" />
-                        <On Platform="Tizen" Value="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.NormalHeroTextFontSize}" />
-                    </OnPlatform>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />            
         </Style>
 
         <Style x:Key="ConfigurationStepDataCaptionLabelStyle" TargetType="Label">
-            <Setter Property="Margin" Value="0,20,0,0" />
             <Setter Property="TextColor" Value="WhiteSmoke" />
-            <Setter Property="FontSize" Value="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.MiddleHeaderTextFontSize}" />
         </Style>
 
         <Style x:Key="ConfigurationStepDataValueLabelStyle" TargetType="Label">
             <Setter Property="TextColor" Value="White" />
-            <Setter Property="FontSize" Value="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.MiddleHeaderTextFontSize}" />
             <Setter Property="FontAttributes" Value="Bold" />
-        </Style>
-
-        <Style x:Key="ConfigurationStepGraphCloudLabelStyle" TargetType="Label">
-            <Setter Property="Text" Value="&#xF163;" />
-            <Setter Property="TextColor" Value="White" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
-            <Setter Property="FontSize" Value="144" />
-        </Style>
-
-        <Style x:Key="ConfigurationStepGraphActionLabelStyle" TargetType="Label">
-            <Setter Property="TextColor" Value="White" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
-            <Setter Property="FontSize" Value="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.MiddleHeroTextFontSize}" />
-        </Style>
-
-        <Style x:Key="ConfigurationStepGraphPlayerLabelStyle" TargetType="Label">
-            <Setter Property="TextColor" Value="White" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
-            <Setter Property="FontSize" Value="120" />
         </Style>
     </Application.Resources>
 </Application>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SmartSolucionesCuba.SAPRESSC.Core.Persistence.Repositories;
+using MOROPO.SAPRESSC.Core.Persistence.Repositories;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models.Filter;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_MODERATION)]
     [Route("api/[area]/[controller]")]
     [Area("account")]
-    [SAPRESSC.Core.Web.Security.Filters.ChangeUserPasswordRequiredAction]
-    [SAPRESSC.Core.Web.Security.Filters.CatchChangeUserPasswordRequiredException]
-    public class FramesController : SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementFilteredController<Persistence.Entities.Frame, long, FrameInputModel, FrameDisplayModel, FrameFilterModel>
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.ChangeUserPasswordRequiredAction]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.CatchChangeUserPasswordRequiredException]
+    public class FramesController : MOROPO.SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementFilteredController<Persistence.Entities.Frame, long, FrameInputModel, FrameDisplayModel, FrameFilterModel>
     {
         private readonly IEntityRepository<Persistence.Entities.Screenplay, System.Guid> screenplayRepository;
         private readonly IEntityRepository<Persistence.Entities.Placard, System.Guid> placardRepository;
@@ -33,7 +33,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
             return NotFound();
         }
 
-        public override ActionResult<SAPRESSC.Core.Common.Models.PaginationModel<FrameDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
+        public override ActionResult<MOROPO.SAPRESSC.Core.Common.Models.PaginationModel<FrameDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
         {
             return NotFound();
         }

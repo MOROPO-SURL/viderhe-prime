@@ -1,6 +1,6 @@
 ﻿@using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
 
-@model Dictionary<string, ICollection<SmartSolucionesCuba.SAPRESSC.Core.Web.Backend.Models.View.ManagementDashboardSectionViewModel>>
+@model Dictionary<string, ICollection<MOROPO.SAPRESSC.Core.Web.Backend.Models.View.ManagementDashboardSectionViewModel>>
 
 <div style="position: relative; min-height: 100vh; z-index: 1000;  overflow-x: hidden; overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */">
     <nav class="nav flex-column nav-pills nav-sidebar" style="margin-top: 84px;">
@@ -20,7 +20,7 @@
         <nav class="nav flex-column nav-pills nav-sidebar">
             @foreach (var item in group.Value)
             {
-                if (User.HasClaim(claim => claim.Type.Equals(SmartSolucionesCuba.SAPRESSC.Core.Web.Security.ClaimTypes.AccountWithFullAccess) && claim.Value.Equals(true.ToString())) || User.IsInRole(item.Role))
+                if (User.HasClaim(claim => claim.Type.Equals(MOROPO.SAPRESSC.Core.Web.Security.Constants.ClaimTypes.AccountWithFullAccess) && claim.Value.Equals(true.ToString())) || User.IsInRole(item.Role))
                 {
                     if (Context.Request.Path.Value.StartsWith("/management/" + item.Area + "/" + item.Controller))
                     {

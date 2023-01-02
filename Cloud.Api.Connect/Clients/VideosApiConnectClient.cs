@@ -2,9 +2,9 @@
 {
     public class VideosApiConnectClient
     {
-        private readonly SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper httpClientHelper;
+        private readonly MOROPO.SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper httpClientHelper;
 
-        public VideosApiConnectClient(SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper httpClientHelper)
+        public VideosApiConnectClient(MOROPO.SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper httpClientHelper)
         {
             this.httpClientHelper = httpClientHelper;
         }
@@ -33,9 +33,9 @@
             await httpClientHelper.PutFormAsync(urlOrResource, new System.Net.Http.MultipartFormDataContent { formContent, fileContent });
         }
 
-        public async System.Threading.Tasks.Task<SAPRESSC.Core.Common.Models.PaginationModel<Common.Models.VideoDisplayModel>> GetPageAsync(int page = 1)
+        public async System.Threading.Tasks.Task<MOROPO.SAPRESSC.Core.Common.Models.PaginationModel<Common.Models.VideoDisplayModel>> GetPageAsync(int page = 1)
         {
-            return await httpClientHelper.GetAsync<SAPRESSC.Core.Common.Models.PaginationModel<Common.Models.VideoDisplayModel>>(string.Format("account/videos/page/{0}", page));
+            return await httpClientHelper.GetAsync<MOROPO.SAPRESSC.Core.Common.Models.PaginationModel<Common.Models.VideoDisplayModel>>(string.Format("account/videos/page/{0}", page));
         }
 
         public virtual async System.Threading.Tasks.Task EditAsync(Common.Models.VideoInputModel inputModel)

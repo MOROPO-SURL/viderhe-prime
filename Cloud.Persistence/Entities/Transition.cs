@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class Transition : SAPRESSC.Core.Persistence.Entities.IHabilitableEntity<System.Guid>
+    public class Transition : MOROPO.SAPRESSC.Core.Persistence.Entities.IHabilitableEntity<System.Guid>
     {
         public Transition()
         {

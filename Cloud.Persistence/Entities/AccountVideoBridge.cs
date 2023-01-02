@@ -8,6 +8,6 @@
 
         public System.Guid VideoId { get; set; }
 
-        public SAPRESSC.Middleware.Media.Persistence.Entities.Video Video { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Video Video { get; set; }
     }
 }

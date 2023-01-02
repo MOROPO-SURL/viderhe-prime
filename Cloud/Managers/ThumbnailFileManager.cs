@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
 {
-    public class ThumbnailFileManager : SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IThumbnailFileManagerFacade
+    public class ThumbnailFileManager : MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IThumbnailFileManagerFacade
     {
         private readonly Microsoft.Extensions.Options.IOptions<Options.MediaPathOptions> mediaPathOptions;
 
@@ -9,19 +9,19 @@
             this.mediaPathOptions = mediaPathOptions;
         }
 
-        public void DeleteThumbnailFile(SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
+        public void DeleteThumbnailFile(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
         {
             System.IO.File.Delete(GetThumbnailAbsoluteFilePath(thumbnail));
         }
 
-        public string GetThumbnailAbsoluteFilePath(SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
+        public string GetThumbnailAbsoluteFilePath(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
         {
             var extension = thumbnail.ContentType.Split('/')[1].ToLowerInvariant();
 
             return System.IO.Path.Combine(mediaPathOptions.Value.ThumbnailMediaPath, string.Format("{0}.{1}", thumbnail.Id, extension));
         }
 
-        public byte[] GetThumbnailFileContent(SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
+        public byte[] GetThumbnailFileContent(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
         {
             byte[] result;
 
@@ -37,14 +37,14 @@
             return result;
         }
 
-        public string GetThumbnailRelativeFilePath(SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
+        public string GetThumbnailRelativeFilePath(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail thumbnail)
         {
             return null;
         }
 
         public void SaveThumbnailFileContent(System.Guid thumbnailId, byte[] content, string contentType)
         {
-            System.IO.File.WriteAllBytes(GetThumbnailAbsoluteFilePath(new SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail { Id = thumbnailId, ContentType = contentType }), content);
+            System.IO.File.WriteAllBytes(GetThumbnailAbsoluteFilePath(new MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail { Id = thumbnailId, ContentType = contentType }), content);
         }
     }
 }

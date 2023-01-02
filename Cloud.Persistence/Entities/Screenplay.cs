@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class Screenplay : SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
+    public class Screenplay : MOROPO.SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
     {
         [Key]
         public System.Guid Id { get; set; }

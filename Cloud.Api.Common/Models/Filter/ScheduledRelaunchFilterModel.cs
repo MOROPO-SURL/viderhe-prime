@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models.Filter
 {
-    public class ScheduledRelaunchFilterModel : SAPRESSC.Core.Persistence.Models.Filter.IEntityFilterModel<Persistence.Entities.ScheduledRelaunch, System.Guid>
+    public class ScheduledRelaunchFilterModel : MOROPO.SAPRESSC.Core.Persistence.Models.Filter.IEntityFilterModel<Persistence.Entities.ScheduledRelaunch, System.Guid>
     {
         [Required, RegularExpression(@"^[0-9A-Z]{7}$")]
         public string PlayerId { get; set; }

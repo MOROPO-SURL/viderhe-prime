@@ -6,13 +6,13 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SecurityController : SAPRESSC.Core.Web.Common.Controllers.BaseWebController
+    public class SecurityController : MOROPO.SAPRESSC.Core.Web.Common.Controllers.BaseWebController
     {
         private readonly Microsoft.Extensions.Options.IOptions<Options.JwtOptions> jwtOptions;
-        private readonly SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider;
-        private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
+        private readonly MOROPO.SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider;
+        private readonly MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
 
-        public SecurityController(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider, Microsoft.Extensions.Options.IOptions<Options.JwtOptions> jwtOptions, Microsoft.Extensions.Localization.IStringLocalizer<SecurityController> localizer, ILogger<SecurityController> logger) : base(localizer, logger)
+        public SecurityController(MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, MOROPO.SAPRESSC.Core.Web.Security.Providers.Facade.IIdentityProviderFacade identityProvider, Microsoft.Extensions.Options.IOptions<Options.JwtOptions> jwtOptions, Microsoft.Extensions.Localization.IStringLocalizer<SecurityController> localizer, ILogger<SecurityController> logger) : base(localizer, logger)
         {
             this.jwtOptions = jwtOptions;
             this.identityProvider = identityProvider;
@@ -30,7 +30,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                 {
                     var account = accountRepository.FindOneBy(entity => entity.Enabled && entity.ModeratorBridges.Any(bridge => bridge.Moderator.UserId == userIdentity.Name));
 
-                    if (userIdentity.HasClaim(match => match.Type.Equals(SAPRESSC.Core.Web.Security.ClaimTypes.AccountDisabled) && match.Value.Equals(true.ToString())) || account == null)
+                    if (userIdentity.HasClaim(match => match.Type.Equals(MOROPO.SAPRESSC.Core.Web.Security.Constants.ClaimTypes.AccountDisabled) && match.Value.Equals(true.ToString())) || account == null)
                     {
                         return Forbid(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
                     }
@@ -54,7 +54,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
         {
             if (ModelState.IsValid)
             {
-                var identityManager = identityProvider as SAPRESSC.Core.Web.Security.Managers.Facade.IIdentityManagerFacade;
+                var identityManager = identityProvider as MOROPO.SAPRESSC.Core.Web.Security.Managers.Facade.IIdentityManagerFacade;
 
                 if (identityManager.TryModifyPassword(User.Identity.Name, model.OldPassword, model.NewPassword))
                 {

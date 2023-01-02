@@ -5,7 +5,7 @@ using System.Linq;
 namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
 {
     [Route("[controller]")]
-    public class ExtensionsController : SAPRESSC.Core.Web.Common.Controllers.BaseWebController
+    public class ExtensionsController : MOROPO.SAPRESSC.Core.Web.Common.Controllers.BaseWebController
     {
         private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
 

@@ -1,7 +1,7 @@
-﻿@model SmartSolucionesCuba.SAPRESSC.Core.Web.Security.Models.View.LoginViewModel
+﻿@model MOROPO.SAPRESSC.Core.Web.Security.Models.View.LoginViewModel
 
 @{
-    ViewData["Title"] = GlobalViewLocalizationHelper.Localize("Login", ViewLocalizer);
+    ViewData["Title"] = "Control de Acceso";
 
     Layout = "_Layout";
 }
@@ -99,7 +99,7 @@
 
     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Contraseña" })
 
-    @if (Context.Session.Keys.Contains(SmartSolucionesCuba.SAPRESSC.Core.Web.Security.HttpSessionMapKeys.CaptchaCodeKey))
+    @if (Context.Session.Keys.Contains(MOROPO.SAPRESSC.Core.Web.Security.Constants.HttpSessionMapKeys.CaptchaCodeKey))
     {
         <div style="margin:20px 0; text-align: left;">
             @Html.LabelFor(model => model.CaptchaCode, new { @class = "control-label", style = "text-align: left;" })
@@ -115,5 +115,5 @@
         </label>
     </div>
     <button class="btn btn-primary btn-block" type="submit">Iniciar Sesión</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+    <p class="mt-5 mb-3 text-muted">&copy; 2022-@DateTime.Now.Year</p>
 }

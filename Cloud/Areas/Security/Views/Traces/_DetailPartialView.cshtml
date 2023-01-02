@@ -1,0 +1,40 @@
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
+
+@model SmartSolucionesCuba.Viderhe.Cloud.Models.View.TraceDisplayViewModel
+
+@{
+    var entityName = Model.EntityName.ToString().Split('.').Last();
+
+    var beforeData = JValue.Parse(Model.BeforeData);
+
+    var afterData = JValue.Parse(Model.AfterData);
+
+}
+
+<!-- Modal -->
+<div class="modal fade" id="descrip-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <dl>                   
+            <dt>@Html.DisplayNameFor(model => model.EntityName) =></dt>
+            <dd>@Html.DisplayName(@entityName)</dd>
+            <dt>@Html.DisplayNameFor(model => model.BeforeData) =></dt>
+            <dd><pre>@Html.Raw(JsonConvert.SerializeObject(beforeData, Formatting.Indented))</pre></dd>
+            <dt>@Html.DisplayNameFor(model => model.AfterData) =></dt>
+            <dd><pre>@Html.Raw(JsonConvert.SerializeObject(afterData, Formatting.Indented))</pre></dd>
+        </dl>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+      </div>
+    </div>
+  </div>
+</div>

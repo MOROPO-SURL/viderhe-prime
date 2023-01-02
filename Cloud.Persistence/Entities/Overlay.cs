@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class Overlay : SAPRESSC.Core.Persistence.Entities.IHabilitableEntity<System.Guid>
+    public class Overlay : MOROPO.SAPRESSC.Core.Persistence.Entities.IHabilitableEntity<System.Guid>
     {
         public Overlay()
         {

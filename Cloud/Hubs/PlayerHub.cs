@@ -6,9 +6,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Hubs
     public class PlayerHub : Hub<SignalR.Connect.Player.Clients.IPlayerClient>, SignalR.Connect.Player.Hubs.IPlayerHub
     {
         private readonly IHubContext<DashboardHub, SignalR.Connect.Dashboard.Clients.IDashboardClient> dashboardHubContext;
-        private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
+        private readonly MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
 
-        public PlayerHub(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IHubContext<DashboardHub, SignalR.Connect.Dashboard.Clients.IDashboardClient> dashboardHubContext)
+        public PlayerHub(MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IHubContext<DashboardHub, SignalR.Connect.Dashboard.Clients.IDashboardClient> dashboardHubContext)
         {
             this.dashboardHubContext = dashboardHubContext;
             this.accountRepository = accountRepository;

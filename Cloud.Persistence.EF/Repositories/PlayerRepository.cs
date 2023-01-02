@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Repositories
 {
-    public class PlayerRepository : SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Player, string>
+    public class PlayerRepository : MOROPO.SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Player, string>
     {
         public PlayerRepository(DbContext dbContext) : base(dbContext)
         {

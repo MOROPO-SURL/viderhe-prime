@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SmartSolucionesCuba.SAPRESSC.Core.Web.Security.Filters;
 using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Backend
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
-    [RequiresRoleBasePermission(SAPRESSC.Core.Web.Security.SecurityRoleCodes.ShellManager)]
-    [ChangeUserPasswordRequiredAction]
-    [CatchChangeUserPasswordRequiredException]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.RequirePermissions(MOROPO.SAPRESSC.Core.Security.Common.Web.Backend.Constants.Permission.ShellManager)]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.ChangeUserPasswordRequiredAction]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.CatchChangeUserPasswordRequiredException]
     [Route("management/[controller]")]
     [Route("{culture:regex(^[[a-z]]{{2}}(?:-[[A-Z]]{{2}})?$)}/management/[controller]")]
-    public class DashboardController : SAPRESSC.Core.Web.Common.Controllers.BaseWebController
+    public class DashboardController : MOROPO.SAPRESSC.Core.Web.Common.Controllers.BaseWebController
     {
-        private readonly System.Collections.Generic.IEnumerable<SAPRESSC.Core.Web.Backend.Providers.Facade.IManagementDashboardSectionProviderFacade> managementDashboardSectionProviders;
+        private readonly System.Collections.Generic.IEnumerable<MOROPO.SAPRESSC.Core.Web.Backend.Providers.Facade.IManagementDashboardSectionProviderFacade> managementDashboardSectionProviders;
 
-        public DashboardController(System.Collections.Generic.IEnumerable<SAPRESSC.Core.Web.Backend.Providers.Facade.IManagementDashboardSectionProviderFacade> managementDashboardSectionProviders, Microsoft.Extensions.Localization.IStringLocalizer<DashboardController> localizer, ILogger<DashboardController> logger) : base(localizer, logger)
+        public DashboardController(System.Collections.Generic.IEnumerable<MOROPO.SAPRESSC.Core.Web.Backend.Providers.Facade.IManagementDashboardSectionProviderFacade> managementDashboardSectionProviders, Microsoft.Extensions.Localization.IStringLocalizer<DashboardController> localizer, ILogger<DashboardController> logger) : base(localizer, logger)
         {
             this.managementDashboardSectionProviders = managementDashboardSectionProviders;
         }

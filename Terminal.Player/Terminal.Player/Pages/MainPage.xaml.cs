@@ -237,7 +237,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
                         targetException = targetException.InnerException;
                     }
 
-                    if (targetException is SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException && (targetException as SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException).HttpStatusCode == System.Net.HttpStatusCode.Forbidden)
+                    if (targetException is MOROPO.SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException && (targetException as MOROPO.SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException).HttpStatusCode == System.Net.HttpStatusCode.Forbidden)
                     {
                         if (!((BindingContext as Models.View.ConfigurationStepViewModel).DetailContentView is Views.ConfigurationStepPlayerRegistrationDetailView))
                         {

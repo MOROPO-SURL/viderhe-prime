@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
 {
-    public class VideoFileManager : SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IVideoFileManagerFacade
+    public class VideoFileManager : MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IVideoFileManagerFacade
     {
         private const string TEMP_DIRECTORY_NAME = "temp";
 
@@ -70,17 +70,17 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
             File.Delete(Path.Combine(mediaPathOptions.Value.VideoMediaPath, TEMP_DIRECTORY_NAME, videoId.ToString(), segment.ToString()));
         }
 
-        public string GetVideoAbsoluteFilePath(SAPRESSC.Middleware.Media.Persistence.Entities.Video video)
+        public string GetVideoAbsoluteFilePath(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Video video)
         {
             return Path.Combine(mediaPathOptions.Value.VideoMediaPath, video.Id.ToString()) + video.Extension;
         }
 
-        public byte[] GetVideoFileContent(SAPRESSC.Middleware.Media.Persistence.Entities.Video video)
+        public byte[] GetVideoFileContent(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Video video)
         {
             throw new System.NotImplementedException();
         }
 
-        public string GetVideoRelativeFilePath(SAPRESSC.Middleware.Media.Persistence.Entities.Video video)
+        public string GetVideoRelativeFilePath(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Video video)
         {
             throw new System.InvalidOperationException();
         }

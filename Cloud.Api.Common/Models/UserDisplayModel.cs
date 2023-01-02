@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class UserDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<SAPRESSC.Core.Security.Persistence.Entities.User, string>
+    public class UserDisplayModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.Entities.User, string>
     {
         public string Id { get; set; }
 
@@ -14,7 +14,7 @@
         
         public int FailAuthenticationCount { get; set; }
 
-        public void Import(SAPRESSC.Core.Security.Persistence.Entities.User entity)
+        public void Import(MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.Entities.User entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

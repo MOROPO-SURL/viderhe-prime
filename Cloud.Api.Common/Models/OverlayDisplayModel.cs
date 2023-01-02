@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class OverlayDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Overlay, System.Guid>
+    public class OverlayDisplayModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Overlay, System.Guid>
     {
         public System.Guid Id { get; set; }
 

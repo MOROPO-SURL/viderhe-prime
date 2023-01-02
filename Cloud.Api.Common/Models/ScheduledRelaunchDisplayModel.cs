@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class ScheduledRelaunchDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.ScheduledRelaunch, System.Guid>
+    public class ScheduledRelaunchDisplayModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.ScheduledRelaunch, System.Guid>
     {
         public System.Guid Id { get; set; }
 

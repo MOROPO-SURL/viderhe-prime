@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Repositories
 {
-    public class FrameRepository : SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Frame, long>
+    public class FrameRepository : MOROPO.SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Frame, long>
     {
         public FrameRepository(DbContext dbContext) : base(dbContext)
         {

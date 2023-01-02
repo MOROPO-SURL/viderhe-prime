@@ -562,6 +562,15 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
 
         private void LoadCurrentScreenplayFrames(System.Action callback = null)
         {
+            if (BindingContextPageModel.SelectedScreenplay == null)
+            {
+                BindingContextPageModel.Frames = new Support.Presentation.Models.View.FrameViewModel[] { };
+
+                callback?.Invoke();
+
+                return;
+            }
+
             BindingContextPageModel.IsBusy = true;
 
             var client = new Cloud.Api.Connect.Clients.FramesApiConnectClient(Managers.SessionManager.Instance);

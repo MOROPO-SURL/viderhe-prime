@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class VideoDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<SAPRESSC.Middleware.Media.Persistence.Entities.Video, System.Guid>
+    public class VideoDisplayModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Video, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -28,7 +28,7 @@
 
         public string AudioChannelOutput { get; set; }
 
-        public void Import(SAPRESSC.Middleware.Media.Persistence.Entities.Video entity)
+        public void Import(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Video entity)
         {
             Id = entity.Id;
             ThumbnailId = entity.ThumbnailId ?? System.Guid.Empty;

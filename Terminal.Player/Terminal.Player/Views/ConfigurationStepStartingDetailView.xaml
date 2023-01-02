@@ -2,8 +2,20 @@
 <sscxftoolkitmvvmviews:ContentView 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:commontemplatingpresentationconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Converters;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation"
     xmlns:sscxftoolkitmvvmviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Views;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Player.Views.ConfigurationStepStartingDetailView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <commontemplatingpresentationconverters:SizeToRelativeValueConverter x:Key="SizeToRelativeValueConverter" />
+            <commontemplatingpresentationconverters:ThicknessToRelativeValueConverter x:Key="ThicknessToRelativeValueConverter" />
+
+            <Thickness x:Key="FallbackOptionsLayoutMargin">0,40,0,0</Thickness>
+            <Thickness x:Key="ConfigurationStepDataIconLabelMargin">10,24,10,0</Thickness>
+            <Thickness x:Key="ConfigurationStepDataCaptionLabelMargin">0,20,0,0</Thickness>
+            <Thickness x:Key="ButtonPadding">12</Thickness>
+        </ResourceDictionary>
+    </ContentView.Resources>
     <ContentView.Content>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -20,36 +32,41 @@
             <Label
                 Grid.ColumnSpan="2" Grid.Row="0"
                 Text="Conectando con el servicio para verificar el reproductor e identificar su cuenta ..."
-                Style="{StaticResource ConfigurationStepSubtitleLabelStyle}" />
+                Style="{StaticResource ConfigurationStepSubtitleLabelStyle}"
+                FontSize="{Binding Source=23, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
             <Label 
                 Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
                 Text="&#xF48B;"
-                Style="{StaticResource ConfigurationStepDataIconLabelStyle}" />
+                Style="{StaticResource ConfigurationStepDataIconLabelStyle}"
+                Margin="{Binding Source={StaticResource ConfigurationStepDataIconLabelMargin}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}"
+                FontSize="{Binding Source=64, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
+
             <Label
                 Grid.Column="1" Grid.Row="1"
                 Text="Nombre del Servidor"
-                Style="{StaticResource ConfigurationStepDataCaptionLabelStyle}" />
+                Style="{StaticResource ConfigurationStepDataCaptionLabelStyle}"
+                Margin="{Binding Source={StaticResource ConfigurationStepDataCaptionLabelMargin}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}"
+                FontSize="{Binding Source=25, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
             <Label 
                 x:Name="ServerAddressLabel"
                 Grid.Column="1" Grid.Row="2"
-                Style="{StaticResource ConfigurationStepDataValueLabelStyle}"/>
+                Style="{StaticResource ConfigurationStepDataValueLabelStyle}"
+                FontSize="{Binding Source=25, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
             <StackLayout
                 x:Name="FallbackOptionsLayout"
                 Grid.ColumnSpan="2" Grid.Row="3"
                 IsVisible="False"
-                Margin="0,40,0,0" 
+                Margin="{Binding Source={StaticResource FallbackOptionsLayoutMargin}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}" 
                 Orientation="Horizontal">
                 <Button
-                    Padding="12"
+                    Padding="{Binding Source={StaticResource ButtonPadding}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}"
                     Text="Especificar Servidor"
-                    TextColor="White"
-                    FontSize="18"
+                    FontSize="{Binding Source=18, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}"
                     Clicked="ChangeServerButton_Clicked" />
                 <Button
-                    Padding="12"
+                    Padding="{Binding Source={StaticResource ButtonPadding}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}"
                     Text="Ajustes del Sistema"
-                    TextColor="White"
-                    FontSize="18"
+                    FontSize="{Binding Source=18, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}"
                     Clicked="OpenSystemSettingsButton_Clicked" />
             </StackLayout>
         </Grid>

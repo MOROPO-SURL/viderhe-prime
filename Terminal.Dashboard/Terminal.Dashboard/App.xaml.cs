@@ -15,7 +15,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard
             Xamarin.Forms.DependencyService.Register<Extend.Common.Presentation.Providers.Facade.IAccountInformationProviderFacade, Providers.AccountInformationProvider>();
             Xamarin.Forms.DependencyService.Register<Support.Presentation.Dashboard.Presenters.Facade.INotificationPresenterFacade, Presenters.NotificationPresenter>();
             Xamarin.Forms.DependencyService.RegisterSingleton<Support.Presentation.Providers.Facade.ICloudServerProviderFacade>(Support.Presentation.Managers.SessionMemoryManager.Instance);
-            Xamarin.Forms.DependencyService.RegisterSingleton<SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade>(sessionManager);
+            Xamarin.Forms.DependencyService.RegisterSingleton<MOROPO.SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade>(sessionManager);
             Xamarin.Forms.DependencyService.RegisterSingleton<Support.Presentation.Helpers.Facade.IExceptionHandleHelperFacade>(this);
 
             Support.Presentation.Helpers.ImageUriFactoryHelper.Instance.Initialize();
@@ -68,9 +68,9 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard
             {
                 message = "No se puede acceder al servidor. Revise su conexión de red y/o la disponibilidad del servicio.";
             }
-            else if (targetException is SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException)
+            else if (targetException is MOROPO.SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException)
             {
-                var unspectedHttpStatus = (targetException as SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException).HttpStatusCode;
+                var unspectedHttpStatus = (targetException as MOROPO.SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException).HttpStatusCode;
 
                 if (unspectedHttpStatus == System.Net.HttpStatusCode.BadRequest)
                 {

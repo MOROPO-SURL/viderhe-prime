@@ -3,16 +3,16 @@ using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
 {
-    public class IdentityManager : SAPRESSC.Core.Web.SecurityLocal.Managers.IdentityManager
+    public class IdentityManager : MOROPO.SAPRESSC.Middleware.Security.Essential.Web.Common.Managers.IdentityManager
     {
-        private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
+        private readonly MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
 
-        public IdentityManager(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<SAPRESSC.Core.Security.Persistence.Entities.User, string> userRepository, ILogger<IdentityManager> logger) : base(userRepository, logger)
+        public IdentityManager(MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.Entities.User, string> userRepository, ILogger<IdentityManager> logger) : base(userRepository, logger)
         {
             this.accountRepository = accountRepository;
         }
 
-        public override void ConfigureClaims(SAPRESSC.Core.Security.Persistence.Entities.User user, System.Collections.Generic.List<System.Security.Claims.Claim> claims)
+        public override void ConfigureClaims(MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.Entities.User user, System.Collections.Generic.List<System.Security.Claims.Claim> claims)
         {
             base.ConfigureClaims(user, claims);
 

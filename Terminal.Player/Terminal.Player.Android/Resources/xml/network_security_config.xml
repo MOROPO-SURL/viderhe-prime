@@ -2,6 +2,7 @@
 <network-security-config>
   <domain-config cleartextTrafficPermitted="true">
     <domain includeSubdomains="true">192.168.200.201</domain>
+	<domain includeSubdomains="true">192.168.200.211</domain>
     <domain includeSubdomains="true">cloud.viderhe.net</domain>
 	<domain includeSubdomains="true">moropo.cu</domain>
   </domain-config>

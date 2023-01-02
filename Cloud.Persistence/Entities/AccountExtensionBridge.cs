@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class AccountExtensionBridge : SAPRESSC.Core.Persistence.Entities.IPersistenceSignable
+    public class AccountExtensionBridge : MOROPO.SAPRESSC.Core.Persistence.Entities.IPersistenceSignable
     {
         public System.Guid AccountId { get; set; }
 

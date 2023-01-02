@@ -8,7 +8,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     [Route("api/[area]/[controller]")]
     [Area("account")]
     [ApiController]
-    public class ExtensionsController : SAPRESSC.Core.Web.Common.Controllers.BaseWebController
+    public class ExtensionsController : MOROPO.SAPRESSC.Core.Web.Common.Controllers.BaseWebController
     {
         private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
 

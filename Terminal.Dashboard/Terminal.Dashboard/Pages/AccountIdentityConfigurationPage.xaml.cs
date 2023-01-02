@@ -108,7 +108,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
                 BindingContextPageModel.SerializedOverlayContext = recoverableSerializedOverlayContext;
             }
 
-            if (BindingContextPageModel.SerializedOverlayContext == null)
+            if (BindingContextPageModel.SerializedOverlayContext == null && BindingContextPageModel.DefaultOverlay != null)
             {
                 BindingContextPageModel.SerializedOverlayContext = Providers.OverlayDefaultSerializedContextProvider.Instance.GetOverlayDefaultContextModel(BindingContextPageModel.DefaultOverlay);
             }

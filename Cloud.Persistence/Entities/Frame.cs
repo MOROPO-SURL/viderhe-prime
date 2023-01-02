@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class Frame : SAPRESSC.Core.Persistence.Entities.IEntity<long>
+    public class Frame : MOROPO.SAPRESSC.Core.Persistence.Entities.IEntity<long>
     {
         [Key]
         public long Id { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Repositories
 {
-    public class ScheduledRelaunchRepository : SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.ScheduledRelaunch, System.Guid>
+    public class ScheduledRelaunchRepository : MOROPO.SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.ScheduledRelaunch, System.Guid>
     {
         public ScheduledRelaunchRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
         {

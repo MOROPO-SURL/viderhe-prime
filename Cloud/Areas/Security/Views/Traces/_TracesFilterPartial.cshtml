@@ -1,0 +1,16 @@
+﻿@model SmartSolucionesCuba.Viderhe.Cloud.Models.View.Filter.TracesFilterViewModel
+
+@using (Html.BeginForm("filter", "traces", new { Area = "security" }, FormMethod.Post, true, null))
+{
+    <fieldset>
+        <legend>Filtro de Trazas</legend>
+        <div style="margin-bottom: 20px;">
+            @Html.Label("Id", "Nombre de Usuario", new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Author, new { @class = "form-control" })
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
+        </div>
+    </fieldset>
+}

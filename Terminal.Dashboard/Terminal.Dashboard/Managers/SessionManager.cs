@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 {
-    public sealed class SessionManager : SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade
+    public sealed class SessionManager : MOROPO.SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade
     {
         private static SessionManager instance;
 
@@ -24,7 +24,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
         public bool HasAuthenticatedIdentity => Moderator != null;
 
-        public SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper HttpClientHelper => new SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper(string.Format("{0}://{1}/api/", Support.Presentation.Managers.SessionMemoryManager.Instance.UseSSL ? "https" : "http", Support.Presentation.Managers.SessionMemoryManager.Instance.Server), GetAuthorizeHeader, null);
+        public MOROPO.SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper HttpClientHelper => new MOROPO.SAPRESSC.Core.Api.Connect.Helpers.HttpClientHelper(string.Format("{0}://{1}/api/", Support.Presentation.Managers.SessionMemoryManager.Instance.UseSSL ? "https" : "http", Support.Presentation.Managers.SessionMemoryManager.Instance.Server), GetAuthorizeHeader, null);
 
         public string AuthenticationType { get; private set; }
         public string AuthorizationToken { get; private set; }
@@ -161,12 +161,6 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
                 var model = await accountApiClient.GetCurrentAsync();
 
-                AccountId = model.Id;
-
-                var overalyDescriptor = model.DefaultOverlayId == null ? null : Support.Extend.Overlaying.Providers.OverlayDescriptorProvider.Instance.GetDescriptorById(model.DefaultOverlayId.Value);
-
-                SyncronizeRequiredAccountInformation(model.Name, Color.FromHex(model.PrimaryColor), Color.FromHex(model.SecoundaryColor), model.LogoImageId, model.HorizontalSplashImageId, model.VerticalSplashImageId, overalyDescriptor, model.SerializedOverlayContext);
-
                 AccountExtensions = model.Extensions.ToArray();
 
                 // MotoTouch does not support dynamic assembly loading
@@ -231,6 +225,12 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
                         }
                     }
                 }
+
+                AccountId = model.Id;
+
+                var overalyDescriptor = model.DefaultOverlayId == null ? null : Support.Extend.Overlaying.Providers.OverlayDescriptorProvider.Instance.GetDescriptorById(model.DefaultOverlayId.Value);
+
+                SyncronizeRequiredAccountInformation(model.Name, Color.FromHex(model.PrimaryColor), Color.FromHex(model.SecoundaryColor), model.LogoImageId, model.HorizontalSplashImageId, model.VerticalSplashImageId, overalyDescriptor, model.SerializedOverlayContext);
             }
             catch (System.Exception e)
             {
@@ -241,7 +241,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
             var ffImageLoadingHttpClient = new System.Net.Http.HttpClient();
 
-            ffImageLoadingHttpClient.DefaultRequestHeaders.Add(AuthenticationType, AuthorizationToken);
+            ffImageLoadingHttpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(AuthenticationType, AuthorizationToken);
 
             FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
             {

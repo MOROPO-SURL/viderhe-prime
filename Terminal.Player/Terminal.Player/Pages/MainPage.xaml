@@ -4,14 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:renderedviews="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Player.Views.Rendered"
-    xmlns:supportpresentationhelpers="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Helpers;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation"
-    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:commontemplatingpresentationconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Converters;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Player.Pages.MainPage"
     ios:Page.PrefersStatusBarHidden="True">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <sscxftoolkitpresentationconverters:FractionConverter x:Key="FractionConverter" />
+            <commontemplatingpresentationconverters:SizeToRelativeValueConverter x:Key="SizeToRelativeValueConverter" />
+            <commontemplatingpresentationconverters:ThicknessToRelativeValueConverter x:Key="ThicknessToRelativeValueConverter" />
+
+            <Thickness x:Key="CurrentTaskProgressBarMargin">0,30</Thickness>
+            <Thickness x:Key="PageLayoutMargin">80</Thickness>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -26,7 +29,7 @@
                         Offset="1.0" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <Grid Margin="{Binding Source={x:RelativeSource AncestorType={x:Type ContentPage}}, Path=Width, Converter={StaticResource FractionConverter}, ConverterParameter=20}">
+            <Grid Margin="{Binding Source={StaticResource PageLayoutMargin}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -43,14 +46,14 @@
                     Opacity="0"
                     Text="{Binding Path=Title}"
                     TextColor="White"
-                    FontSize="{Static supportpresentationhelpers:StaticResourceProvisioningHelper.LargeTitleTextFontSize}" />
+                    FontSize="{Binding Source=48, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
                 <renderedviews:IndeterminableProgressBarView
                     x:Name="CurrentTaskProgressBar"
                     Grid.ColumnSpan="2" Grid.Row="1"
                     Opacity="0"
-                    Margin="0,30"
+                    Margin="{Binding Source={StaticResource CurrentTaskProgressBarMargin}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}"
                     ProgressColor="White"
-                    HeightRequest="20" />
+                    HeightRequest="{Binding Source=20, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
                 <ContentView 
                     x:Name="StepDetailContentView"
                     Content="{Binding Path=DetailContentView}"
@@ -62,7 +65,7 @@
                     Opacity="0"
                     Spacing="0">
                     <ffimageloadingsvg:SvgCachedImage
-                        WidthRequest="180"
+                        WidthRequest="{Binding Source=180, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}"
                         Source="resource://SmartSolucionesCuba.Viderhe.Terminal.Player.Assets.Images.viderhe-identity-high-contrast-light.svg" />
                 </StackLayout>
                 <!--<StackLayout 

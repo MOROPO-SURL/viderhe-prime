@@ -1,8 +1,8 @@
-﻿using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
+﻿using MOROPO.SAPRESSC.Middleware.Media.Web.Common.Extensions;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
 {
-    public class ImageFileManager : SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade
+    public class ImageFileManager : MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade.IImageFileManagerFacade
     {
         private readonly Microsoft.Extensions.Options.IOptions<Options.MediaPathOptions> mediaPathOptions;
 
@@ -11,17 +11,17 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
             this.mediaPathOptions = mediaPathOptions;
         }
 
-        public void DeleteImageFile(SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
+        public void DeleteImageFile(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
         {
             System.IO.File.Delete(GetImageAbsoluteFilePath(image));
         }
 
-        public string GetImageAbsoluteFilePath(SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
+        public string GetImageAbsoluteFilePath(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
         {
             return System.IO.Path.Combine(mediaPathOptions.Value.ImageMediaPath, string.Format("{0}.{1}", image.Id, image.ContentType.ContentTypeToExtension()));
         }
 
-        public byte[] GetImageFileContent(SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
+        public byte[] GetImageFileContent(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
         {
             byte[] result;
 
@@ -37,14 +37,14 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Managers
             return result;
         }
 
-        public string GetImageRelativeFilePath(SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
+        public string GetImageRelativeFilePath(MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image image)
         {
             return null;
         }
 
         public void SaveImageFileContent(System.Guid imageId, byte[] content, string contentType)
         {
-            System.IO.File.WriteAllBytes(GetImageAbsoluteFilePath(new SAPRESSC.Middleware.Media.Persistence.Entities.Image { Id = imageId, ContentType = contentType }), content);
+            System.IO.File.WriteAllBytes(GetImageAbsoluteFilePath(new MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image { Id = imageId, ContentType = contentType }), content);
         }
     }
 }

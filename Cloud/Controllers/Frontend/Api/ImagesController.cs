@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade;
+using MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models;
 using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
 using System.Linq;
@@ -11,17 +11,17 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     [Route("api/[area]/[controller]")]
     [Area("account")]
     [ApiController]
-    [SAPRESSC.Core.Web.Security.Filters.ChangeUserPasswordRequiredAction]
-    [SAPRESSC.Core.Web.Security.Filters.CatchChangeUserPasswordRequiredException]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.ChangeUserPasswordRequiredAction]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.CatchChangeUserPasswordRequiredException]
     public class ImagesController : Controller
     {
         private readonly IImageFileManagerFacade imageFileManager;
         private readonly IThumbnailFileManagerFacade thumbnailFileManager;
         private readonly Persistence.EF.ApplicationDbContext dbContext;
         private readonly Microsoft.Extensions.Options.IOptions<Options.MediaThumbnailResizeOptions> mediaThumbnailResizeOptions;
-        private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<SAPRESSC.Middleware.Media.Persistence.Entities.Image, System.Guid> imageRepository;
+        private readonly MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image, System.Guid> imageRepository;
 
-        public ImagesController(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<SAPRESSC.Middleware.Media.Persistence.Entities.Image, System.Guid> imageRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Persistence.EF.ApplicationDbContext dbContext, Microsoft.Extensions.Options.IOptions<Options.MediaThumbnailResizeOptions> mediaThumbnailResizeOptions)
+        public ImagesController(MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image, System.Guid> imageRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Persistence.EF.ApplicationDbContext dbContext, Microsoft.Extensions.Options.IOptions<Options.MediaThumbnailResizeOptions> mediaThumbnailResizeOptions)
         {
             this.imageFileManager = imageFileManager;
             this.thumbnailFileManager = thumbnailFileManager;
@@ -32,7 +32,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 
         [HttpGet]
         [HttpGet("page/{page}")]
-        public ActionResult<SAPRESSC.Core.Common.Models.PaginationModel<ImageDisplayModel>> GetPage(int page = 1)
+        public ActionResult<MOROPO.SAPRESSC.Core.Common.Models.PaginationModel<ImageDisplayModel>> GetPage(int page = 1)
         {
             var accountId = System.Guid.Parse(User.Claims.First(claim => claim.Type == Security.Authorization.Claims.ACCOUNT_CLAIM).Value);
 
@@ -53,7 +53,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                 page = 1;
             }
 
-            return Ok(new SAPRESSC.Core.Common.Models.PaginationModel<ImageDisplayModel>
+            return Ok(new MOROPO.SAPRESSC.Core.Common.Models.PaginationModel<ImageDisplayModel>
             {
                 List = account.ImageBridges.Select(bridge => bridge.Image).OrderByDescending(e => e.CreateAt).Skip((page - 1) * limit).Take(limit).Select(entity =>
                 {
@@ -87,7 +87,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
             {
                 using (var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData))
                 {
-                    var image = new SAPRESSC.Middleware.Media.Persistence.Entities.Image
+                    var image = new MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image
                     {
                         ContentType = file.ContentType,
                         Length = file.Length,
@@ -115,7 +115,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                         {
                             var thumbnailSkData = thumbnailSkImage.Encode(SkiaSharp.SKEncodedImageFormat.Png, 75);
 
-                            image.Thumbnail = new SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail
+                            image.Thumbnail = new MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Thumbnail
                             {
                                 ContentType = "image/png",
                                 Length = thumbnailSkData.Size,

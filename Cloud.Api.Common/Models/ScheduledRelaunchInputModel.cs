@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class ScheduledRelaunchInputModel : SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.ScheduledRelaunch, System.Guid>
+    public class ScheduledRelaunchInputModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.ScheduledRelaunch, System.Guid>
     {
         public System.Guid Id { get; set; }
 

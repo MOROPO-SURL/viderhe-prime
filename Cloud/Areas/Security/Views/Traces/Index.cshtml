@@ -1,0 +1,302 @@
+﻿@model MOROPO.SAPRESSC.Core.Web.Frontend.Models.View.PaginationViewModel<MOROPO.SAPRESSC.Core.Persistence.EF.Entities.Trace, long, SmartSolucionesCuba.Viderhe.Cloud.Models.View.TraceDisplayViewModel>
+
+@{
+    ViewData["Title"] = "Administración de Trazas";
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"mdi mdi-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = Url.Action("index", "dashboard", new { Area = string.Empty })
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+<div class="row mb-3">
+    <div class="col-sm-4">
+        @await Html.PartialAsync("_TracesFilterPartial", Model.Filter)
+    </div>
+</div>
+
+@if (Model.MaxPageCount > 0)
+{
+    if (Model.HasNext || Model.HasPrevious)
+    {
+        var paginationStart = (Model.Page - 1) * Model.Limit + 1;
+        var paginationEnd = paginationStart - 1 + Model.List.Count;
+
+        <div class="text-center">
+            <ul class="pagination justify-content-center" style="margin: 0;">
+                @if (Model.HasPrevious)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", Model.Page - 1}})">&laquo;</a></li>
+                }
+                else
+                {
+                    <li class="disabled page-item"><a class="page-link" href="#">&laquo;</a></li>
+                }
+
+                @if (Model.MaxPageCount > 5)
+                {
+                    if (Model.Page > 3)
+                    {
+                        if (Model.MaxPageCount - Model.Page < 3)
+                        {
+                            for (var i = Model.MaxPageCount - 4; i <= Model.MaxPageCount; i++)
+                            {
+                                if (i == Model.Page)
+                                {
+                                    <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (var i = Model.Page - 2; i <= Model.Page + 2; i++)
+                            {
+                                if (i == Model.Page)
+                                {
+                                    <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (var i = 1; i <= 5; i++)
+                        {
+                            if (i == Model.Page)
+                            {
+                                <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (var i = 1; i <= Model.MaxPageCount; i++)
+                    {
+                        if (i == Model.Page)
+                        {
+                            <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                        }
+                    }
+                }
+
+                @if (Model.HasNext)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", Model.Page + 1}})">&raquo;</a></li>
+                }
+                else
+                {
+                    <li class="disabled page-item"><a class="page-link" href="#">&raquo;</a></li>
+                }
+            </ul>           
+            <div class="text-info" style="margin-top: 10px; margin-bottom: 20px;">
+                <span style="font-weight: 600;">Página @Model.Page</span>: del @paginationStart al @paginationEnd, <span style="font-weight: 600;">Total de páginas</span>: @Model.MaxPageCount
+            </div>
+        </div>
+    }
+
+     <div>
+        @foreach (var item in Model.List)
+        {
+            <div class="card border-primary mb-2 d-block d-sm-none">
+                <div class="card-body text-justify">
+                    <div class="mb-2">
+                        <span class="font-weight-bold">
+                            Autor:
+                        </span>
+                        @item.Author
+                    </div>
+                    <div class="mb-2">
+                        <span class="font-weight-bold">
+                            Registro:
+                        </span>
+                        @item.Registered
+                    </div>
+                    <div class="mb-2">
+                        <span class="font-weight-bold">
+                            Tipo:
+                        </span>
+                        @item.Type
+                    </div>
+                    <div>
+                        <div class="btn-group btn-group-sm float-right">
+                            <button class="btn btn-light" title="@Model" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-file-eye-outline  "></span><span>Detail</span></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            await Html.RenderPartialAsync("_DetailPartialView", @item);
+        }
+    </div>
+
+    <div class="d-none d-sm-block" style="border: 1px solid #DDD; border-radius: 4px;">
+        <table class="table" style="margin: 0;">
+            <thead>
+                <tr>
+                    <th>Autor</th>
+                    <th>Registro</th>
+                    <th>Tipo</th>
+                    <th>Entidad</th>
+                    <th style="width: 1px;">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.List)
+                {
+                    var entityName = item.EntityName.ToString().Split('.').Last();
+                    <tr>
+                        <td style="vertical-align: middle;">@item.Author</td>
+                        <td style="vertical-align: middle;">@item.Registered.ToString()</td>
+                        <td style="vertical-align: middle;">@item.Type.ToString()</td>
+                        <td style="vertical-align: middle;">@entityName</td>
+                        <td style="vertical-align: middle;">
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-light" title="@Model" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-file-eye-outline  "></span><span>Detail</span></button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    if (Model.HasNext || Model.HasPrevious)
+    {
+        var paginationStart = (Model.Page - 1) * Model.Limit + 1;
+        var paginationEnd = Model.List.Count;
+
+        <div class="text-center" style="margin-top: 20px;">
+            <div class="text-info" style="margin-bottom: 10px; margin-top: 20px;">
+                <span style="font-weight: 600;">Página @Model.Page</span>: del @paginationStart al @paginationEnd, <span style="font-weight: 600;">Total de páginas</span>: @Model.MaxPageCount
+            </div>            
+                <ul class="pagination justify-content-center" style="margin: 0;">
+                @if (Model.HasPrevious)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", Model.Page - 1}})">&laquo;</a></li>
+                }
+                else
+                {
+                        <li class="disabled page-item"><a class="page-link" href="#">&laquo;</a></li>
+                }
+
+                @if (Model.MaxPageCount > 5)
+                {
+                    if (Model.Page > 3)
+                    {
+                        if (Model.MaxPageCount - Model.Page < 3)
+                        {
+                            for (var i = Model.MaxPageCount - 4; i <= Model.MaxPageCount; i++)
+                            {
+                                if (i == Model.Page)
+                                {
+                                        <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                }
+                                else
+                                {
+                                        <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (var i = Model.Page - 2; i <= Model.Page + 2; i++)
+                            {
+                                if (i == Model.Page)
+                                {
+                                    <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (var i = 1; i <= 5; i++)
+                        {
+                            if (i == Model.Page)
+                            {
+                                <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (var i = 1; i <= Model.MaxPageCount; i++)
+                    {
+                        if (i == Model.Page)
+                        {
+                            <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", i}})">@i</a></li>
+                        }
+                    }
+                }
+
+                @if (Model.HasNext)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues) {{"sheet", Model.Page + 1}})">&raquo;</a></li>
+                }
+                else
+                {
+                    <li class="disabled page-item"><a class="page-link" href="#">&raquo;</a></li>
+                }
+            </ul>            
+        </div>
+    }
+}
+else
+{
+    <div style="border: 1px solid #DDD; border-radius: 4px;">
+        <table class="table" style="margin: 0;">
+            <thead>
+                <tr>
+                    <th>Autor</th>
+                    <th>Registro</th>
+                    <th>Tipo</th>
+                    <th style="width: 184px;">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6"><p style="margin: 0 5px;" class="text-muted">Sin elementos que mostrar</p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}

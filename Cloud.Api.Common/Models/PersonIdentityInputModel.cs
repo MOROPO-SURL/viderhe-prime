@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class PersonIdentityInputModel : SAPRESSC.Core.Persistence.Models.IEntityInputModel<SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity, System.Guid>
+    public class PersonIdentityInputModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityInputModel<MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -9,11 +9,11 @@
 
         public string LastName { get; set; }
 
-        public System.DateTime BornDate { get; set; }
+        public System.DateTime? BornDate { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
 
         public string Alias { get; set; }
 
@@ -21,21 +21,21 @@
 
         public string About { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity Export()
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity Export()
         {
-            var entity = new SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity();
+            var entity = new MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity();
 
             Mergue(entity);
 
             return entity;
         }
 
-        public void Import(SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity entity)
+        public void Import(MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity entity)
         {
             throw new System.InvalidOperationException();
         }
 
-        public void Mergue(SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity entity)
+        public void Mergue(MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity entity)
         {
             entity.Name = Name;
             entity.LastName = LastName;

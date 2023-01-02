@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Repositories
 {
-    public class ModeratorRepository : SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Moderator, System.Guid>
+    public class ModeratorRepository : MOROPO.SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Moderator, System.Guid>
     {
         public ModeratorRepository(DbContext dbContext) : base(dbContext)
         {

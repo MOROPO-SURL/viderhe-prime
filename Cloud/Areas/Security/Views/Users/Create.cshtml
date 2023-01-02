@@ -1,6 +1,6 @@
-﻿@using SmartSolucionesCuba.SAPRESSC.Core.Common.Models.View;
+﻿@using MOROPO.SAPRESSC.Core.Common.Models.View;
 
-@model SmartSolucionesCuba.SAPRESSC.Core.Web.SecurityLocal.Models.View.UserWithPasswordInputViewModel
+@model MOROPO.SAPRESSC.Middleware.Security.Essential.Web.Backend.Models.View.UserWithPasswordInputViewModel
 
 @{
     ViewData["Title"] = "Agregar Usuario";
@@ -10,7 +10,7 @@
         new BreadcrumbViewModel
         {
             Caption = "<span class=\"mdi mdi-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
-            Url = "/"
+            Url = Url.Action("index", "dashboard", new { Area = string.Empty })
         },
         new BreadcrumbViewModel
         {
@@ -26,16 +26,16 @@
     Layout = "_BackendLayout";
 }
 
-@using (Html.BeginForm("create", "users", new { Area = "security" }, FormMethod.Post, true, null))
+@using (Html.BeginForm("create", "users", new { Area = "security" }, FormMethod.Post, true, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
 
-    <div class="card" style="margin-bottom: 20px;">
-        <div class="card-header"><h4>@ViewData["Title"]</h4></div>
+    <div class="card mb-3">
+        <div class="card-header"><h4 class="mb-0">@ViewData["Title"]</h4></div>
 
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6" style="margin-bottom: 20px;">
+                <div class="col-md-6 mb-3">
                     @Html.LabelFor(model => model.Id, new { @class = "control-label" })
                     @Html.TextBoxFor(model => model.Id, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Id, null, new { @class = "text-danger" })
@@ -43,13 +43,13 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6" style="margin-bottom: 20px;">
+                <div class="col-md-6 mb-3">
                     @Html.LabelFor(model => model.Password, new { @class = "control-label" })
                     @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label" })
                     @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
@@ -57,7 +57,7 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-4 style="margin-bottom: 20px;"">
+                <div class="col-sm-4 mb-3">
                     <div class="checkbox">
                         <label>
                             @Html.EditorFor(model => model.Enabled) Habilitado
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4" style="margin-bottom: 20px;">
+                <div class="col-sm-4 mb-3">
                     <div class="checkbox">
                         <label>
                             @Html.EditorFor(model => model.PasswordChangeRequired) Debe cambiar la contraseña?
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4" style="margin-bottom: 20px;">
+                <div class="col-sm-4 mb-3">
                     <div class="checkbox">
                         <label>
                             @Html.EditorFor(model => model.HasFullAccess) Es super usuario?
@@ -85,26 +85,28 @@
                 </div>
             </div>
 
-            <fieldset style="margin-bottom: 20px;">
-                <legend>@Html.LabelFor(model => model.SelectableGroups)</legend>
-                <div class="row">
-                @if (Model.SelectableGroups != null && Model.SelectableGroups.Count() > 0)
+            <fieldset>
+                <legend class="border-bottom h4">Roles</legend>
+                @if (Model.SelectableRoles != null && Model.SelectableRoles.Count > 0)
                 {
-                    for (int i = 0; i < Model.SelectableGroups.Count(); i++)
+                    <div class="row">
+                    @for (int i = 0; i < Model.SelectableRoles.Count; i++)
                     {
-                        @Html.EditorFor(subModel => subModel.SelectableGroups[i], "SelectionDescriptedGuidIDItemInputViewModel");
+                        <div class="col-md-6">
+                            @Html.EditorFor(subModel => subModel.SelectableRoles[i], "SelectionDescriptedGuidIDItemInputViewModel")
+                        </div>
                     }
+                    </div>
                 }
                 else
                 {
-                    <div class="editor-field col-md-12">Sin elementos que mostrar.</div>
+                    <div>Sin elementos que mostrar.</div>
                 }
-                </div>
             </fieldset>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Crear</button>
-            <a class="btn btn-default" href="@Url.Action("index")">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a class="btn btn-light" href="@Url.Action("index")">Cancelar</a>
         </div>
     </div>
 }

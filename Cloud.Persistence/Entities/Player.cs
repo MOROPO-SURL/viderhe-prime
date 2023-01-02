@@ -1,4 +1,4 @@
-﻿using SmartSolucionesCuba.SAPRESSC.Core.Persistence.Entities;
+﻿using MOROPO.SAPRESSC.Core.Persistence.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities

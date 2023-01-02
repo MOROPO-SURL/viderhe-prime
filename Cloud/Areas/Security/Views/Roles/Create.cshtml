@@ -1,0 +1,93 @@
+﻿@model MOROPO.SAPRESSC.Core.Security.Common.Web.Backend.Models.View.RoleInputViewModel
+
+@{
+    ViewData["Title"] = "Agregar Rol";
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = Url.Action("index", "dashboard", new { Area = string.Empty })
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = "Administración de Roles",
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+@using (Html.BeginForm("create", "roles", new { Area = "security" }, FormMethod.Post, true, null))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="card" style="margin-bottom: 20px;">
+        <div class="card-header"><h4 class="mb-0">@ViewData["Title"]</h4></div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Description, 4, 0, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+            </div>
+
+            <div class="card">
+                <div class="card-header">Permisos</div>
+
+                <div class="card-body">
+                    @if (Model.GroupedSelectablePermissions.Length > 0 || Model.UngroupedSelectablePermissions.Length > 0)
+                    {
+                        var index = 0;
+
+                        <div class="row">
+                            @foreach (var item in Model.UngroupedSelectablePermissions)
+                            {
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => item, "SelectionDescriptedIntIDItemInputViewModel", string.Format("UngroupedSelectablePermissions[{0}]", index++))
+                                </div>
+                            }
+                        </div>
+
+                        foreach (var group in Model.GroupedSelectablePermissions)
+                        {
+                            <fieldset>
+                                <legend class="border-bottom">@GlobalViewLocalizationHelper.Localize(group.Key)</legend>
+                                <div class="row">
+                                    @foreach (var item in group.Value)
+                                    {
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => item, "SelectionDescriptedIntIDItemInputViewModel", string.Format("UngroupedSelectablePermissions[{0}]", index++))
+                                        </div>
+                                    }
+                                </div>
+                            </fieldset>
+                        }
+                    }
+                    else
+                    {
+                        <div>Sin elementos que mostrar.</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a class="btn btn-light" href="@Url.Action("index")">Cancelar</a>
+        </div>
+    </div>
+}

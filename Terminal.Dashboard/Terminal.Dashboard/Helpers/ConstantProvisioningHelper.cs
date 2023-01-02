@@ -24,7 +24,7 @@
 
         public string FallbackUserProfileImageUrl => string.Format("{0}://{1}/img/default-person-picture.jpg", Support.Presentation.Managers.SessionMemoryManager.Instance.UseSSL ? "https" : "http", Support.Presentation.Managers.SessionMemoryManager.Instance.Host);
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex[] Sex_All => (SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex[])System.Enum.GetValues(typeof(SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex));
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex[] Sex_All => (MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex[])System.Enum.GetValues(typeof(MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex));
 
         //public SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus[] CivilStatus_All => (SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus[])System.Enum.GetValues(typeof(SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus));
     }

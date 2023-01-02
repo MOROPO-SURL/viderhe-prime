@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class ScreenplayInputModel : SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Screenplay, System.Guid>
+    public class ScreenplayInputModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Screenplay, System.Guid>
     {
         public System.Guid Id { get; set; }
 

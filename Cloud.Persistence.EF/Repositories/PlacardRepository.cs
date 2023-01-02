@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF.Repositories
 {
-    public class PlacardRepository : SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Placard, System.Guid>
+    public class PlacardRepository : MOROPO.SAPRESSC.Core.Persistence.EF.Repositories.AbstractEntityRepository<Entities.Placard, System.Guid>
     {
         public PlacardRepository(DbContext dbContext) : base(dbContext)
         {

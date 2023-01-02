@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class ScheduledRelaunch : SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
+    public class ScheduledRelaunch : MOROPO.SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }

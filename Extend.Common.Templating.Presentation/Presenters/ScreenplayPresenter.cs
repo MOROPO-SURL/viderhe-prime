@@ -144,7 +144,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
         {
             if (outgoingFrameView != null)
             {
-                container.Children.Remove(outgoingFrameView);
+                container?.Children.Remove(outgoingFrameView);
             }
 
             incomingFrameView.OnShowInTransitionComplete();

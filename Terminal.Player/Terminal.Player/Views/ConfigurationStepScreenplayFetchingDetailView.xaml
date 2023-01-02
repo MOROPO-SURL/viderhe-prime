@@ -3,8 +3,18 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:managers="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Player.Managers"
+    xmlns:commontemplatingpresentationconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Converters;assembly=SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation"
     xmlns:sscxftoolkitmvvmviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Views;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Player.Views.ConfigurationStepScreenplayFetchingDetailView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <commontemplatingpresentationconverters:SizeToRelativeValueConverter x:Key="SizeToRelativeValueConverter" />
+            <commontemplatingpresentationconverters:ThicknessToRelativeValueConverter x:Key="ThicknessToRelativeValueConverter" />
+
+            <Thickness x:Key="ConfigurationStepDataIconLabelMargin">10,24,10,0</Thickness>
+            <Thickness x:Key="ConfigurationStepDataCaptionLabelMargin">0,20,0,0</Thickness>
+        </ResourceDictionary>
+    </ContentView.Resources>
     <ContentView.Content>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -20,19 +30,25 @@
             <Label
                 Grid.ColumnSpan="2" Grid.Row="0"
                 Text="Solicitando configuración y guion de reproducción para comenzar ..."
-                Style="{StaticResource ConfigurationStepSubtitleLabelStyle}" />
+                Style="{StaticResource ConfigurationStepSubtitleLabelStyle}"
+                FontSize="{Binding Source=23, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
             <Label 
                 Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
                 Text="&#xF0D7;"
-                Style="{StaticResource ConfigurationStepDataIconLabelStyle}" />
+                Style="{StaticResource ConfigurationStepDataIconLabelStyle}"
+                Margin="{Binding Source={StaticResource ConfigurationStepDataIconLabelMargin}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}"
+                FontSize="{Binding Source=64, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
             <Label
                 Grid.Column="1" Grid.Row="1"
                 Text="Nombre de la Cuenta"
-                Style="{StaticResource ConfigurationStepDataCaptionLabelStyle}" />
+                Style="{StaticResource ConfigurationStepDataCaptionLabelStyle}"
+                Margin="{Binding Source={StaticResource ConfigurationStepDataCaptionLabelMargin}, Converter={StaticResource ThicknessToRelativeValueConverter}, Mode=OneTime}"
+                FontSize="{Binding Source=25, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
             <Label 
                 Grid.Column="1" Grid.Row="2"
                 Text="{Binding Source={x:Static managers:SessionManager.Instance}, Path=Account.Name}" 
-                Style="{StaticResource ConfigurationStepDataValueLabelStyle}"/>
+                Style="{StaticResource ConfigurationStepDataValueLabelStyle}"
+                FontSize="{Binding Source=25, Converter={StaticResource SizeToRelativeValueConverter}, Mode=OneTime}" />
         </Grid>
     </ContentView.Content>
 </sscxftoolkitmvvmviews:ContentView>

@@ -26,4 +26,17 @@
     Layout = "_UserAuthenticatedLayout";
 }
 
-<a class="btn btn-default" href="@Url.Action("index")">Cancelar</a>
+<h3>Modificar Perfil de Usuario</h3>
+<hr class="mb-4" />
+
+<form asp-action="edit">
+    <div class="row">            
+        <div class="col-md-6 mb-3">
+            <label class="control-label">@GlobalViewLocalizationHelper.Localize("Login")</label>
+            <input type="text" readonly="readonly" value="@User.Identity.Name" class="form-control" />
+        </div>
+    </div>
+    <hr />
+    <button type="submit" class="btn btn-primary">Modificar</button>
+    <a class="btn btn-light" asp-action="index">Cancelar</a>
+</form>

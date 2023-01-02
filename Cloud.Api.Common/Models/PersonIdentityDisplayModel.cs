@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class PersonIdentityDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity, System.Guid>
+    public class PersonIdentityDisplayModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -8,11 +8,11 @@
 
         public string LastName { get; set; }
 
-        public System.DateTime BornDate { get; set; }
+        public System.DateTime? BornDate { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Enumerations.Sex Sex { get; set; }
 
         public string Alias { get; set; }
 
@@ -20,7 +20,7 @@
 
         public ImageDisplayModel Image { get; set; }
 
-        public void Import(SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity entity)
+        public void Import(MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity entity)
         {
             Id = entity.Id;
             Name = entity.Name;

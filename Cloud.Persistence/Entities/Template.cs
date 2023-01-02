@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class Template : SAPRESSC.Core.Persistence.Entities.IHabilitableEntity<System.Guid>
+    public class Template : MOROPO.SAPRESSC.Core.Persistence.Entities.IHabilitableEntity<System.Guid>
     {
         public Template()
         {

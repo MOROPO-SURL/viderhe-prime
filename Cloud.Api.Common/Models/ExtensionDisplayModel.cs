@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class ExtensionDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Extension, System.Guid>
+    public class ExtensionDisplayModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Extension, System.Guid>
     {
         public System.Guid Id { get; set; }
 

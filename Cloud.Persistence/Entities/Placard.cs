@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class Placard : SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
+    public class Placard : MOROPO.SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
     {
         [Key]
         public System.Guid Id { get; set; }

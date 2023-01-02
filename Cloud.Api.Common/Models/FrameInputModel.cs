@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class FrameInputModel : SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Frame, long>
+    public class FrameInputModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Frame, long>
     {
         public long Id { get; set; }
 

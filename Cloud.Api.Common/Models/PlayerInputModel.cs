@@ -2,7 +2,7 @@
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class PlayerInputModel : SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Player, string>
+    public class PlayerInputModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Player, string>
     {
         [Required, RegularExpression(@"^[0-9A-Z]{7}$")]
         public string Id { get; set; }

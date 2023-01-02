@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 {
-    public class ModeratorInputModel : SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Moderator, System.Guid>
+    public class ModeratorInputModel : MOROPO.SAPRESSC.Core.Persistence.Models.IEntityInputModel<Persistence.Entities.Moderator, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -14,13 +14,13 @@
         {
             var entity = new Persistence.Entities.Moderator
             {
-                User = new SAPRESSC.Core.Security.Persistence.Entities.User
+                User = new MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.Entities.User
                 {
                     Id = User.Id,
                     FailAuthenticationCount = 0,
                     HasFullAccess = false
                 },
-                Identity = new SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity()
+                Identity = new MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity()
             };
 
             entity.UserId = entity.User.Id;

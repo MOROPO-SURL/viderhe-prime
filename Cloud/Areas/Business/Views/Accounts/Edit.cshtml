@@ -100,7 +100,7 @@
 
     @Html.HiddenFor(model => model.Id)
 
-    <div class="card" style="margin-bottom: 20px;">
+    <div class="card mb-3">
         <div class="card-header">
             <h4>Modificar Cuenta</h4>
             <ul class="nav nav-tabs card-header-tabs">
@@ -118,12 +118,12 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-md-9" style="margin-bottom: 20px;">
+                <div class="col-md-9 mb-3">
                     @Html.LabelFor(model => model.Name, new { @class = "control-label" })
                     @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
                 </div>
-                <div class="col-md-3" style="margin-bottom: 20px;">
+                <div class="col-md-3 mb-3">
                     <div class="checkbox">
                         <label>
                             @Html.EditorFor(model => model.Enabled) Habilitada
@@ -132,7 +132,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 col-sm-6" style="margin-bottom: 20px;">
+                <div class="col-md-3 col-sm-6 mb-3">
                     @Html.HiddenFor(model => model.LogoImageId)
                     <div>
                         @Html.LabelFor(model => model.LogoImageFile, new { @class = "control-label h5 mt-2" })
@@ -145,12 +145,12 @@
                     <div><img src="@Url.Action("image", "default", new { Area = "media", key = Model.LogoImageId })" class="img-thumbnail" id="LogoImageFilePreview" style="margin-bottom: 10px;" /></div>
                     <div>@Html.ValidationMessageFor(model => model.LogoImageFile, null, new { @class = "text-danger" })</div>
                 </div>
-                <div class="col-md-3 col-sm-6" style="margin-bottom: 20px;">
+                <div class="col-md-3 col-sm-6 mb-3">
                     @Html.LabelFor(model => model.MaxPlayerCount, new { @class = "control-label" })
                     @Html.TextBoxFor(model => model.MaxPlayerCount, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MaxPlayerCount, null, new { @class = "text-danger" })
                 </div>
-                <div class="col-md-3 col-sm-6" style="margin-bottom: 20px;">
+                <div class="col-md-3 col-sm-6 mb-3">
                     @Html.LabelFor(model => model.PrimaryColor, new { @class = "control-label" })
                     <div class="input-group colorpicker-element">
                         @Html.TextBoxFor(model => model.PrimaryColor, new { @class = "form-control", @readonly = "readonly" })
@@ -160,7 +160,7 @@
                     </div>
                     @Html.ValidationMessageFor(model => model.PrimaryColor, null, new { @class = "text-danger" })
                 </div>
-                <div class="col-md-3 col-sm-6" style="margin-bottom: 20px;">
+                <div class="col-md-3 col-sm-6 mb-3">
                     @Html.LabelFor(model => model.SecoundaryColor, new { @class = "control-label" })
                     <div class="input-group colorpicker-element">
                         @Html.TextBoxFor(model => model.SecoundaryColor, new { @class = "form-control", @readonly = "readonly" })
@@ -172,7 +172,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 col-sm-4" style="margin-bottom: 20px;">
+                <div class="col-md-4 col-sm-4 mb-3">
                     @Html.HiddenFor(model => model.VerticalSplashImageId)
                     <div>
                         @Html.LabelFor(model => model.VerticalSplashImageFile, new { @class = "control-label h5 mt-2" })
@@ -185,7 +185,7 @@
                     <div><img src="@Url.Action("image", "default", new { Area = "media", key = Model.VerticalSplashImageId })" class="img-thumbnail" id="VerticalSplashImageFilePreview" style="margin-bottom: 10px;" /></div>
                     <div>@Html.ValidationMessageFor(model => model.VerticalSplashImageFile, null, new { @class = "text-danger" })</div>
                 </div>
-                <div class="col-md-8 col-sm-8" style="margin-bottom: 20px;">
+                <div class="col-md-8 col-sm-8">
                     @Html.HiddenFor(model => model.HorizontalSplashImageId)
                     <div>
                         @Html.LabelFor(model => model.HorizontalSplashImageFile, new { @class = "control-label h5 mt-2" })

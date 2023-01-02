@@ -1,18 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartSolucionesCuba.SAPRESSC.Core.Security.Persistence.Entities;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Identity.Persistence.Entities;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Media.Persistence.Entities;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Region.Persistence.Entities;
+using MOROPO.SAPRESSC.Core.Security.Common.Persistence.Entities;
+using MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities;
+using MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities;
+using MOROPO.SAPRESSC.Middleware.Region.Persistence.Entities;
+using MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.Entities;
 using SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF
 {
     public class ApplicationDbContext :
-        SAPRESSC.Core.Persistence.EF.Context.AbstractTraceableDbContext,
-        SAPRESSC.Core.Security.Persistence.EF.Context.ISecurityPersistenceModuleDbContext,
-        SAPRESSC.Middleware.Identity.Persistence.EF.Context.IIdentityMiddlewarePersistenceDbContext
+        MOROPO.SAPRESSC.Core.Persistence.EF.Context.AbstractTraceableDbContext,
+        MOROPO.SAPRESSC.Core.Security.Common.Persistence.EF.Contract.IModulePersistenceDbContext,
+        MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.EF.Contract.IModulePersistenceDbContext,
+        MOROPO.SAPRESSC.Middleware.Identity.Persistence.EF.Context.IIdentityMiddlewarePersistenceDbContext
     {
-        public ApplicationDbContext(System.Collections.Generic.IEnumerable<SAPRESSC.Core.Persistence.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
+        public ApplicationDbContext(System.Collections.Generic.IEnumerable<MOROPO.SAPRESSC.Core.Persistence.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
         }
 
@@ -20,11 +22,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.EF
         public override bool TraceChanges => false;
 #endif
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Group> Groups { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<UserGroupBridge> UserGroupBridges { get; set; }
-        public DbSet<GroupRoleBridge> GroupRoleBridges { get; set; }
+        public DbSet<RolePermissionBridge> RolePermissionBridges { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRoleBridge> UserRoleBridges { get; set; }
 
         public DbSet<Thumbnail> Thumbnails { get; set; }
         public DbSet<Image> Images { get; set; }

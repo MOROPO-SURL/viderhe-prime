@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SmartSolucionesCuba.SAPRESSC.Core.Persistence.Repositories;
+using MOROPO.SAPRESSC.Core.Persistence.Repositories;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models;
 using System.Linq;
 
@@ -9,9 +9,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Policy = Security.Authorization.Policies.ACCOUNT_MODERATION)]
     [Route("api/[area]/[controller]")]
     [Area("account")]
-    [SAPRESSC.Core.Web.Security.Filters.ChangeUserPasswordRequiredAction]
-    [SAPRESSC.Core.Web.Security.Filters.CatchChangeUserPasswordRequiredException]
-    public class ScreenplaysController : SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementController<Persistence.Entities.Screenplay, System.Guid, ScreenplayInputModel, ScreenplayDisplayModel>
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.ChangeUserPasswordRequiredAction]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.CatchChangeUserPasswordRequiredException]
+    public class ScreenplaysController : MOROPO.SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementController<Persistence.Entities.Screenplay, System.Guid, ScreenplayInputModel, ScreenplayDisplayModel>
     {
         private readonly IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
         private readonly IEntityRepository<Persistence.Entities.Player, string> playerRepository;

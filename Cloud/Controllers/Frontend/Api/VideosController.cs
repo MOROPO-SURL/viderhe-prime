@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Media.Persistence.Entities;
-using SmartSolucionesCuba.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade;
+using MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities;
+using MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models;
 using System.Linq;
 
@@ -12,18 +12,18 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     [Route("api/[area]/[controller]")]
     [Area("account")]
     [ApiController]
-    [SAPRESSC.Core.Web.Security.Filters.ChangeUserPasswordRequiredAction]
-    [SAPRESSC.Core.Web.Security.Filters.CatchChangeUserPasswordRequiredException]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.ChangeUserPasswordRequiredAction]
+    [MOROPO.SAPRESSC.Core.Web.Security.Attributes.CatchChangeUserPasswordRequiredException]
     public class VideosController : Controller
     {
         private readonly ILogger<VideosController> logger;
         private readonly IVideoFileManagerFacade videoFileManager;
         private readonly IThumbnailFileManagerFacade thumbnailFileManager;
         private readonly Persistence.EF.ApplicationDbContext dbContext;
-        private readonly SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Video, System.Guid> videoRepository;
+        private readonly MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Video, System.Guid> videoRepository;
         private readonly MediaToolkit.Services.IMediaToolkitService mediaToolkitService;
 
-        public VideosController(MediaToolkit.Services.IMediaToolkitService mediaToolkitService, SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Video, System.Guid> videoRepository, IVideoFileManagerFacade videoFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Persistence.EF.ApplicationDbContext dbContext, ILogger<VideosController> logger)
+        public VideosController(MediaToolkit.Services.IMediaToolkitService mediaToolkitService, MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Video, System.Guid> videoRepository, IVideoFileManagerFacade videoFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Persistence.EF.ApplicationDbContext dbContext, ILogger<VideosController> logger)
         {
             this.logger = logger;
             this.videoFileManager = videoFileManager;
@@ -35,7 +35,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
 
         [HttpGet]
         [HttpGet("page/{page}")]
-        public ActionResult<SAPRESSC.Core.Common.Models.PaginationModel<VideoDisplayModel>> GetPage(int page = 1)
+        public ActionResult<MOROPO.SAPRESSC.Core.Common.Models.PaginationModel<VideoDisplayModel>> GetPage(int page = 1)
         {
             var accountId = System.Guid.Parse(User.Claims.First(claim => claim.Type == Security.Authorization.Claims.ACCOUNT_CLAIM).Value);
 
@@ -56,7 +56,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                 page = 1;
             }
 
-            return Ok(new SAPRESSC.Core.Common.Models.PaginationModel<VideoDisplayModel>
+            return Ok(new MOROPO.SAPRESSC.Core.Common.Models.PaginationModel<VideoDisplayModel>
             {
                 List = account.VideoBridges.Select(bridge => bridge.Video).OrderByDescending(b => b.CreateAt).Skip((page - 1) * limit).Take(limit).Select(entity =>
                 {

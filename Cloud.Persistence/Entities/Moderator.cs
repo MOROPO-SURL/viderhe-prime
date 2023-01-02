@@ -1,12 +1,12 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 {
-    public class Moderator : SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
+    public class Moderator : MOROPO.SAPRESSC.Core.Persistence.Entities.IEntity<System.Guid>
     {
         public Moderator()
         {
             Id = System.Guid.NewGuid();
             ModerationKind = Enumerations.ModerationKind.Standard;
-            Identity = new SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity();
+            Identity = new MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity();
             AccountBridges = new System.Collections.Generic.List<AccountModeratorBridge>();
         }
 
@@ -15,11 +15,11 @@
 
         public System.Guid IdentityId { get; set; }
 
-        public SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity Identity { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Identity.Persistence.Entities.PersonIdentity Identity { get; set; }
 
         public string UserId { get; set; }
 
-        public SAPRESSC.Core.Security.Persistence.Entities.User User { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.Entities.User User { get; set; }
 
         public Enumerations.ModerationKind ModerationKind { get; set; }
 

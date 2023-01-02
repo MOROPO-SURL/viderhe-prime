@@ -1,4 +1,4 @@
-﻿using SmartSolucionesCuba.SAPRESSC.Core.Persistence.Entities;
+﻿using MOROPO.SAPRESSC.Core.Persistence.Entities;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,17 +23,17 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
         public System.Guid LogoId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey("LogoId")]
-        public SAPRESSC.Middleware.Media.Persistence.Entities.Image Logo { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image Logo { get; set; }
 
         public System.Guid HorizontalSplashId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey("HorizontalSplashId")]
-        public SAPRESSC.Middleware.Media.Persistence.Entities.Image HorizontalSplash { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image HorizontalSplash { get; set; }
 
         public System.Guid VerticalSplashId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey("VerticalSplashId")]
-        public SAPRESSC.Middleware.Media.Persistence.Entities.Image VerticalSplash { get; set; }
+        public MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities.Image VerticalSplash { get; set; }
 
         public System.Guid? DefaultOverlayId { get; set; }
 

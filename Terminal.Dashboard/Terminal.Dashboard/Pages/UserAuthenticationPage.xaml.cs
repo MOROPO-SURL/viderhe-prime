@@ -55,9 +55,9 @@
                             {
                                 message = "No se puede acceder al servidor. Revise su conexión de red y/o la disponibilidad del servicio.";
                             }
-                            else if (targetException is SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException)
+                            else if (targetException is MOROPO.SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException)
                             {
-                                var unspectedHttpStatus = (targetException as SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException).HttpStatusCode;
+                                var unspectedHttpStatus = (targetException as MOROPO.SAPRESSC.Core.Api.Connect.UnspectedHttpStatusException).HttpStatusCode;
 
                                 if (unspectedHttpStatus == System.Net.HttpStatusCode.BadRequest)
                                 {

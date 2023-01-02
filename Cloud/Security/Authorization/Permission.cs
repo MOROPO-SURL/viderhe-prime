@@ -1,6 +1,6 @@
 ﻿namespace SmartSolucionesCuba.Viderhe.Cloud.Security.Authorization
 {
-    public static class Roles
+    public static class Permission
     {
         public const string AccountViewer = "business-account-viewer";
         public const string AccountCreator = "business-account-creator";
