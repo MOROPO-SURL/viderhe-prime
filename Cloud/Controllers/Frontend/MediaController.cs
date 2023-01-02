@@ -14,7 +14,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend
         private readonly IImageFileManagerFacade imageFileManager;
         private readonly IThumbnailFileManagerFacade thumbnailFileManager;
 
-        public MediaController(SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
+        public MediaController(MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository, IImageFileManagerFacade imageFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Microsoft.Extensions.Localization.IStringLocalizer<MediaController> localizer, ILogger<MediaController> logger)
             : base(localizer, logger)
         {
             this.accountRepository = accountRepository;
