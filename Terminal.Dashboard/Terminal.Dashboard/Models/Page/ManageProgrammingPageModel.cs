@@ -11,7 +11,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.Page
         private bool hasMorePlacards;
         private ScreenplayViewModel selectedScreenPlay;
         private bool useExpandedLayout;
-        private System.Collections.ObjectModel.ObservableCollection<PlacardOverviewViewModel> placardOverviews;
+        private System.Collections.ObjectModel.ObservableCollection<Support.Presentation.Dashboard.Models.View.PlacardOverviewViewModel> placardOverviews;
 
         public ManageProgrammingPageModel(System.Action<ScreenplayViewModel> selectedScreenplayCallbackAction)
         {
@@ -19,7 +19,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.Page
 
             Screenplays = new ScreenplayViewModel[] { };
             Frames = new Support.Presentation.Models.View.FrameViewModel[] { };
-            PlacardOverviews = new System.Collections.ObjectModel.ObservableCollection<PlacardOverviewViewModel>();
+            PlacardOverviews = new System.Collections.ObjectModel.ObservableCollection<Support.Presentation.Dashboard.Models.View.PlacardOverviewViewModel>();
         }
 
         public ScreenplayViewModel[] Screenplays
@@ -34,7 +34,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.Page
             set => SetProperty(ref frames, value);
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<PlacardOverviewViewModel> PlacardOverviews { get => placardOverviews; set => SetProperty(ref placardOverviews, value); }
+        public System.Collections.ObjectModel.ObservableCollection<Support.Presentation.Dashboard.Models.View.PlacardOverviewViewModel> PlacardOverviews { get => placardOverviews; set => SetProperty(ref placardOverviews, value); }
 
         public bool HasMorePlacards { get => hasMorePlacards; set => SetProperty(ref hasMorePlacards, value); }
 

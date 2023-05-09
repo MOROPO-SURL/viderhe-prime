@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pagemodels="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.Page"
     xmlns:supportpresentationdashboardviews="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Views;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
+    xmlns:supportpresentationdashboardconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Converters;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
     xmlns:converters="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Converters"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
@@ -27,7 +28,7 @@
             <sscxftoolkitpresentationconverters:BoolToBoolNegationConverter x:Key="BoolToBoolNegationConverter" />
             <sscxftoolkitpresentationconverters:BindingLayoutWidthToResponsiveChildWidthConverter x:Key="BindingLayoutWidthToResponsiveChildWidthConverter" ChildMinWidth="275" ChildAbsoluteHorizontalMargin="10" />
 
-            <converters:AllTrueMultiConverter x:Key="AllTrueMultiConverter" />
+            <supportpresentationdashboardconverters:AllTrueMultiConverter x:Key="AllTrueMultiConverter" />
             <converters:IsPlayerConnectedToViewConverter x:Key="IsPlayerConnectedToViewConverter" />
             <converters:PlayerAudioLevelKnownToBooleanConverter x:Key="PlayerAudioLevelKnownToBooleanConverter" />
             <converters:PlayerAudioLevelReachedToBooleanConverter x:Key="MaxPlayerAudioLevelReachedToBooleanConverter" TargetAudioLevel="100" />

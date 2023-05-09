@@ -81,7 +81,7 @@
       <Version>1.3.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client">
-      <Version>5.0.3</Version>
+      <Version>7.0.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Parsers">
       <Version>6.1.1</Version>
@@ -99,7 +99,7 @@
       <Version>0.4.10-alpha</Version>
     </PackageReference>
     <PackageReference Include="SSCXFToolKit.Presentation">
-      <Version>0.6.1-alpha</Version>
+      <Version>0.6.2</Version>
     </PackageReference>
     <PackageReference Include="SSCXFToolKit.Presentation.Transform">
       <Version>0.3.0-alpha</Version>
@@ -171,6 +171,46 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Extend.Common.Overlaying.Dashboard.Presentation\Extend.Common.Overlaying.Dashboard.Presentation.csproj">
+      <Project>{0c4a6224-eb36-44ef-9844-6b0bfbcbba17}</Project>
+      <Name>Extend.Common.Overlaying.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Overlaying.Presentation\Extend.Common.Overlaying.Presentation.csproj">
+      <Project>{54a31415-5aca-41cf-a9da-2b97e0812ec6}</Project>
+      <Name>Extend.Common.Overlaying.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Overlaying\Extend.Common.Overlaying.csproj">
+      <Project>{a3bb2159-c755-415a-b238-81e5a24fa0aa}</Project>
+      <Name>Extend.Common.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Presentation\Extend.Common.Presentation.csproj">
+      <Project>{f6f4f289-0342-4f75-ae1b-7b1b7ef9711d}</Project>
+      <Name>Extend.Common.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Templating.Dashboard.Presentation\Extend.Common.Templating.Dashboard.Presentation.csproj">
+      <Project>{05af9b61-f444-429f-9148-461197c175ef}</Project>
+      <Name>Extend.Common.Templating.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Templating.Presentation\Extend.Common.Templating.Presentation.csproj">
+      <Project>{e620a859-7769-472d-981a-b93dbf496926}</Project>
+      <Name>Extend.Common.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Templating\Extend.Common.Templating.csproj">
+      <Project>{571b8648-903d-4322-addc-60ddbe97974f}</Project>
+      <Name>Extend.Common.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Transitioning.Presentation\Extend.Common.Transitioning.Presentation.csproj">
+      <Project>{7b10ab64-aec2-4109-bbb6-cbe522c1273c}</Project>
+      <Name>Extend.Common.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Transitioning\Extend.Common.Transitioning.csproj">
+      <Project>{9b378c2e-1ed2-432b-9a18-b923cefa70c7}</Project>
+      <Name>Extend.Common.Transitioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common\Extend.Common.csproj">
+      <Project>{fa8fcd4c-da74-4102-b767-6a0d0150c673}</Project>
+      <Name>Extend.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Extend.Essential.Overlaying.Dashboard.Presentation\Extend.Essential.Overlaying.Dashboard.Presentation.csproj">
       <Project>{c79fac59-2855-438c-b372-23ee0e4ebb7c}</Project>
       <Name>Extend.Essential.Overlaying.Dashboard.Presentation</Name>
@@ -207,6 +247,46 @@
       <Project>{1887c021-dbec-42f7-8563-0e56598b6f9a}</Project>
       <Name>Extend.Essential</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Overlaying\Support.Extend.Overlaying.csproj">
+      <Project>{c6ec5e2a-cf68-4a31-b53d-0bf9ec767fa4}</Project>
+      <Name>Support.Extend.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Templating.Presentation\Support.Extend.Templating.Presentation.csproj">
+      <Project>{3483f51d-3eef-425e-b55a-cc251a8337b3}</Project>
+      <Name>Support.Extend.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Templating\Support.Extend.Templating.csproj">
+      <Project>{7a875aef-130d-440d-989e-1459d1c0b3ba}</Project>
+      <Name>Support.Extend.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Transitioning.Presentation\Support.Extend.Transitioning.Presentation.csproj">
+      <Project>{d30821d6-84ca-4a80-9c96-1d2dd24bc02b}</Project>
+      <Name>Support.Extend.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Transitioning\Support.Extend.Transitioning.csproj">
+      <Project>{b2638380-165d-4142-8714-38ba6deb6dc4}</Project>
+      <Name>Support.Extend.Transitioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend\Support.Extend.csproj">
+      <Project>{c7964055-5ee7-40e7-9830-b9385722f77e}</Project>
+      <Name>Support.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Presentation.Dashboard\Support.Presentation.Dashboard.csproj">
+      <Project>{f36158f5-5a62-40f5-8f5e-ce85d8277f20}</Project>
+      <Name>Support.Presentation.Dashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Presentation.Player\Support.Presentation.Player.csproj">
+      <Project>{83be5d7f-2fb7-40c5-a1ef-1b6ebdd8fed6}</Project>
+      <Name>Support.Presentation.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Presentation\Support.Presentation.csproj">
+      <Project>{44a1ea24-59c5-4e9d-af01-c65297998114}</Project>
+      <Name>Support.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Terminal.Common.Android.RtmpClient\Terminal.Common.Android.RtmpClient.csproj">
+      <Project>{075f5bd6-d1e1-40a4-baeb-6d7e908f3405}</Project>
+      <Name>Terminal.Common.Android.RtmpClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Terminal.Dashboard\Terminal.Dashboard.csproj">
       <Project>{CBA05853-1C8C-4704-811A-1C1C679B7B55}</Project>
       <Name>Terminal.Dashboard</Name>
@@ -214,6 +294,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\network_security_config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\flags.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-sw600dp\flags.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

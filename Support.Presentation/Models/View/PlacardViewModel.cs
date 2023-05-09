@@ -10,6 +10,10 @@
 
         public Viderhe.Extend.Common.Templating.Enumerations.PlayerOrientationSupportKind? PlayerOrientationSupportKind { get; set; }
 
+        public System.DateTime? BeginAt { get; set; }
+
+        public System.DateTime? EndAt { get; set; }
+
         public string SerializedContext { get; set; }
 
         #region IDisposable Support

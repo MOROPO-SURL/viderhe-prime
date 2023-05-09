@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sscxftoolkitmvvmpages:BindingContextedContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pagemodels="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Models.Page"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Converters"
+    xmlns:views="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Views"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Pages.PlacardsPickPage"
+    x:TypeArguments="pagemodels:PlacardsPickPageModel"
+    Title="Seleccionar Carteles">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PlacardViewModelToPlacardThumbnailWrapViewConverter x:Key="PlacardViewModelToPlacardThumbnailWrapViewConverter" />
+            <converters:PlacardToIsAnyPlayerOrientationSupportedConverter x:Key="PlacardToIsAnyPlayerOrientationSupportedConverter" />
+            <sscxftoolkitpresentationconverters:BoolToBoolNegationConverter x:Key="BoolToBoolNegationConverter" />
+            <sscxftoolkitpresentationconverters:BoolToStringConverter x:Key="BooleanToSelectionStateGlyphIconStringConverter" FalseString="&#xf131;" TrueString="&#xf132;" />
+            <sscxftoolkitpresentationconverters:BindingLayoutWidthToResponsiveChildWidthConverter x:Key="BindingLayoutWidthToResponsiveChildWidthConverter" ChildMinWidth="200" ChildAbsoluteHorizontalMargin="10" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Aplicar"
+            Activated="ApplyToolbarItem_Activated">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource ToolbarIconFontFamily}" Glyph="&#xf12c;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Activated="CancelToolbarItem_Activated">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource ToolbarIconFontFamily}" Glyph="&#xf156;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <views:BackgroundView />
+            <ScrollView Orientation="Vertical">
+                <StackLayout Spacing="0">
+                    <FlexLayout
+                        Margin="5"
+                        Wrap="Wrap"
+                        AlignItems="Start" AlignContent="Start"
+                        BindableLayout.ItemsSource="{Binding Path=SelectablePlacards}">
+                        <BindableLayout.EmptyView>
+                            <Label
+                                IsVisible="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="Black" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    Margin="5"
+                                    WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type FlexLayout}}, Path=Width, Converter={StaticResource BindingLayoutWidthToResponsiveChildWidthConverter}}">
+                                    <Grid>
+                                        <Grid RowSpacing="0" BindingContext="{Binding Path=Model}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid 
+                                                Grid.Row="0"
+                                                HeightRequest="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=Width}">
+                                                <BoxView Color="White" Opacity="0.2" />
+                                                <ContentView Content="{Binding Path=Placard, Converter={StaticResource PlacardViewModelToPlacardThumbnailWrapViewConverter}}" />
+                                                <Label
+                                                    IsVisible="{Binding Path=Placard, Converter={StaticResource PlacardToIsAnyPlayerOrientationSupportedConverter}}"
+                                                    HorizontalOptions="Start" VerticalOptions="End"
+                                                    BackgroundColor="{StaticResource PrimaryColor}"
+                                                    Padding="4"
+                                                    Text="&#xf884;"
+                                                    TextColor="White"
+                                                    FontFamily="Material Design Icons"
+                                                    FontSize="24" />
+                                            </Grid>
+                                            <StackLayout 
+                                                Grid.Row="1"
+                                                BackgroundColor="White"
+                                                Spacing="0">
+                                                <Label
+                                                    Margin="8,8,8,4"
+                                                    Text="{Binding Path=Placard.Label}"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label 
+                                                    VerticalOptions="Center"
+                                                    Margin="8,0,0,8"
+                                                    Text="{Binding Path=Placard.Template.Name}"
+                                                    LineBreakMode="TailTruncation"
+                                                    TextColor="DimGray"
+                                                    FontSize="Caption" />
+                                            </StackLayout>
+                                        </Grid>
+                                        <BoxView 
+                                            Color="#99000000" 
+                                            IsVisible="{Binding Path=Selected}" />
+                                        <Label
+                                            HorizontalOptions="Start" VerticalOptions="Start"
+                                            Margin="10"
+                                            BackgroundColor="#99000000"
+                                            Text="{Binding Path=Selected, Converter={StaticResource BooleanToSelectionStateGlyphIconStringConverter}}"
+                                            TextColor="White"
+                                            FontFamily="{StaticResource IconFontFamily}"
+                                            FontSize="Medium">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SelectionToggleLabelTapGestureRecognizer_Tapped" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                    <Button
+                        IsVisible="{Binding Path=HasMorePlacards}"
+                        IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BoolToBoolNegationConverter}}"
+                        Margin="5,0,5,5"
+                        HorizontalOptions="Center"
+                        Text="Mostrar más"
+                        Clicked="LoadNextPageButtton_Clicked" />
+                    <ActivityIndicator
+                        IsVisible="{Binding Path=IsBusy}"
+                        Margin="5,0,5,5"
+                        IsRunning="{Binding Path=IsBusy}" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:BindingContextedContentPage>

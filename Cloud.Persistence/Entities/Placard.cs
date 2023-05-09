@@ -24,6 +24,10 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Persistence.Entities
 
         public Extend.Common.Templating.Enumerations.PlayerOrientationSupportKind? PlayerOrientationSupportKind { get; set; }
 
+        public System.DateTime? BeginAt { get; set; }
+
+        public System.DateTime? EndAt { get; set; }
+
         [Required]
         public string SerializedContext { get; set; }
 

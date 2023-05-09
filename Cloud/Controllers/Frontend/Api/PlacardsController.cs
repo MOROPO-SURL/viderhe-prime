@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MOROPO.SAPRESSC.Core.Persistence.Repositories;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models;
+using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models.Filter;
 using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
@@ -11,7 +12,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
     [Area("account")]
     [MOROPO.SAPRESSC.Core.Web.Security.Attributes.ChangeUserPasswordRequiredAction]
     [MOROPO.SAPRESSC.Core.Web.Security.Attributes.CatchChangeUserPasswordRequiredException]
-    public class PlacardsController : MOROPO.SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementController<Persistence.Entities.Placard, System.Guid, PlacardInputModel, PlacardDisplayModel>
+    public class PlacardsController : MOROPO.SAPRESSC.Core.Web.Api.Controllers.AbstractEntityApiManagementFilteredController<Persistence.Entities.Placard, System.Guid, PlacardInputModel, PlacardDisplayModel, PlacardFilterModel>
     {
         private readonly IEntityRepository<Persistence.Entities.Account, System.Guid> accountRepository;
         private readonly IEntityRepository<Persistence.Entities.Template, System.Guid> templateRepository;
@@ -27,6 +28,12 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
             var accountId = System.Guid.Parse(User.Claims.First(claim => claim.Type == Security.Authorization.Claims.ACCOUNT_CLAIM).Value);
 
             return e => e.Account.Id == accountId && e.Template.Enabled;
+        }
+
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public override ActionResult<PlacardDisplayModel> Get(System.Guid key)
+        {
+            return base.Get(key);
         }
 
         protected override void PreCreate(Persistence.Entities.Placard entity, PlacardInputModel inputModel)

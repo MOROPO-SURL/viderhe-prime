@@ -1024,8 +1024,14 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                     b.Property<Guid>("AccountId")
                         .HasColumnName("accountid");
 
+                    b.Property<DateTime?>("BeginAt")
+                        .HasColumnName("beginat");
+
                     b.Property<DateTime>("CreateAt")
                         .HasColumnName("createat");
+
+                    b.Property<DateTime?>("EndAt")
+                        .HasColumnName("endat");
 
                     b.Property<string>("Label")
                         .IsRequired()

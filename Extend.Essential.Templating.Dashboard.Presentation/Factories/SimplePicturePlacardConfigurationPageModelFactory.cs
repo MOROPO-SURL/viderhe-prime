@@ -14,6 +14,10 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
             return new Models.Page.SimplePicturePlacardConfigurationPageModel
             {
                 RequireUnobstructedPresetation = context.RequireUnobstructedPresetation,
+                DefineBeginAt = placardViewModel.BeginAt != null,
+                BeginAt = placardViewModel.BeginAt ?? System.DateTime.Now.Date,
+                DefineEndAt = placardViewModel.EndAt != null,
+                EndAt = placardViewModel.EndAt ?? System.DateTime.Now.Date,
                 PlayerOrientationSupportKind = placardViewModel.PlayerOrientationSupportKind == null ? Common.Templating.Dashboard.Presentation.Enumerations.ConfigurationPlayerOrientationSupportKind.Inherited : placardViewModel.PlayerOrientationSupportKind.Value.ToConfiguration(),
                 Label = placardViewModel.Label,
                 ScreenPresentationTimeSecounds = System.Convert.ToInt32(context.ScreenPresentationTime.TotalSeconds),

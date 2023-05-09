@@ -12,8 +12,9 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
         private System.Action screenplayPresentIterationCompleteCallbackAction;
         private System.Action<System.Guid> placardPlayingCallbackAction;
         private System.Action<BasePlacardPresentationView, BasePlacardPresentationView> placardViewTransitionCompleteCallbackAction;
+        private System.Func<Xamarin.Essentials.DisplayOrientation> getOrientationFunction;
 
-        private System.Func<PlacardViewModel, BasePlacardPresentationView> placardViewModelToPresentationViewFunction;
+        private System.Func<PlacardViewModel, System.Func<Xamarin.Essentials.DisplayOrientation>, BasePlacardPresentationView> placardViewModelToPresentationViewFunction;
 
         private System.Collections.Generic.Stack<PlacardViewModel> framesStack;
 
@@ -30,7 +31,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
         private bool suspended;
         private bool loop;
 
-        public ScreenplayPresenter(Xamarin.Forms.Layout<Xamarin.Forms.View> container, System.Func<PlacardViewModel, BasePlacardPresentationView> placardViewModelToPresentationViewFunction, PlacardViewModel[] placards, ITransitionProviderFacade transitionProvider, System.Action screenplayPresentationEndedCallbackAction, bool loop, System.Action<System.Guid> placardPlayingCallbackAction, System.Action screenplayPresentIterationCompleteCallbackAction = null, System.Action<BasePlacardPresentationView, BasePlacardPresentationView> placardViewTransitionCompleteCallbackAction = null)
+        public ScreenplayPresenter(Xamarin.Forms.Layout<Xamarin.Forms.View> container, System.Func<PlacardViewModel, System.Func<Xamarin.Essentials.DisplayOrientation>, BasePlacardPresentationView> placardViewModelToPresentationViewFunction, PlacardViewModel[] placards, ITransitionProviderFacade transitionProvider, System.Action screenplayPresentationEndedCallbackAction, bool loop, System.Action<System.Guid> placardPlayingCallbackAction, System.Action screenplayPresentIterationCompleteCallbackAction = null, System.Action<BasePlacardPresentationView, BasePlacardPresentationView> placardViewTransitionCompleteCallbackAction = null, System.Func<Xamarin.Essentials.DisplayOrientation> getOrientationFunction = null)
         {
             suspended = false;
 
@@ -38,11 +39,13 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
             this.placardViewModelToPresentationViewFunction = placardViewModelToPresentationViewFunction;
             this.placards = placards;
             this.transitionProvider = transitionProvider;
-            this.presentationEndedCallbackAction = screenplayPresentationEndedCallbackAction;
             this.placardPlayingCallbackAction = placardPlayingCallbackAction;
             this.screenplayPresentIterationCompleteCallbackAction = screenplayPresentIterationCompleteCallbackAction;
             this.placardViewTransitionCompleteCallbackAction = placardViewTransitionCompleteCallbackAction;
+            this.getOrientationFunction = getOrientationFunction ?? (() => Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Orientation);
             this.loop = loop;
+
+            presentationEndedCallbackAction = screenplayPresentationEndedCallbackAction;
 
             framesStack = new System.Collections.Generic.Stack<PlacardViewModel>(placards.Reverse());
         }
@@ -192,7 +195,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
                 {
                     var model = framesStack.Pop();
 
-                    while (!model.SupportedByMainDisplayOrientation())
+                    while (!IsPresentable(model))
                     {
                         model = null;
 
@@ -203,7 +206,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
 
                     if (model != null)
                     {
-                        var incomingFrameView = placardViewModelToPresentationViewFunction.Invoke(model);
+                        var incomingFrameView = placardViewModelToPresentationViewFunction.Invoke(model, getOrientationFunction);
 
                         incomingFrameView.PresentationComplete += PlacardPresentationView_PresentationComplete;
 
@@ -286,6 +289,17 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
             });
         }
 
+        private bool IsPresentable(PlacardViewModel model)
+        {
+            if (!model.SupportedByTargetOrientation(getOrientationFunction)) return false;
+
+            if (model.BeginAt != null && System.DateTime.Now.Date < model.BeginAt) return false;
+
+            if (model.EndAt != null && System.DateTime.Now.Date > model.EndAt) return false;
+
+            return true;
+        }
+
         #region IOverlablePresenter implementation
 
         public void SuspendPresentation()
@@ -337,6 +351,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Common.Templating.Presentation.Pres
                 screenplayPresentIterationCompleteCallbackAction = null;
                 placardViewTransitionCompleteCallbackAction = null;
                 placardViewModelToPresentationViewFunction = null;
+                getOrientationFunction = null;
                 transitionProvider = null;
                 container = null;
 

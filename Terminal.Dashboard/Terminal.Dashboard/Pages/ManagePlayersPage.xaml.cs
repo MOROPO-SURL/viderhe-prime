@@ -91,7 +91,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
         {
             if (BindingContextPageModel.IsBusy) return;
 
-            this.NavigationPushPageAsync(new PlacardPickPage(PlayerIterventionPlacardPicked_Callback, (sender as Xamarin.Forms.Button).BindingContext as Models.View.PlayerViewModel));
+            this.NavigationPushPageAsync(new Support.Presentation.Dashboard.Pages.PlacardPickPage(PlayerIterventionPlacardPicked_Callback, (sender as Xamarin.Forms.Button).BindingContext as Models.View.PlayerViewModel));
         }
 
         private void PlayerAudioEnabledSwitchButton_Clicked(object sender, System.EventArgs eventArgs)

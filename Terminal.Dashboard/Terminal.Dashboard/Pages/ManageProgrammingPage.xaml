@@ -5,6 +5,7 @@
     xmlns:pagemodels="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Models.Page"
     xmlns:converters="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Converters"
     xmlns:supportpresentationdashboardviews="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Views;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
+    xmlns:supportpresentationdashboardconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Converters;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages.ManageProgrammingPage"
@@ -12,12 +13,12 @@
     Title="Programación">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:PlacardViewModelToPlacardThumbnailWrapViewConverter x:Key="PlacardViewModelToPlacardThumbnailWrapViewConverter" />
             <converters:TemplateViewModelToTemplateThumbnailWrapViewConverter x:Key="TemplateViewModelToTemplateThumbnailWrapViewConverter" />
-            <converters:PlacardToIsAnyPlayerOrientationSupportedConverter x:Key="PlacardToIsAnyPlayerOrientationSupportedConverter" />
             <converters:BoolToManageProgrammingPageLayoutToolbarItemIconConverter x:Key="BoolToManageProgrammingPageLayoutToolbarItemIconConverter" />
-            <converters:CollectionViewWidthToSelfVerticalGridItemsLayoutConverter x:Key="CollectionViewWidthToSelfVerticalGridItemsLayoutConverter" ChildMinWidth="200" ChildAbsoluteHorizontalMargin="10" />
-            <converters:AllTrueMultiConverter x:Key="AllTrueMultiConverter" />
+            <supportpresentationdashboardconverters:CollectionViewWidthToSelfVerticalGridItemsLayoutConverter x:Key="CollectionViewWidthToSelfVerticalGridItemsLayoutConverter" ChildMinWidth="200" ChildAbsoluteHorizontalMargin="10" />
+            <supportpresentationdashboardconverters:AllTrueMultiConverter x:Key="AllTrueMultiConverter" />
+            <supportpresentationdashboardconverters:PlacardViewModelToPlacardThumbnailWrapViewConverter x:Key="PlacardViewModelToPlacardThumbnailWrapViewConverter" />
+            <supportpresentationdashboardconverters:PlacardToIsAnyPlayerOrientationSupportedConverter x:Key="PlacardToIsAnyPlayerOrientationSupportedConverter" />
 
             <sscxftoolkitpresentationconverters:IfNullOrEmptyToStringConverter x:Key="IfNullOrEmptyToStringConverter" StringReplacement="Descripción no especificada" />
             <sscxftoolkitpresentationconverters:NullToBooleanConverter x:Key="NullToBooleanConverter" />

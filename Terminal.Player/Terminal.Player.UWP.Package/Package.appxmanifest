@@ -8,12 +8,12 @@
   IgnorableNamespaces="uap rescap desktop">
 
   <Identity
-    Name="MOROPO.Viderhe.Player"
+    Name="MOROPO.VIDERHE.Player"
     Publisher="CN=MOROPO S.U.R.L."
-    Version="0.5.4.0" />
+    Version="0.7.0.0" />
 
   <Properties>
-    <DisplayName>Viderhe Player</DisplayName>
+    <DisplayName>VIDERHE Player</DisplayName>
     <PublisherDisplayName>MOROPO S.U.R.L.</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
@@ -32,8 +32,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Viderhe Player"
-        Description="Presentador de guiones de señalización digital para dispositivos asociados a cuentas de la plataforma Viderhe"
+        DisplayName="VIDERHE Player"
+        Description="Presentador de guiones de señalización digital para dispositivos asociados a cuentas de la plataforma VIDERHE"
         BackgroundColor="#00162c"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">

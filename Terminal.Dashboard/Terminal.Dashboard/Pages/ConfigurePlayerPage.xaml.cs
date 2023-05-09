@@ -132,6 +132,8 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
             BindingContextPageModel.Overlay = (target as Xamarin.Forms.Picker).SelectedItem as Extend.Common.Overlaying.Descriptors.IOverlayDescriptor;
             BindingContextPageModel.SerializedOverlayContext = null;
 
+            if (BindingContextPageModel.Overlay == null) return;
+
             if (recoverableOverlay != null && BindingContextPageModel.Overlay.Id == recoverableOverlay.Id)
             {
                 BindingContextPageModel.SerializedOverlayContext = recoverableSerializedOverlayContext;

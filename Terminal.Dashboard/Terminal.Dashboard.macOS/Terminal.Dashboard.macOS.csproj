@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Xamarin.Forms.5.0.0.2083\build\Xamarin.Forms.props" Condition="Exists('..\..\packages\Xamarin.Forms.5.0.0.2083\build\Xamarin.Forms.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{F8BAD163-811A-4C8C-B951-118756E5884B}</ProjectGuid>
+    <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
+    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <RootNamespace>SmartSolucionesCuba.Viderhe.Terminal.Dashboard.macOS</RootNamespace>
+    <AssemblyName></AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CodesigningKey>Mac Developer</CodesigningKey>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>true</UseSGen>
+    <UseRefCounting>true</UseRefCounting>
+    <HttpClientHandler></HttpClientHandler>
+    <CodesignProvision></CodesignProvision>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
+    <XamMacArch>x86_64</XamMacArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants></DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>true</CreatePackage>
+    <UseSGen>true</UseSGen>
+    <UseRefCounting>true</UseRefCounting>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <HttpClientHandler></HttpClientHandler>
+    <LinkMode>SdkOnly</LinkMode>
+    <AOTMode>None</AOTMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.Mac" />
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\packages\Xamarin.Forms.5.0.0.2083\lib\Xamarin.Mac\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\..\packages\Xamarin.Forms.5.0.0.2083\lib\Xamarin.Mac\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.macOS">
+      <HintPath>..\..\packages\Xamarin.Forms.5.0.0.2083\lib\Xamarin.Mac\Xamarin.Forms.Platform.macOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\packages\Xamarin.Forms.5.0.0.2083\lib\Xamarin.Mac\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\..\packages\SkiaSharp.2.80.3\lib\xamarinmac2.0\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Mac">
+      <HintPath>..\..\packages\SkiaSharp.Views.2.80.3\lib\xamarinmac2.0\SkiaSharp.Views.Mac.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Forms">
+      <HintPath>..\..\packages\SkiaSharp.Views.Forms.2.80.3\lib\xamarinmac2.0\SkiaSharp.Views.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="MagicGradients">
+      <HintPath>..\..\packages\MagicGradients.1.3.1\lib\netstandard2.0\MagicGradients.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
+      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.5.0.1\lib\netstandard2.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>..\..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>..\..\packages\System.Buffers.4.5.1\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipelines">
+      <HintPath>..\..\packages\System.IO.Pipelines.5.0.1\lib\netstandard2.0\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>..\..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.Http.Features.5.0.3\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Connections.Abstractions">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.Connections.Abstractions.5.0.3\lib\netstandard2.1\Microsoft.AspNetCore.Connections.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>..\..\packages\Microsoft.Extensions.Options.5.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\netstandard1.3\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>..\..\packages\Microsoft.Extensions.Logging.5.0.0\lib\netstandard2.1\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web">
+      <HintPath>..\..\packages\System.Text.Encodings.Web.5.0.0\lib\netstandard2.1\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json">
+      <HintPath>..\..\packages\System.Text.Json.5.0.1\lib\netstandard2.0\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Connections.Common">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.Http.Connections.Common.5.0.3\lib\netstandard2.0\Microsoft.AspNetCore.Http.Connections.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Connections.Client">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.Http.Connections.Client.5.0.3\lib\netstandard2.1\Microsoft.AspNetCore.Http.Connections.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Common">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.SignalR.Common.5.0.3\lib\netstandard2.0\Microsoft.AspNetCore.SignalR.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Protocols.Json">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.SignalR.Protocols.Json.5.0.3\lib\netstandard2.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels">
+      <HintPath>..\..\packages\System.Threading.Channels.5.0.0\lib\netstandard2.1\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Client.Core">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.SignalR.Client.Core.5.0.3\lib\netstandard2.1\Microsoft.AspNetCore.SignalR.Client.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Client">
+      <HintPath>..\..\packages\Microsoft.AspNetCore.SignalR.Client.5.0.3\lib\netstandard2.0\Microsoft.AspNetCore.SignalR.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup">
+      <HintPath>..\..\packages\Rg.Plugins.Popup.2.0.0.11\lib\xamarinmac20\Rg.Plugins.Popup.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard" />
+    <Reference Include="Toasts.Forms.Plugin.Abstractions">
+      <HintPath>..\..\packages\Toasts.Forms.Plugin.3.3.2\lib\netstandard1.1\Toasts.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Xam.Plugin.SimpleColorPicker">
+      <HintPath>..\..\packages\Xam.Plugin.SimpleColorPicker.1.0.5\lib\netstandard2.0\Xam.Plugin.SimpleColorPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin">
+      <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.3.0.0.5\lib\netstandard2.0\ImageCircle.Forms.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Essentials">
+      <HintPath>..\..\packages\Xamarin.Essentials.1.7.0\lib\xamarinmac20\Xamarin.Essentials.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="WebP.Mac">
+      <HintPath>..\..\packages\WebP.Touch.1.0.8\lib\Xamarin.Mac20\WebP.Mac.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.4.11.982\lib\Xamarin.Mac20\FFImageLoading.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.4.11.982\lib\Xamarin.Mac20\FFImageLoading.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Svg.Platform">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Svg.2.4.11.982\lib\Xamarin.Mac20\FFImageLoading.Svg.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Forms.2.4.11.982\lib\Xamarin.Mac20\FFImageLoading.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms.Platform">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Forms.2.4.11.982\lib\Xamarin.Mac20\FFImageLoading.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Svg.Forms">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Svg.Forms.2.4.11.982\lib\Xamarin.Mac20\FFImageLoading.Svg.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.FilePicker">
+      <HintPath>..\..\packages\Xamarin.Plugin.FilePicker.2.1.41\lib\xamarinmac20\Plugin.FilePicker.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common.dll" />
+    <Reference Include="SmartSolucionesCuba.XFToolKit.IoC">
+      <HintPath>..\..\packages\SSCXFToolKit.IoC.0.2.0-alpha\lib\netstandard2.0\SmartSolucionesCuba.XFToolKit.IoC.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartSolucionesCuba.XFToolKit.Presentation">
+      <HintPath>..\..\packages\SSCXFToolKit.Presentation.0.6.1-alpha\lib\netstandard2.0\SmartSolucionesCuba.XFToolKit.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartSolucionesCuba.XFToolKit.Mvvm">
+      <HintPath>..\..\packages\SSCXFToolKit.Mvvm.0.4.10-alpha\lib\netstandard2.0\SmartSolucionesCuba.XFToolKit.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartSolucionesCuba.XFToolKit.Presentation.Transform">
+      <HintPath>..\..\packages\SSCXFToolKit.Presentation.Transform.0.3.0-alpha\lib\netstandard2.0\SmartSolucionesCuba.XFToolKit.Presentation.Transform.dll</HintPath>
+    </Reference>
+    <Reference Include="LibVLCSharp">
+      <HintPath>..\..\packages\LibVLCSharp.3.6.0\lib\xamarinmac20\LibVLCSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Core.Persistence">
+      <HintPath>..\..\packages\SAPRESSC.Core.Persistence.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Core.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Middleware.Media.Persistence">
+      <HintPath>..\..\packages\SAPRESSC.Middleware.Media.Persistence.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Middleware.Media.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Middleware.Region.Persistence">
+      <HintPath>..\..\packages\SAPRESSC.Middleware.Region.Persistence.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Middleware.Region.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Middleware.Identity.Persistence">
+      <HintPath>..\..\packages\SAPRESSC.Middleware.Identity.Persistence.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Middleware.Identity.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Core.Security.Common.Persistence">
+      <HintPath>..\..\packages\SAPRESSC.Core.Security.Common.Persistence.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Core.Security.Common.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence">
+      <HintPath>..\..\packages\SAPRESSC.Middleware.Security.Essential.Persistence.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Middleware.Security.Essential.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Core.Common">
+      <HintPath>..\..\packages\SAPRESSC.Core.Common.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Core.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MOROPO.SAPRESSC.Core.Api.Connect">
+      <HintPath>..\..\packages\SAPRESSC.Core.Api.Connect.2.2.6.6\lib\netstandard2.0\MOROPO.SAPRESSC.Core.Api.Connect.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Transformations">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Transformations.2.4.11.982\lib\Xamarin.Mac20\FFImageLoading.Transformations.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Managers\" />
+    <Folder Include="Extensiones\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Renderer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Helpers\ToastNotificationHelper.cs" />
+    <Compile Include="Managers\UNNotificationManager.cs" />
+    <Compile Include="Extensiones\DateExtensions.cs" />
+    <Compile Include="Managers\ApplicationManager.cs" />
+    <Compile Include="Views\Renderer\VLCVideoPlayerViewRenderer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Main.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Terminal.Dashboard\Terminal.Dashboard.csproj">
+      <Name>Terminal.Dashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.Api.Connect\Cloud.Api.Connect.csproj">
+      <Name>Cloud.Api.Connect</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.Api.Common\Cloud.Api.Common.csproj">
+      <Name>Cloud.Api.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.Persistence\Cloud.Persistence.csproj">
+      <Name>Cloud.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.SignalR.Connect.Common\Cloud.SignalR.Connect.Common.csproj">
+      <Name>Cloud.SignalR.Connect.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cloud.SignalR.Connect.Dashboard\Cloud.SignalR.Connect.Dashboard.csproj">
+      <Name>Cloud.SignalR.Connect.Dashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Overlaying.Dashboard.Presentation\Extend.Common.Overlaying.Dashboard.Presentation.csproj">
+      <Name>Extend.Common.Overlaying.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Overlaying.Presentation\Extend.Common.Overlaying.Presentation.csproj">
+      <Name>Extend.Common.Overlaying.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Overlaying\Extend.Common.Overlaying.csproj">
+      <Name>Extend.Common.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Presentation\Extend.Common.Presentation.csproj">
+      <Name>Extend.Common.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Templating.Dashboard.Presentation\Extend.Common.Templating.Dashboard.Presentation.csproj">
+      <Name>Extend.Common.Templating.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Templating.Presentation\Extend.Common.Templating.Presentation.csproj">
+      <Name>Extend.Common.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Templating\Extend.Common.Templating.csproj">
+      <Name>Extend.Common.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Transitioning.Presentation\Extend.Common.Transitioning.Presentation.csproj">
+      <Name>Extend.Common.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common.Transitioning\Extend.Common.Transitioning.csproj">
+      <Name>Extend.Common.Transitioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Common\Extend.Common.csproj">
+      <Name>Extend.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Overlaying.Dashboard.Presentation\Extend.Essential.Overlaying.Dashboard.Presentation.csproj">
+      <Name>Extend.Essential.Overlaying.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Overlaying.Presentation\Extend.Essential.Overlaying.Presentation.csproj">
+      <Name>Extend.Essential.Overlaying.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Overlaying\Extend.Essential.Overlaying.csproj">
+      <Name>Extend.Essential.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Templating.Dashboard.Presentation\Extend.Essential.Templating.Dashboard.Presentation.csproj">
+      <Name>Extend.Essential.Templating.Dashboard.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Templating.Presentation\Extend.Essential.Templating.Presentation.csproj">
+      <Name>Extend.Essential.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Templating\Extend.Essential.Templating.csproj">
+      <Name>Extend.Essential.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Transitioning.Presentation\Extend.Essential.Transitioning.Presentation.csproj">
+      <Name>Extend.Essential.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential.Transitioning\Extend.Essential.Transitioning.csproj">
+      <Name>Extend.Essential.Transitioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extend.Essential\Extend.Essential.csproj">
+      <Name>Extend.Essential</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Overlaying\Support.Extend.Overlaying.csproj">
+      <Name>Support.Extend.Overlaying</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Templating.Presentation\Support.Extend.Templating.Presentation.csproj">
+      <Name>Support.Extend.Templating.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Templating\Support.Extend.Templating.csproj">
+      <Name>Support.Extend.Templating</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Transitioning.Presentation\Support.Extend.Transitioning.Presentation.csproj">
+      <Name>Support.Extend.Transitioning.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend.Transitioning\Support.Extend.Transitioning.csproj">
+      <Name>Support.Extend.Transitioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Extend\Support.Extend.csproj">
+      <Name>Support.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Presentation.Dashboard\Support.Presentation.Dashboard.csproj">
+      <Name>Support.Presentation.Dashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Presentation.Player\Support.Presentation.Player.csproj">
+      <Name>Support.Presentation.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support.Presentation\Support.Presentation.csproj">
+      <Name>Support.Presentation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
+  <Import Project="..\..\packages\Xamarin.Forms.5.0.0.2083\build\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.5.0.0.2083\build\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\MagicGradients.1.3.1\build\MagicGradients.targets" Condition="Exists('..\..\packages\MagicGradients.1.3.1\build\MagicGradients.targets')" />
+  <Import Project="..\..\packages\SkiaSharp.2.80.3\build\xamarinmac2.0\SkiaSharp.targets" Condition="Exists('..\..\packages\SkiaSharp.2.80.3\build\xamarinmac2.0\SkiaSharp.targets')" />
+  <Import Project="..\..\packages\VideoLAN.LibVLC.Mac.3.1.3.1\build\VideoLAN.LibVLC.Mac.targets" Condition="Exists('..\..\packages\VideoLAN.LibVLC.Mac.3.1.3.1\build\VideoLAN.LibVLC.Mac.targets')" />
+</Project>

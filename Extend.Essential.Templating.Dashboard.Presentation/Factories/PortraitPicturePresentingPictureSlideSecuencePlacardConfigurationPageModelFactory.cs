@@ -13,6 +13,10 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
             var result = new Models.Page.PortraitPicturePresentingPictureSlideSecuencePlacardConfigurationPageModel
             {
                 RequireUnobstructedPresetation = context.RequireUnobstructedPresetation,
+                DefineBeginAt = placardViewModel.BeginAt != null,
+                BeginAt = placardViewModel.BeginAt ?? System.DateTime.Now.Date,
+                DefineEndAt = placardViewModel.EndAt != null,
+                EndAt = placardViewModel.EndAt ?? System.DateTime.Now.Date,
                 Label = placardViewModel.Label,
                 PresenterImage = context.PresenterImage.ToViewModel(),
                 PresenterSide = context.PresenterSide,

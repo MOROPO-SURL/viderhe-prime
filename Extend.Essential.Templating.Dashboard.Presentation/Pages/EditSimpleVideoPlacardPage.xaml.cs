@@ -45,7 +45,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
             {
                 var client = new Cloud.Api.Connect.Clients.PlacardsApiConnectClient(Xamarin.Forms.DependencyService.Get<MOROPO.SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                await client.EditAsync(new Cloud.Api.Common.Models.PlacardInputModel
+                var model = new Cloud.Api.Common.Models.PlacardInputModel
                 {
                     Id = placardViewModel.Id,
                     PlayerOrientationSupportKind = BindingContextPageModel.PlayerOrientationSupportKind.FromConfiguration(),
@@ -56,7 +56,19 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
                         RequireUnobstructedPresetation = BindingContextPageModel.RequireUnobstructedPresetation,
                         Video = contextModel.Video
                     })
-                });
+                };
+
+                if (BindingContextPageModel.DefineBeginAt)
+                {
+                    model.BeginAt = BindingContextPageModel.BeginAt;
+                }
+
+                if (BindingContextPageModel.DefineEndAt)
+                {
+                    model.EndAt = BindingContextPageModel.EndAt;
+                }
+
+                await client.EditAsync(model);
             }).ContinueWith((System.Threading.Tasks.Task task) =>
             {
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>

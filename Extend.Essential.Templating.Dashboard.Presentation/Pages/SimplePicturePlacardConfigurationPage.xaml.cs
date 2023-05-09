@@ -66,7 +66,7 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
 
                 if (placardViewModel == null)
                 {
-                    await client.CreateAsync(new Cloud.Api.Common.Models.PlacardInputModel
+                    var model = new Cloud.Api.Common.Models.PlacardInputModel
                     {
                         Label = BindingContextPageModel.Label,
                         TemplateId = Descriptors.SimplePictureTemplateDescriptor.ID,
@@ -79,11 +79,23 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
                             IsZoomingEnabled = BindingContextPageModel.IsZoomingEnabled,
                             Image = BindingContextPageModel.Image.ToContextModel()
                         })
-                    });
+                    };
+
+                    if (BindingContextPageModel.DefineBeginAt)
+                    {
+                        model.BeginAt = BindingContextPageModel.BeginAt;
+                    }
+
+                    if (BindingContextPageModel.DefineEndAt)
+                    {
+                        model.EndAt = BindingContextPageModel.EndAt;
+                    }
+
+                    await client.CreateAsync(model);
                 }
                 else
                 {
-                    await client.EditAsync(new Cloud.Api.Common.Models.PlacardInputModel
+                    var model = new Cloud.Api.Common.Models.PlacardInputModel
                     {
                         Id = placardViewModel.Id,
                         Label = BindingContextPageModel.Label,
@@ -97,7 +109,19 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Templating.Dashboard.Pres
                             IsZoomingEnabled = BindingContextPageModel.IsZoomingEnabled,
                             Image = BindingContextPageModel.Image.ToContextModel()
                         })
-                    });
+                    };
+
+                    if (BindingContextPageModel.DefineBeginAt)
+                    {
+                        model.BeginAt = BindingContextPageModel.BeginAt;
+                    }
+
+                    if (BindingContextPageModel.DefineEndAt)
+                    {
+                        model.EndAt = BindingContextPageModel.EndAt;
+                    }
+
+                    await client.EditAsync(model);
                 }
             }).ContinueWith(task =>
             {

@@ -10,6 +10,10 @@
 
         public Extend.Common.Templating.Enumerations.PlayerOrientationSupportKind? PlayerOrientationSupportKind { get; set; }
 
+        public System.DateTime? BeginAt { get; set; }
+
+        public System.DateTime? EndAt { get; set; }
+
         public string SerializedContext { get; set; }
 
         public void Import(Persistence.Entities.Placard entity)
@@ -17,6 +21,8 @@
             Id = entity.Id;
             Label = entity.Label;
             PlayerOrientationSupportKind = entity.PlayerOrientationSupportKind;
+            BeginAt = entity.BeginAt;
+            EndAt = entity.EndAt;
             SerializedContext = entity.SerializedContext;
 
             Template = new TemplateDisplayModel();

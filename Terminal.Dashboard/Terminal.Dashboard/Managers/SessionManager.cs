@@ -178,7 +178,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
                     }
 
                     var counter = 1;
-                    var missingAccountExtensionsCount = dynamicLoadExtensions.Length;
+                    var missingAccountExtensionsCount = missingAccountExtensions.Count;
 
                     foreach (var missingAccountExtension in missingAccountExtensions)
                     {
@@ -230,6 +230,15 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
                 var overalyDescriptor = model.DefaultOverlayId == null ? null : Support.Extend.Overlaying.Providers.OverlayDescriptorProvider.Instance.GetDescriptorById(model.DefaultOverlayId.Value);
 
+                var ffImageLoadingHttpClient = new System.Net.Http.HttpClient();
+
+                ffImageLoadingHttpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(AuthenticationType, AuthorizationToken);
+
+                FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
+                {
+                    HttpClient = ffImageLoadingHttpClient
+                });
+
                 SyncronizeRequiredAccountInformation(model.Name, Color.FromHex(model.PrimaryColor), Color.FromHex(model.SecoundaryColor), model.LogoImageId, model.HorizontalSplashImageId, model.VerticalSplashImageId, overalyDescriptor, model.SerializedOverlayContext);
             }
             catch (System.Exception e)
@@ -238,15 +247,6 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Managers
 
                 throw e;
             }
-
-            var ffImageLoadingHttpClient = new System.Net.Http.HttpClient();
-
-            ffImageLoadingHttpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(AuthenticationType, AuthorizationToken);
-
-            FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
-            {
-                HttpClient = ffImageLoadingHttpClient
-            });
         }
 
         public void SignOut()

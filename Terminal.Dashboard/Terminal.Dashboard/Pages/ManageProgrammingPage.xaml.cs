@@ -1,4 +1,5 @@
-﻿using SmartSolucionesCuba.Viderhe.Support.Presentation.Extensions;
+﻿using SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Models.View;
+using SmartSolucionesCuba.Viderhe.Support.Presentation.Extensions;
 using SmartSolucionesCuba.Viderhe.Support.Presentation.Helpers.Facade;
 using SmartSolucionesCuba.XFToolKit.Mvvm.Extensions;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
         private const string OPTION_FRAME_DELETE = "Quitar";
 
         private const string OPTION_PLACARD_SEQUENCE = "Agregar a Secuencia";
+        private const string OPTION_PLACARD_PLACARD_CLONE = "Duplicar";
 
         private int currentPlacardsPageNumber;
         private int currentPlacardCollectionViewCellColumnCount = 3;
@@ -45,12 +47,13 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
 
         private void PlacardOverviewOptionsButton_Clicked(object sender, System.EventArgs eventArgs)
         {
-            var target = (sender as Xamarin.Forms.BindableObject).BindingContext as Models.View.PlacardOverviewViewModel;
+            var target = (sender as Xamarin.Forms.BindableObject).BindingContext as PlacardOverviewViewModel;
 
             var extraOptions = new System.Collections.Generic.List<string>
             {
                 OPTION_COMMON_PREVIEW,
-                OPTION_COMMON_EDIT
+                OPTION_COMMON_EDIT,
+                OPTION_PLACARD_PLACARD_CLONE
             };
 
             if (BindingContextPageModel.SelectedScreenplay != null)
@@ -63,10 +66,43 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
                 extraOptions.Clear();
             }
 
-            DisplayActionSheet("Opciones de Marco", OPTION_COMMON_CANCEL, OPTION_COMMON_DELETE, extraOptions.ToArray()).ContinueWith(actionSheetTask =>
+            DisplayActionSheet("Opciones de Marco", OPTION_COMMON_CANCEL, OPTION_COMMON_DELETE, extraOptions.ToArray()).ContinueWith(async actionSheetTask =>
             {
+                Extend.Common.Templating.Presentation.Helpers.Facade.IPlacardViewModelCompletitionHelperFacade completitionHelper;
+
+                Support.Presentation.Models.View.PlacardViewModel placardClone;
+
+                var placardsClient = new Cloud.Api.Connect.Clients.PlacardsApiConnectClient(Xamarin.Forms.DependencyService.Get<MOROPO.SAPRESSC.Core.Api.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
                 switch (actionSheetTask.Result)
                 {
+                    case OPTION_PLACARD_PLACARD_CLONE:
+                        await placardsClient.CreateAsync(new Cloud.Api.Common.Models.PlacardInputModel
+                        {
+                            Label = string.Format("(Copia) {0}", target.Placard.Label),
+                            TemplateId = target.Placard.Template.Id,
+                            SerializedContext = target.Placard.SerializedContext
+                        }).ContinueWith(cloneTask =>
+                        {
+                            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                            {
+                                BindingContextPageModel.IsBusy = false;
+
+                                if (cloneTask.Exception != null || cloneTask.IsCanceled)
+                                {
+                                    Xamarin.Forms.DependencyService.Get<IExceptionHandleHelperFacade>().HandleException(cloneTask.Exception);
+                                }
+                                else
+                                {
+                                    Xamarin.Forms.DependencyService.Get<Support.Presentation.Dashboard.Presenters.Facade.INotificationPresenterFacade>().PresentNotification("Información", "Marco duplicado con éxito.");
+
+                                    PlacardEditionCompleted_Callback();
+                                }
+                            });
+                        });
+
+                        break;
+
                     case OPTION_COMMON_DELETE:
                         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                         {
@@ -76,11 +112,9 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
 
                                 BindingContextPageModel.IsBusy = true;
 
-                                var client = new Cloud.Api.Connect.Clients.PlacardsApiConnectClient(Managers.SessionManager.Instance);
-
                                 try
                                 {
-                                    await client.Delete(target.Placard.Id);
+                                    await placardsClient.Delete(target.Placard.Id);
 
                                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                                     {
@@ -104,9 +138,32 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
                         break;
 
                     case OPTION_COMMON_PREVIEW:
+                        completitionHelper = Support.Extend.Templating.Presentation.Providers.PlacardViewModelCompletitionHelperProvider.Instance.GetFor(new Cloud.Api.Common.Models.PlacardDisplayModel
+                        {
+                            Id = target.Placard.Id,
+                            Template = new Cloud.Api.Common.Models.TemplateDisplayModel
+                            {
+                                Id = target.Placard.Template.Id
+                            }
+                        });
+
+                        placardClone = new Support.Presentation.Models.View.PlacardViewModel
+                        {
+                            Id = target.Placard.Id,
+                            Label = target.Placard.Label,
+                            PlayerOrientationSupportKind = target.Placard.PlayerOrientationSupportKind,
+                            SerializedContext = target.Placard.SerializedContext,
+                            Template = target.Placard.Template
+                        };
+
+                        if (completitionHelper != null)
+                        {
+                            await completitionHelper.CompleteAsync(placardClone);
+                        }
+
                         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                         {
-                            var screenplayPlayerPage = new Support.Presentation.Player.Pages.ScreenplayPlayerPage(new Support.Presentation.Models.View.PlacardViewModel[] { target.Placard }, ScreenplayPresentationComplete_Callback, false);
+                            var screenplayPlayerPage = new Support.Presentation.Player.Pages.ScreenplayPlayerPage(new Support.Presentation.Models.View.PlacardViewModel[] { placardClone }, ScreenplayPresentationComplete_Callback, false);
 
                             this.NavigationPushModalPageAsync(screenplayPlayerPage);
                         });
@@ -114,9 +171,34 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
                         break;
 
                     case OPTION_COMMON_EDIT:
+                        completitionHelper = Support.Extend.Templating.Presentation.Providers.PlacardViewModelCompletitionHelperProvider.Instance.GetFor(new Cloud.Api.Common.Models.PlacardDisplayModel
+                        {
+                            Id = target.Placard.Id,
+                            Template = new Cloud.Api.Common.Models.TemplateDisplayModel
+                            {
+                                Id = target.Placard.Template.Id
+                            }
+                        });
+
+                        placardClone = new Support.Presentation.Models.View.PlacardViewModel
+                        {
+                            Id = target.Placard.Id,
+                            Label = target.Placard.Label,
+                            PlayerOrientationSupportKind = target.Placard.PlayerOrientationSupportKind,
+                            BeginAt = target.Placard.BeginAt,
+                            EndAt = target.Placard.EndAt,
+                            SerializedContext = target.Placard.SerializedContext,
+                            Template = target.Placard.Template
+                        };
+
+                        if (completitionHelper != null)
+                        {
+                            await completitionHelper.CompleteAsync(placardClone);
+                        }
+                        
                         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                         {
-                            var placardEditPage = Providers.PlacardConfigurationPageProvider.Instance.GetEditionPageByDescriptor(target.Placard, PlacardEditionCompleted_Callback);
+                            var placardEditPage = Providers.PlacardConfigurationPageProvider.Instance.GetEditionPageByDescriptor(placardClone, PlacardEditionCompleted_Callback);
 
                             if (placardEditPage != null)
                             {
@@ -139,11 +221,11 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
 
                                 BindingContextPageModel.IsBusy = true;
 
-                                var client = new Cloud.Api.Connect.Clients.FramesApiConnectClient(Managers.SessionManager.Instance);
+                                var framesClient = new Cloud.Api.Connect.Clients.FramesApiConnectClient(Managers.SessionManager.Instance);
 
                                 try
                                 {
-                                    await client.CreateAsync(new Cloud.Api.Common.Models.FrameInputModel
+                                    await framesClient.CreateAsync(new Cloud.Api.Common.Models.FrameInputModel
                                     {
                                         ScreenplayId = BindingContextPageModel.SelectedScreenplay.Id,
                                         PlacardId = target.Placard.Id,
@@ -197,16 +279,43 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
 
             DisplayActionSheet("Opciones de Marco en Secuencia", OPTION_COMMON_CANCEL, null, extraOptions.ToArray()).ContinueWith(actionSheetTask =>
             {
+                Extend.Common.Templating.Presentation.Helpers.Facade.IPlacardViewModelCompletitionHelperFacade completitionHelper;
+
+                Support.Presentation.Models.View.PlacardViewModel placardClone;
+
                 switch (actionSheetTask.Result)
                 {
                     case OPTION_FRAME_PLACARD_EDIT:
-                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
                         {
-                            var placardEditPage = Providers.PlacardConfigurationPageProvider.Instance.GetEditionPageByDescriptor(targetFrameViewModel.Placard, PlacardEditionCompleted_Callback);
+                            completitionHelper = Support.Extend.Templating.Presentation.Providers.PlacardViewModelCompletitionHelperProvider.Instance.GetFor(new Cloud.Api.Common.Models.PlacardDisplayModel
+                            {
+                                Id = targetFrameViewModel.Placard.Id,
+                                Template = new Cloud.Api.Common.Models.TemplateDisplayModel
+                                {
+                                    Id = targetFrameViewModel.Placard.Template.Id
+                                }
+                            });
+
+                            placardClone = new Support.Presentation.Models.View.PlacardViewModel
+                            {
+                                Id = targetFrameViewModel.Placard.Id,
+                                Label = targetFrameViewModel.Placard.Label,
+                                PlayerOrientationSupportKind = targetFrameViewModel.Placard.PlayerOrientationSupportKind,
+                                SerializedContext = targetFrameViewModel.Placard.SerializedContext,
+                                Template = targetFrameViewModel.Placard.Template
+                            };
+
+                            if (completitionHelper != null)
+                            {
+                                await completitionHelper.CompleteAsync(placardClone);
+                            }
+
+                            var placardEditPage = Providers.PlacardConfigurationPageProvider.Instance.GetEditionPageByDescriptor(placardClone, PlacardEditionCompleted_Callback);
 
                             if (placardEditPage != null)
                             {
-                                this.NavigationPushPageAsync(placardEditPage);
+                                await this.NavigationPushPageAsync(placardEditPage);
                             }
                             else
                             {
@@ -253,11 +362,34 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
                         break;
 
                     case OPTION_COMMON_PREVIEW:
-                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
                         {
-                            var screenplayPlayerPage = new Support.Presentation.Player.Pages.ScreenplayPlayerPage(new Support.Presentation.Models.View.PlacardViewModel[] { targetFrameViewModel.Placard }, ScreenplayPresentationComplete_Callback, false);
+                            completitionHelper = Support.Extend.Templating.Presentation.Providers.PlacardViewModelCompletitionHelperProvider.Instance.GetFor(new Cloud.Api.Common.Models.PlacardDisplayModel
+                            {
+                                Id = targetFrameViewModel.Placard.Id,
+                                Template = new Cloud.Api.Common.Models.TemplateDisplayModel
+                                {
+                                    Id = targetFrameViewModel.Placard.Template.Id
+                                }
+                            });
 
-                            this.NavigationPushModalPageAsync(screenplayPlayerPage);
+                            placardClone = new Support.Presentation.Models.View.PlacardViewModel
+                            {
+                                Id = targetFrameViewModel.Placard.Id,
+                                Label = targetFrameViewModel.Placard.Label,
+                                PlayerOrientationSupportKind = targetFrameViewModel.Placard.PlayerOrientationSupportKind,
+                                SerializedContext = targetFrameViewModel.Placard.SerializedContext,
+                                Template = targetFrameViewModel.Placard.Template
+                            };
+
+                            if (completitionHelper != null)
+                            {
+                                await completitionHelper.CompleteAsync(placardClone);
+                            }
+
+                            var screenplayPlayerPage = new Support.Presentation.Player.Pages.ScreenplayPlayerPage(new Support.Presentation.Models.View.PlacardViewModel[] { placardClone }, ScreenplayPresentationComplete_Callback, false);
+
+                            await this.NavigationPushModalPageAsync(screenplayPlayerPage);
                         });
 
                         break;
@@ -277,11 +409,34 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
             });
         }
 
-        private void ScreenplayFramesPlayButton_Clicked(object sender, System.EventArgs eventArgs)
+        private async void ScreenplayFramesPlayButton_Clicked(object sender, System.EventArgs eventArgs)
         {
-            var screenplayPlayerPage = new Support.Presentation.Player.Pages.ScreenplayPlayerPage(BindingContextPageModel.Frames.Select(m => m.Placard).ToArray(), ScreenplayPresentationComplete_Callback, false);
+            var screenplayPlacards = BindingContextPageModel.Frames.Select(m => m.Placard).ToArray();
 
-            this.NavigationPushModalPageAsync(screenplayPlayerPage);
+            var previewPlacards = new System.Collections.Generic.List<Support.Presentation.Models.View.PlacardViewModel>();
+
+            foreach (var item in screenplayPlacards)
+            {
+                var completitionHelper = Support.Extend.Templating.Presentation.Providers.PlacardViewModelCompletitionHelperProvider.Instance.GetFor(new Cloud.Api.Common.Models.PlacardDisplayModel
+                {
+                    Id = item.Id,
+                    Template = new Cloud.Api.Common.Models.TemplateDisplayModel
+                    {
+                        Id = item.Template.Id
+                    }
+                });
+
+                if (completitionHelper != null)
+                {
+                    await completitionHelper.CompleteAsync(item);
+                }
+
+                previewPlacards.Add(item);
+            }
+
+            var screenplayPlayerPage = new Support.Presentation.Player.Pages.ScreenplayPlayerPage(previewPlacards.ToArray(), ScreenplayPresentationComplete_Callback, false);
+
+            await this.NavigationPushModalPageAsync(screenplayPlayerPage);
         }
 
         private void AddScreenplayButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -500,13 +655,13 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
                       {
                           if (currentPlacardsPageNumber == 1)
                           {
-                              BindingContextPageModel.PlacardOverviews = new System.Collections.ObjectModel.ObservableCollection<Models.View.PlacardOverviewViewModel>(task.Result.List.Select(item => new Models.View.PlacardOverviewViewModel(item.ToViewModel())));
+                              BindingContextPageModel.PlacardOverviews = new System.Collections.ObjectModel.ObservableCollection<PlacardOverviewViewModel>(task.Result.List.Select(item => new PlacardOverviewViewModel(item.ToViewModel())));
                           }
                           else
                           {
                               foreach (var item in task.Result.List)
                               {
-                                  BindingContextPageModel.PlacardOverviews.Add(new Models.View.PlacardOverviewViewModel(item.ToViewModel(), true));
+                                  BindingContextPageModel.PlacardOverviews.Add(new PlacardOverviewViewModel(item.ToViewModel(), true));
                               }
                           }
 

@@ -36,13 +36,6 @@ namespace SmartSolucionesCuba.Viderhe.Extend.Essential.Transitioning.Presentatio
                     Scale = 1.2,
                     Duration = "3000"
                 });
-                storyboard.Animations.Add(new FadeToAnimation
-                {
-                    Target = outgoingPlacardPresentationView,
-                    Opacity = 0,
-                    Delay = "100",
-                    Duration = "2000"
-                });
             }
 
             storyboard.Animations.Add(factShowInAnimation = new ScaleToAnimation

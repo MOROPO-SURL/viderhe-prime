@@ -2,6 +2,6 @@
 {
     public interface IPlacardPresentationViewProviderFacade
     {
-        Common.Presentation.Views.BasePlacardPresentationView GetFor(Support.Presentation.Models.View.PlacardViewModel model);
+        Common.Presentation.Views.BasePlacardPresentationView GetFor(Support.Presentation.Models.View.PlacardViewModel model, System.Func<Xamarin.Essentials.DisplayOrientation> getOrientationFunction);
     }
 }

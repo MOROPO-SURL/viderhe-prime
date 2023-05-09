@@ -44,6 +44,8 @@ namespace SmartSolucionesCuba.Viderhe.Support.Presentation.Extensions
                 Id = target.Id,
                 Label = target.Label,
                 PlayerOrientationSupportKind = target.PlayerOrientationSupportKind,
+                BeginAt = target.BeginAt,
+                EndAt = target.EndAt,
                 SerializedContext = target.SerializedContext,
                 Template = templateDescriptor.ToViewModel()
             };

@@ -360,7 +360,23 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Pages
                     }
                 }
 
-                placards = task.Result.Placards.Select(m => m.ToViewModel()).ToArray();
+                var placardList = new System.Collections.Generic.List<Support.Presentation.Models.View.PlacardViewModel>();
+
+                foreach (var model in task.Result.Placards)
+                {
+                    var item = model.ToViewModel();
+
+                    var completitionHelper = Support.Extend.Templating.Presentation.Providers.PlacardViewModelCompletitionHelperProvider.Instance.GetFor(model);
+
+                    if (completitionHelper != null)
+                    {
+                        await completitionHelper.CompleteAsync(item);
+                    }
+
+                    placardList.Add(item);
+                }
+
+                placards = placardList.ToArray();
                 
                 if (task.Result.ScheduledRelaunches.Length > 0)
                 {

@@ -91,9 +91,9 @@ namespace SmartSolucionesCuba.Viderhe.Support.Presentation.Player.Pages
 
         }
 
-        private BasePlacardPresentationView PlacardViewModelToPresentationView(Models.View.PlacardViewModel model)
+        private BasePlacardPresentationView PlacardViewModelToPresentationView(Models.View.PlacardViewModel model, System.Func<Xamarin.Essentials.DisplayOrientation> getOrientationFunction)
         {
-            return Extend.Templating.Presentation.Providers.PlacardPresentationViewProvider.Instance.GetFor(model);
+            return Extend.Templating.Presentation.Providers.PlacardPresentationViewProvider.Instance.GetFor(model, getOrientationFunction);
         }
 
         protected override void DisposeUnmanagementResources()

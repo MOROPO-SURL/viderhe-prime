@@ -154,7 +154,7 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages
                 {
                     BindingContextPageModel.IsBusy = false;
 
-                    if (task.Exception != null)
+                    if (task.Exception != null || task.IsCanceled)
                     {
                         (Xamarin.Forms.Application.Current as Support.Presentation.Helpers.Facade.IExceptionHandleHelperFacade).HandleException(task.Exception);
                     }

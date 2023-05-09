@@ -14,6 +14,10 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
 
         public Extend.Common.Templating.Enumerations.PlayerOrientationSupportKind? PlayerOrientationSupportKind { get; set; }
 
+        public System.DateTime? BeginAt { get; set; }
+
+        public System.DateTime? EndAt { get; set; }
+
         [Required]
         public string SerializedContext { get; set; }
 
@@ -32,6 +36,8 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
             Label = entity.Label;
             TemplateId = entity.TemplateId;
             PlayerOrientationSupportKind = entity.PlayerOrientationSupportKind;
+            BeginAt = entity.BeginAt;
+            EndAt = entity.EndAt;
             SerializedContext = entity.SerializedContext;
         }
 
@@ -39,6 +45,8 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models
         {
             entity.Label = Label;
             entity.PlayerOrientationSupportKind = PlayerOrientationSupportKind;
+            entity.BeginAt = BeginAt;
+            entity.EndAt = EndAt;
             entity.SerializedContext = SerializedContext;
         }
     }

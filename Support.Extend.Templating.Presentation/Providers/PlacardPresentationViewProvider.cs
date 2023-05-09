@@ -29,13 +29,13 @@ namespace SmartSolucionesCuba.Viderhe.Support.Extend.Templating.Presentation.Pro
             XFToolKit.IoC.TinyIoCContainer.Current.AutoRegister(assemblies, XFToolKit.IoC.DuplicateImplementationActions.RegisterMultiple, t => typeof(IPlacardPresentationViewProviderFacade).IsAssignableFrom(t));
         }
 
-        public BasePlacardPresentationView GetFor(Support.Presentation.Models.View.PlacardViewModel model)
+        public BasePlacardPresentationView GetFor(Support.Presentation.Models.View.PlacardViewModel model, System.Func<Xamarin.Essentials.DisplayOrientation> getOrientationFunction)
         {
             var providers = XFToolKit.IoC.TinyIoCContainer.Current.ResolveAll<IPlacardPresentationViewProviderFacade>();
 
             foreach (var provider in providers)
             {
-                var result = provider.GetFor(model);
+                var result = provider.GetFor(model, getOrientationFunction);
 
                 if (result == null) continue;
 

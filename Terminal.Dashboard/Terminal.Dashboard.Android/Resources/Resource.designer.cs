@@ -16786,7 +16786,10 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Droid
 			public const int config_materialPreferenceIconSpaceReserved = 2130968579;
 			
 			// aapt resource value: 0x7F040004
-			public const int mtrl_btn_textappearance_all_caps = 2130968580;
+			public const int is_mobile_phone = 2130968580;
+			
+			// aapt resource value: 0x7F040005
+			public const int mtrl_btn_textappearance_all_caps = 2130968581;
 			
 			static Boolean()
 			{

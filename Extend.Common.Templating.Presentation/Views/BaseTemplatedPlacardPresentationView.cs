@@ -20,7 +20,7 @@
                     EndPresentation();
                 }
 
-                return true;
+                return false;
             });
         }
 

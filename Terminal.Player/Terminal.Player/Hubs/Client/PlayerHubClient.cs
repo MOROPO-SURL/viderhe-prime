@@ -42,6 +42,9 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Hubs.Client
                 .WithAutomaticReconnect()
                 .Build();
 
+            connection.ServerTimeout = System.TimeSpan.FromSeconds(10);
+            connection.HandshakeTimeout = System.TimeSpan.FromSeconds(10);
+
             connection.On(nameof(OnPresentNextFrameRequestAsync), OnPresentNextFrameRequestAsync);
             connection.On(nameof(OnPresentPreviousFrameRequestAsync), OnPresentPreviousFrameRequestAsync);
             connection.On<PlacardDisplayModel[]>(nameof(OnPresentInterventionPlacardsRequestAsync), OnPresentInterventionPlacardsRequestAsync);
@@ -53,38 +56,49 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Hubs.Client
             connection.On<bool>(nameof(OnShutdownRequestAsync), OnShutdownRequestAsync);
         }
 
-        private async System.Threading.Tasks.Task Connection_ClosedAsync(System.Exception arg)
-        {
-            var randomizer = new System.Random();
-
-            await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(randomizer.Next(0, 5)));
-
-            await connection.StartAsync();
-        }
-
         public void GetReady()
         {
             if (connection.State == HubConnectionState.Disconnected)
             {
-                connection.Closed += Connection_ClosedAsync;
+                connection.Closed += Connection_Closed;
 
-                connection.StartAsync().ContinueWith(task =>
-                {
-                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-                    {
-                        var platformControlHelper = Xamarin.Forms.DependencyService.Get<Helpers.Facade.IPlatformControlHelperFacade>();
-
-                        UpdateEnvironmentConfiguration(platformControlHelper.AudioLevel, platformControlHelper.IsAudioEnabled);
-                    });
-                });
+                connection.StartAsync().ContinueWith(ConnectionAsyncStart_Callback);
             }
+        }
+
+        private void ConnectionAsyncStart_Callback(System.Threading.Tasks.Task task)
+        {   
+            if (task.IsCanceled || task.Exception != null)
+            {
+                System.Threading.Thread.Sleep(System.TimeSpan.FromSeconds(15));
+
+                connection.StartAsync().ContinueWith(ConnectionAsyncStart_Callback);
+
+                return;
+            }
+
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(UpdateEnvironmentConfiguration);
+        }
+
+        private async System.Threading.Tasks.Task Connection_Closed(System.Exception arg)
+        {
+            await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(15));
+
+            await connection.StartAsync().ContinueWith(ConnectionAsyncStart_Callback);
         }
 
         public void MakeReleased()
         {
-            connection.Closed -= Connection_ClosedAsync;
+            connection.Closed -= Connection_Closed;
 
             connection.StopAsync();
+        }
+
+        public void UpdateEnvironmentConfiguration()
+        {
+            var platformControlHelper = Xamarin.Forms.DependencyService.Get<Helpers.Facade.IPlatformControlHelperFacade>();
+
+            connection.InvokeAsync(nameof(Cloud.SignalR.Connect.Player.Hubs.IPlayerHub.UpdateEnvironmentConfiguration), platformControlHelper.AudioLevel, platformControlHelper.IsAudioEnabled);
         }
 
         public void UpdateEnvironmentConfiguration(int audioLevel, bool isAudioEnabled)
@@ -200,12 +214,17 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Hubs.Client
                 // TODO: libere los recursos no administrados (objetos no administrados) y reemplace el siguiente finalizador.
                 // TODO: configure los campos grandes en nulos.
 
-                connection.Closed -= Connection_ClosedAsync;
+                connection.Closed -= Connection_Closed;
 
                 connection.Remove(nameof(OnPresentNextFrameRequestAsync));
                 connection.Remove(nameof(OnPresentPreviousFrameRequestAsync));
+                connection.Remove(nameof(OnPresentInterventionPlacardsRequestAsync));
                 connection.Remove(nameof(OnRestartScreenplayRequestAsync));
                 connection.Remove(nameof(OnReloadScreenplayRequestAsync));
+                connection.Remove(nameof(OnSetAudioEnabledRequestAsync));
+                connection.Remove(nameof(OnSetAudioLevelRequestAsync));
+                connection.Remove(nameof(OnCloseRequestAsync));
+                connection.Remove(nameof(OnShutdownRequestAsync));
 
                 connection.StopAsync().ContinueWith(task =>
                 {

@@ -69,6 +69,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <StackLayout 
                         Grid.ColumnSpan="3" Grid.Row="0"
@@ -132,6 +133,64 @@
                     <Frame 
                         Grid.Column="0" Grid.Row="2"
                         Style="{StaticResource FormFieldFrame}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                Text="Fecha de incio" 
+                                Style="{StaticResource FormLabel}" />
+                            <Switch 
+                                Grid.Column="0" Grid.Row="1"
+                                IsToggled="{Binding Path=DefineBeginAt}" />
+                            <DatePicker 
+                                Grid.Column="1" Grid.Row="1"
+                                IsEnabled="{Binding DefineBeginAt, Mode=OneWay}"
+                                Date="{Binding Path=BeginAt}" />
+                        </Grid>
+                    </Frame>
+                    <Frame 
+                        Grid.Column="1" Grid.Row="2"
+                        Style="{StaticResource FormFieldFrame}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                Text="Fecha de fin" 
+                                Style="{StaticResource FormLabel}" />
+                            <Switch 
+                                Grid.Column="0" Grid.Row="1"
+                                IsToggled="{Binding Path=DefineEndAt}" />
+                            <DatePicker 
+                                Grid.Column="1" Grid.Row="1"
+                                IsEnabled="{Binding DefineEndAt, Mode=OneWay}"
+                                Date="{Binding Path=EndAt}" />
+                        </Grid>
+                    </Frame>
+                    <Frame 
+                        Grid.Column="2" Grid.Row="2"
+                        Style="{StaticResource FormFieldFrame}">
+                        <StackLayout>
+                            <Label Text="A Pantalla Completa" Style="{StaticResource FormLabel}" />
+                            <Switch IsToggled="{Binding Path=RequireUnobstructedPresetation}" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame 
+                        Grid.Column="0" Grid.Row="3"
+                        Style="{StaticResource FormFieldFrame}">
                         <StackLayout>
                             <Label Text="Tiempo en Pantalla" Style="{StaticResource FormLabel}" />
                             <StackLayout Orientation="Horizontal">
@@ -141,16 +200,8 @@
                             </StackLayout>
                         </StackLayout>
                     </Frame>
-                    <Frame 
-                        Grid.Column="1" Grid.Row="2"
-                        Style="{StaticResource FormFieldFrame}">
-                        <StackLayout>
-                            <Label Text="A Pantalla Completa" Style="{StaticResource FormLabel}" />
-                            <Switch IsToggled="{Binding Path=RequireUnobstructedPresetation}" />
-                        </StackLayout>
-                    </Frame>
                     <Grid
-                        Grid.ColumnSpan="2" Grid.Row="3"
+                        Grid.ColumnSpan="2" Grid.Row="4"
                         VerticalOptions="Start"
                         ColumnSpacing="10" RowSpacing="10">
                         <Grid.ColumnDefinitions>
@@ -228,7 +279,7 @@
                         </Frame>
                     </Grid>                    
                     <Frame 
-                        Grid.Column="2" Grid.Row="3"
+                        Grid.Column="2" Grid.Row="4"
                         Style="{StaticResource FormFieldFrame}"
                         Padding="0">
                         <StackLayout 
@@ -282,7 +333,7 @@
                         </StackLayout>
                     </Frame>
                     <Frame 
-                        Grid.Column="2" Grid.Row="4"
+                        Grid.Column="2" Grid.Row="5"
                         Style="{StaticResource FormFieldFrame}">
                         <StackLayout>
                             <Label Text="Matener centrada Imagen Presentada?" Style="{StaticResource FormLabel}" />
@@ -290,7 +341,7 @@
                         </StackLayout>
                     </Frame>
                     <Frame 
-                        Grid.Column="2" Grid.Row="5"
+                        Grid.Column="2" Grid.Row="6"
                         Style="{StaticResource FormFieldFrame}">
                         <StackLayout>
                             <Label Text="Usar ecfecto Zooming en Imagen Presentada?" Style="{StaticResource FormLabel}" />

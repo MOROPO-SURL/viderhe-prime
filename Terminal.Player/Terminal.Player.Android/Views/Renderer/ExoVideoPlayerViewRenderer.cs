@@ -12,6 +12,8 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Droid.Views.Renderer
     {
         private bool buffered;
 
+        private float volumenBackup;
+
         public ExoVideoPlayerViewRenderer(Android.Content.Context context) : base(context)
         {
             buffered = false;
@@ -36,11 +38,15 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Droid.Views.Renderer
                     playerView.Player.AddListener(this);
 
                     SetNativeControl(playerView);
+
+                    volumenBackup = (Control.Player as SimpleExoPlayer).Volume;
                 }
 
                 SetAreTransportControlsEnabled();
 
                 SetAspectStrech();
+
+                SetIsMuted();
 
                 SetAutoPlay();
 
@@ -96,6 +102,10 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Droid.Views.Renderer
             {
                 SetAutoPlay();
             }
+            else if (args.PropertyName == XFToolKit.Presentation.Views.Rendered.VideoPlayerView.IsMutedProperty.PropertyName)
+            {
+                SetIsMuted();
+            }
         }
 
         private void SetAreTransportControlsEnabled()
@@ -133,6 +143,11 @@ namespace SmartSolucionesCuba.Viderhe.Terminal.Player.Droid.Views.Renderer
         private void SetAutoPlay()
         {
             Control.Player.PlayWhenReady = Element.AutoPlay;
+        }
+
+        private void SetIsMuted()
+        {
+            (Control.Player as SimpleExoPlayer).Volume = Element.IsMuted ? 0f : volumenBackup;
         }
 
         private void SetSource()

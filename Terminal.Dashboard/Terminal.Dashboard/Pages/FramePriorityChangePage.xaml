@@ -6,6 +6,7 @@
     xmlns:converters="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Converters"
     xmlns:viewtemplateselectors="clr-namespace:SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Views.Template.Selector"
     xmlns:supportpresentationdashboardviews="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Views;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
+    xmlns:supportpresentationdashboardconverters="clr-namespace:SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard.Converters;assembly=SmartSolucionesCuba.Viderhe.Support.Presentation.Dashboard"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     x:Class="SmartSolucionesCuba.Viderhe.Terminal.Dashboard.Pages.FramePriorityChangePage"
@@ -56,7 +57,7 @@
             </DataTemplate>
             <viewtemplateselectors:FrameOrderingDataTemplateSelector x:Key="FrameOrderingDataTemplateSelector" PositionPickFrameDataTemplate="{StaticResource PositionPickFrameDataTemplate}" PositionReferenceFrameDataTemplate="{StaticResource PositionReferenceFrameDataTemplate}" />
             <converters:TemplateViewModelToTemplateThumbnailWrapViewConverter x:Key="TemplateViewModelToTemplateThumbnailWrapViewConverter" />
-            <converters:AllTrueMultiConverter x:Key="AllTrueMultiConverter" />
+            <supportpresentationdashboardconverters:AllTrueMultiConverter x:Key="AllTrueMultiConverter" />
             <sscxftoolkitpresentationconverters:NotNullToBooleanConverter x:Key="NotNullToBooleanConverter" />
             <sscxftoolkitpresentationconverters:NullToBooleanConverter x:Key="NullToBooleanConverter" />
             <sscxftoolkitpresentationconverters:BoolToBoolNegationConverter x:Key="BoolToBoolNegationConverter" />
