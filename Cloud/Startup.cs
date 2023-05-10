@@ -83,11 +83,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud
             services.Configure<JwtOptions>(configuration.GetSection("JWT"));
             //services.Configure<FfmpegOptions>(configuration.GetSection("FFmpeg"));
 
-            //services.AddDbContext<Persistence.EF.ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("DefaultConnection"), mySqlOptions =>
-            //{
-            //    mySqlOptions.ServerVersion(new System.Version(configuration.GetSection("MySQLSeverVersion").Value), Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql);
-            //}));
-            services.AddDbContext<Persistence.EF.ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<Persistence.EF.ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("DefaultConnection"), mySqlOptions =>
+            {
+                mySqlOptions.ServerVersion(new System.Version(configuration.GetSection("MySQLSeverVersion").Value), Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql);
+            }));
+            //services.AddDbContext<Persistence.EF.ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<DbContext, Persistence.EF.ApplicationDbContext>();
 

@@ -9,7 +9,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "viderhe_sapressc_core_securitylocal");
+                name: "viderhe_sapressc_core_security_common");
 
             migrationBuilder.EnsureSchema(
                 name: "viderhe_sapressc_middleware_identity");
@@ -20,11 +20,15 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
             migrationBuilder.EnsureSchema(
                 name: "viderhe_sapressc_middleware_region");
 
+            migrationBuilder.EnsureSchema(
+                name: "viderhe_sapressc_middleware_security_essential");
+
             migrationBuilder.CreateTable(
                 name: "extensions",
                 columns: table => new
                 {
                     id = table.Column<Guid>(nullable: false),
+                    version = table.Column<string>(nullable: false),
                     enabled = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -53,8 +57,25 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "groups",
-                schema: "viderhe_sapressc_core_securitylocal",
+                name: "permissions",
+                schema: "viderhe_sapressc_core_security_common",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    code = table.Column<string>(nullable: false),
+                    name = table.Column<string>(nullable: false),
+                    family = table.Column<string>(nullable: true),
+                    description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_permissions", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "roles",
+                schema: "viderhe_sapressc_core_security_common",
                 columns: table => new
                 {
                     id = table.Column<Guid>(nullable: false),
@@ -63,43 +84,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_groups", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "roles",
-                schema: "viderhe_sapressc_core_securitylocal",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    code = table.Column<string>(nullable: false),
-                    name = table.Column<string>(nullable: false),
-                    description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
                     table.PrimaryKey("pk_roles", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "users",
-                schema: "viderhe_sapressc_core_securitylocal",
-                columns: table => new
-                {
-                    id = table.Column<string>(nullable: false),
-                    enabled = table.Column<bool>(nullable: false),
-                    password = table.Column<string>(nullable: false),
-                    passwordchangerequired = table.Column<bool>(nullable: false),
-                    hasfullaccess = table.Column<bool>(nullable: false),
-                    created = table.Column<DateTime>(nullable: false),
-                    lastsessiondate = table.Column<DateTime>(nullable: false),
-                    failauthenticationcount = table.Column<int>(nullable: false),
-                    signature = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_users", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,6 +173,26 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "users",
+                schema: "viderhe_sapressc_middleware_security_essential",
+                columns: table => new
+                {
+                    id = table.Column<string>(nullable: false),
+                    enabled = table.Column<bool>(nullable: false),
+                    password = table.Column<string>(nullable: false),
+                    passwordchangerequired = table.Column<bool>(nullable: false),
+                    hasfullaccess = table.Column<bool>(nullable: false),
+                    created = table.Column<DateTime>(nullable: false),
+                    lastsessiondate = table.Column<DateTime>(nullable: false),
+                    failauthenticationcount = table.Column<int>(nullable: false),
+                    signature = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_users", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "overlays",
                 columns: table => new
                 {
@@ -245,55 +250,28 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "grouprolebridges",
-                schema: "viderhe_sapressc_core_securitylocal",
+                name: "rolepermissionbridges",
+                schema: "viderhe_sapressc_core_security_common",
                 columns: table => new
                 {
-                    groupid = table.Column<Guid>(nullable: false),
-                    roleid = table.Column<int>(nullable: false)
+                    roleid = table.Column<Guid>(nullable: false),
+                    permissionid = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_grouprolebridges", x => new { x.groupid, x.roleid });
+                    table.PrimaryKey("pk_rolepermissionbridges", x => new { x.roleid, x.permissionid });
                     table.ForeignKey(
-                        name: "fk_grouprolebridges_groups_groupid",
-                        column: x => x.groupid,
-                        principalSchema: "viderhe_sapressc_core_securitylocal",
-                        principalTable: "groups",
+                        name: "fk_rolepermissionbridges_permissions_permissionid",
+                        column: x => x.permissionid,
+                        principalSchema: "viderhe_sapressc_core_security_common",
+                        principalTable: "permissions",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_grouprolebridges_roles_roleid",
+                        name: "fk_rolepermissionbridges_roles_roleid",
                         column: x => x.roleid,
-                        principalSchema: "viderhe_sapressc_core_securitylocal",
+                        principalSchema: "viderhe_sapressc_core_security_common",
                         principalTable: "roles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "usergroupbridges",
-                schema: "viderhe_sapressc_core_securitylocal",
-                columns: table => new
-                {
-                    userid = table.Column<string>(nullable: false),
-                    groupid = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_usergroupbridges", x => new { x.userid, x.groupid });
-                    table.ForeignKey(
-                        name: "fk_usergroupbridges_groups_groupid",
-                        column: x => x.groupid,
-                        principalSchema: "viderhe_sapressc_core_securitylocal",
-                        principalTable: "groups",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_usergroupbridges_users_userid",
-                        column: x => x.userid,
-                        principalSchema: "viderhe_sapressc_core_securitylocal",
-                        principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -377,6 +355,34 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "userrolebridges",
+                schema: "viderhe_sapressc_middleware_security_essential",
+                columns: table => new
+                {
+                    userid = table.Column<string>(nullable: false),
+                    roleid = table.Column<Guid>(nullable: false),
+                    signature = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_userrolebridges", x => new { x.userid, x.roleid });
+                    table.ForeignKey(
+                        name: "fk_userrolebridges_roles_roleid",
+                        column: x => x.roleid,
+                        principalSchema: "viderhe_sapressc_core_security_common",
+                        principalTable: "roles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_userrolebridges_users_userid",
+                        column: x => x.userid,
+                        principalSchema: "viderhe_sapressc_middleware_security_essential",
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "accounts",
                 columns: table => new
                 {
@@ -386,7 +392,8 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                     secoundarycolor = table.Column<string>(nullable: false),
                     maxplayercount = table.Column<int>(nullable: false),
                     logoid = table.Column<Guid>(nullable: false),
-                    splashid = table.Column<Guid>(nullable: false),
+                    horizontalsplashid = table.Column<Guid>(nullable: false),
+                    verticalsplashid = table.Column<Guid>(nullable: false),
                     defaultoverlayid = table.Column<Guid>(nullable: true),
                     serializedoverlaycontext = table.Column<string>(nullable: true),
                     createat = table.Column<DateTime>(nullable: false),
@@ -403,6 +410,13 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "fk_accounts_images_horizontalsplashid",
+                        column: x => x.horizontalsplashid,
+                        principalSchema: "viderhe_sapressc_middleware_media",
+                        principalTable: "images",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "fk_accounts_images_logoid",
                         column: x => x.logoid,
                         principalSchema: "viderhe_sapressc_middleware_media",
@@ -410,8 +424,8 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_accounts_images_splashid",
-                        column: x => x.splashid,
+                        name: "fk_accounts_images_verticalsplashid",
+                        column: x => x.verticalsplashid,
                         principalSchema: "viderhe_sapressc_middleware_media",
                         principalTable: "images",
                         principalColumn: "id",
@@ -425,7 +439,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 {
                     id = table.Column<Guid>(nullable: false),
                     name = table.Column<string>(nullable: false),
-                    borndate = table.Column<DateTime>(nullable: false),
+                    borndate = table.Column<DateTime>(nullable: true),
                     about = table.Column<string>(nullable: true),
                     ownerid = table.Column<Guid>(nullable: true),
                     imageid = table.Column<Guid>(nullable: true)
@@ -456,7 +470,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 {
                     id = table.Column<Guid>(nullable: false),
                     name = table.Column<string>(nullable: false),
-                    borndate = table.Column<DateTime>(nullable: false),
+                    borndate = table.Column<DateTime>(nullable: true),
                     about = table.Column<string>(nullable: true),
                     lastname = table.Column<string>(nullable: true),
                     alias = table.Column<string>(nullable: true),
@@ -578,10 +592,12 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 {
                     id = table.Column<Guid>(nullable: false),
                     createat = table.Column<DateTime>(nullable: false),
-                    templateid = table.Column<Guid>(nullable: false),
-                    tempateid = table.Column<Guid>(nullable: true),
                     accountid = table.Column<Guid>(nullable: false),
                     label = table.Column<string>(nullable: false),
+                    templateid = table.Column<Guid>(nullable: false),
+                    playerorientationsupportkind = table.Column<int>(nullable: true),
+                    beginat = table.Column<DateTime>(nullable: true),
+                    endat = table.Column<DateTime>(nullable: true),
                     serializedcontext = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -594,11 +610,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_placards_templates_tempateid",
-                        column: x => x.tempateid,
+                        name: "fk_placards_templates_templateid",
+                        column: x => x.templateid,
                         principalTable: "templates",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -735,7 +751,8 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 {
                     id = table.Column<Guid>(nullable: false),
                     identityid = table.Column<Guid>(nullable: false),
-                    userid = table.Column<string>(nullable: true)
+                    userid = table.Column<string>(nullable: true),
+                    moderationkind = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -750,7 +767,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                     table.ForeignKey(
                         name: "fk_moderators_users_userid",
                         column: x => x.userid,
-                        principalSchema: "viderhe_sapressc_core_securitylocal",
+                        principalSchema: "viderhe_sapressc_middleware_security_essential",
                         principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
@@ -914,6 +931,56 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "placardimagebridges",
+                columns: table => new
+                {
+                    placardid = table.Column<Guid>(nullable: false),
+                    imageid = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_placardimagebridges", x => new { x.placardid, x.imageid });
+                    table.ForeignKey(
+                        name: "fk_placardimagebridges_images_imageid",
+                        column: x => x.imageid,
+                        principalSchema: "viderhe_sapressc_middleware_media",
+                        principalTable: "images",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_placardimagebridges_placards_placardid",
+                        column: x => x.placardid,
+                        principalTable: "placards",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "placardvideobridges",
+                columns: table => new
+                {
+                    placardid = table.Column<Guid>(nullable: false),
+                    videoid = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_placardvideobridges", x => new { x.placardid, x.videoid });
+                    table.ForeignKey(
+                        name: "fk_placardvideobridges_placards_placardid",
+                        column: x => x.placardid,
+                        principalTable: "placards",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_placardvideobridges_videos_videoid",
+                        column: x => x.videoid,
+                        principalSchema: "viderhe_sapressc_middleware_media",
+                        principalTable: "videos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "frames",
                 columns: table => new
                 {
@@ -1046,6 +1113,25 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "scheduledrelaunches",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(nullable: false),
+                    playerid = table.Column<string>(nullable: false),
+                    time = table.Column<TimeSpan>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_scheduledrelaunches", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_scheduledrelaunches_players_playerid",
+                        column: x => x.playerid,
+                        principalTable: "players",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "postalcontactitems",
                 schema: "viderhe_sapressc_middleware_identity",
                 columns: table => new
@@ -1143,14 +1229,19 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 column: "defaultoverlayid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_accounts_horizontalsplashid",
+                table: "accounts",
+                column: "horizontalsplashid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_accounts_logoid",
                 table: "accounts",
                 column: "logoid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_accounts_splashid",
+                name: "ix_accounts_verticalsplashid",
                 table: "accounts",
-                column: "splashid");
+                column: "verticalsplashid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_accountvideobridges_videoid",
@@ -1183,14 +1274,24 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 column: "extensionid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_placardimagebridges_imageid",
+                table: "placardimagebridges",
+                column: "imageid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_placards_accountid",
                 table: "placards",
                 column: "accountid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_placards_tempateid",
+                name: "ix_placards_templateid",
                 table: "placards",
-                column: "tempateid");
+                column: "templateid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_placardvideobridges_videoid",
+                table: "placardvideobridges",
+                column: "videoid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_players_accountid",
@@ -1208,6 +1309,11 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 column: "screenplayid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_scheduledrelaunches_playerid",
+                table: "scheduledrelaunches",
+                column: "playerid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_screenplays_accountid",
                 table: "screenplays",
                 column: "accountid");
@@ -1223,16 +1329,10 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 column: "extensionid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_grouprolebridges_roleid",
-                schema: "viderhe_sapressc_core_securitylocal",
-                table: "grouprolebridges",
-                column: "roleid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_usergroupbridges_groupid",
-                schema: "viderhe_sapressc_core_securitylocal",
-                table: "usergroupbridges",
-                column: "groupid");
+                name: "ix_rolepermissionbridges_permissionid",
+                schema: "viderhe_sapressc_core_security_common",
+                table: "rolepermissionbridges",
+                column: "permissionid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_memberships_personid",
@@ -1405,6 +1505,12 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 schema: "viderhe_sapressc_middleware_region",
                 table: "states",
                 column: "countryid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_userrolebridges_roleid",
+                schema: "viderhe_sapressc_middleware_security_essential",
+                table: "userrolebridges",
+                column: "roleid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1425,7 +1531,13 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 name: "frames");
 
             migrationBuilder.DropTable(
-                name: "players");
+                name: "placardimagebridges");
+
+            migrationBuilder.DropTable(
+                name: "placardvideobridges");
+
+            migrationBuilder.DropTable(
+                name: "scheduledrelaunches");
 
             migrationBuilder.DropTable(
                 name: "traces");
@@ -1434,12 +1546,8 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 name: "transitions");
 
             migrationBuilder.DropTable(
-                name: "grouprolebridges",
-                schema: "viderhe_sapressc_core_securitylocal");
-
-            migrationBuilder.DropTable(
-                name: "usergroupbridges",
-                schema: "viderhe_sapressc_core_securitylocal");
+                name: "rolepermissionbridges",
+                schema: "viderhe_sapressc_core_security_common");
 
             migrationBuilder.DropTable(
                 name: "memberships",
@@ -1486,25 +1594,25 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 schema: "viderhe_sapressc_middleware_identity");
 
             migrationBuilder.DropTable(
+                name: "userrolebridges",
+                schema: "viderhe_sapressc_middleware_security_essential");
+
+            migrationBuilder.DropTable(
                 name: "moderators");
+
+            migrationBuilder.DropTable(
+                name: "placards");
 
             migrationBuilder.DropTable(
                 name: "videos",
                 schema: "viderhe_sapressc_middleware_media");
 
             migrationBuilder.DropTable(
-                name: "placards");
+                name: "players");
 
             migrationBuilder.DropTable(
-                name: "screenplays");
-
-            migrationBuilder.DropTable(
-                name: "roles",
-                schema: "viderhe_sapressc_core_securitylocal");
-
-            migrationBuilder.DropTable(
-                name: "groups",
-                schema: "viderhe_sapressc_core_securitylocal");
+                name: "permissions",
+                schema: "viderhe_sapressc_core_security_common");
 
             migrationBuilder.DropTable(
                 name: "organizationidentities",
@@ -1531,21 +1639,32 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 schema: "viderhe_sapressc_middleware_identity");
 
             migrationBuilder.DropTable(
+                name: "roles",
+                schema: "viderhe_sapressc_core_security_common");
+
+            migrationBuilder.DropTable(
                 name: "personidentities",
                 schema: "viderhe_sapressc_middleware_identity");
 
             migrationBuilder.DropTable(
                 name: "users",
-                schema: "viderhe_sapressc_core_securitylocal");
+                schema: "viderhe_sapressc_middleware_security_essential");
 
             migrationBuilder.DropTable(
                 name: "templates");
 
             migrationBuilder.DropTable(
-                name: "accounts");
+                name: "screenplays");
 
             migrationBuilder.DropTable(
                 name: "regions",
+                schema: "viderhe_sapressc_middleware_region");
+
+            migrationBuilder.DropTable(
+                name: "accounts");
+
+            migrationBuilder.DropTable(
+                name: "localities",
                 schema: "viderhe_sapressc_middleware_region");
 
             migrationBuilder.DropTable(
@@ -1556,7 +1675,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
                 schema: "viderhe_sapressc_middleware_media");
 
             migrationBuilder.DropTable(
-                name: "localities",
+                name: "municipalities",
                 schema: "viderhe_sapressc_middleware_region");
 
             migrationBuilder.DropTable(
@@ -1565,10 +1684,6 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Migrations
             migrationBuilder.DropTable(
                 name: "thumbnails",
                 schema: "viderhe_sapressc_middleware_media");
-
-            migrationBuilder.DropTable(
-                name: "municipalities",
-                schema: "viderhe_sapressc_middleware_region");
 
             migrationBuilder.DropTable(
                 name: "states",
