@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="6000" android:versionName="0.6.0" package="smartsolucionescuba.viderhe.terminal.dashboard" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="104000" android:versionName="1.4.0" package="smartsolucionescuba.viderhe.terminal.dashboard" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="29" />
 	<application android:label="VIDERHE Control" android:hardwareAccelerated="true" android:theme="@style/MainTheme" android:icon="@mipmap/icon" android:usesCleartextTraffic="true"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

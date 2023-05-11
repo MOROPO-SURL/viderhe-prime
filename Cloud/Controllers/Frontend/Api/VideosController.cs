@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MOROPO.SAPRESSC.Middleware.Media.Persistence.Entities;
 using MOROPO.SAPRESSC.Middleware.Media.Web.Common.Managers.Facade;
 using SmartSolucionesCuba.Viderhe.Cloud.Api.Common.Models;
+using SmartSolucionesCuba.Viderhe.Cloud.Extensions;
 using System.Linq;
 
 namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
@@ -22,8 +24,9 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
         private readonly Persistence.EF.ApplicationDbContext dbContext;
         private readonly MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Video, System.Guid> videoRepository;
         private readonly MediaToolkit.Services.IMediaToolkitService mediaToolkitService;
+        private readonly IOptions<Options.MediaThumbnailResizeOptions> mediaThumbnailResizeOptions;
 
-        public VideosController(MediaToolkit.Services.IMediaToolkitService mediaToolkitService, MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Video, System.Guid> videoRepository, IVideoFileManagerFacade videoFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Persistence.EF.ApplicationDbContext dbContext, ILogger<VideosController> logger)
+        public VideosController(IOptions<Options.MediaThumbnailResizeOptions> mediaThumbnailResizeOptions, MediaToolkit.Services.IMediaToolkitService mediaToolkitService, MOROPO.SAPRESSC.Core.Persistence.Repositories.IEntityRepository<Video, System.Guid> videoRepository, IVideoFileManagerFacade videoFileManager, IThumbnailFileManagerFacade thumbnailFileManager, Persistence.EF.ApplicationDbContext dbContext, ILogger<VideosController> logger)
         {
             this.logger = logger;
             this.videoFileManager = videoFileManager;
@@ -31,6 +34,7 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
             this.dbContext = dbContext;
             this.videoRepository = videoRepository;
             this.mediaToolkitService = mediaToolkitService;
+            this.mediaThumbnailResizeOptions = mediaThumbnailResizeOptions;
         }
 
         [HttpGet]
@@ -137,7 +141,50 @@ namespace SmartSolucionesCuba.Viderhe.Cloud.Controllers.Frontend.Api
                         {
                             var thumbnailMediaFileInfo = new System.IO.FileInfo(thumbnailPath);
 
-                            video.Thumbnail.Length = thumbnailMediaFileInfo.Length;
+                            try
+                            {
+                                SkiaSharp.SKData resizedThumbnailSkData = null;
+
+                                using (var thumbnailMediaFileStream = thumbnailMediaFileInfo.Open(System.IO.FileMode.Open))
+                                {
+                                    using (var imageSkData = SkiaSharp.SKData.Create(thumbnailMediaFileStream, thumbnailMediaFileInfo.Length))
+                                    {
+                                        using (var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData))
+                                        {
+                                            SkiaSharp.SKImageInfo desiredImageInfo;
+
+                                            if (imageSkBitmap.Width > imageSkBitmap.Height)
+                                            {
+                                                desiredImageInfo = imageSkBitmap.Info.LandscapeScale(mediaThumbnailResizeOptions.Value.DesiredWidth);
+                                            }
+                                            else
+                                            {
+                                                desiredImageInfo = imageSkBitmap.Info.PortraitScale(mediaThumbnailResizeOptions.Value.DesiredHeigth);
+                                            }
+
+                                            using (var thumbnailSkBitmap = imageSkBitmap.Resize(desiredImageInfo, SkiaSharp.SKFilterQuality.High))
+                                            {
+                                                using (var thumbnailSkImage = SkiaSharp.SKImage.FromBitmap(thumbnailSkBitmap))
+                                                {
+                                                    resizedThumbnailSkData = thumbnailSkImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                thumbnailFileManager.SaveThumbnailFileContent(video.Thumbnail.Id, resizedThumbnailSkData.ToArray(), video.Thumbnail.ContentType);
+
+                                video.Thumbnail.Length = resizedThumbnailSkData.Size;
+
+                                resizedThumbnailSkData.Dispose();
+
+                                resizedThumbnailSkData = null;
+                            }
+                            catch 
+                            {
+                                video.Thumbnail.Length = thumbnailMediaFileInfo.Length;
+                            }
 
                             video.Length = memoryStream.Length;
                             video.Duration = videoDuration;

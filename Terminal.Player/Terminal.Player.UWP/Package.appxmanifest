@@ -8,9 +8,9 @@
   IgnorableNamespaces="uap mp uap3">
 
   <Identity
-    Name="MOROPO.Viderhe.Player"
+    Name="MOROPO.VIDERHE.Player"
     Publisher="CN=MOROPO S.U.R.L."
-    Version="0.8.0.0" />
+    Version="1.3.8.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
