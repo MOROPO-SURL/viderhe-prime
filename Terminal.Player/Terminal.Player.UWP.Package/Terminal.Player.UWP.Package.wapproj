@@ -56,7 +56,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\Terminal.Player.UWP\Terminal.Player.UWP.csproj</EntryPointProjectUniqueName>
-    <PackageCertificateThumbprint>0D95332E4D64DCD46AB7FF3938F8569F5F7D2E8E</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>F64B0D686D094358B54194DE031B18937FE77FEE</PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>

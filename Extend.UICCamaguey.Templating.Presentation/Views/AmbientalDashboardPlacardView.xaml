@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <converters:AmbientalReadingDisplayModelToLastValuePresentationConverter x:Key="AmbientalReadingDisplayModelToLastValuePresentationConverter" PlacardView="{Reference RootView}" />
             
-            <extendcommontemplatingpresentationconverters:SizeToRelativeValueConverter x:Key="SizeToRelativeValueConverter" RelativeDimensionScalable="{Reference RootView}" />
+            <extendcommontemplatingpresentationconverters:SizeToRelativeValueConverter x:Key="SizeToRelativeValueConverter" SizeScalableView="{Reference RootView}" />
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
